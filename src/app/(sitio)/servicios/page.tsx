@@ -26,7 +26,7 @@ type ServiceCategory = {
   services: ServiceItem[];
 };
 
-  getCategoryId(name: string) {
+function getCategoryId(name: string) {
   if (name.includes("Faciales")) return "faciales";
   if (name.includes("Corporales")) return "corporales";
   if (name.includes("Láser")) return "tecnologia";
@@ -194,12 +194,13 @@ export default function ServiciosPage() {
 
             return (
               <motion.section
+              id={getCategoryId(group.category)}
               key={idx}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
-              className={`grid grid-cols-1 md:grid-cols-2 items-start gap-10 ${
+              className={`scroll-mt-32 grid grid-cols-1 md:grid-cols-2 items-start gap-10 ${
                 idx % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""
               }`}
             >

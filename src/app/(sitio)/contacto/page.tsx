@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { ContactForm } from "@/components/forms/contact-form";
 
 export default function ContactoPage() {
   return (
@@ -66,29 +67,7 @@ export default function ContactoPage() {
           >
             <h2 className="text-2xl font-serif text-gray-900 mb-8">Envíanos un Mensaje</h2>
             
-            {/* Form Placeholder */}
-            <form className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm uppercase tracking-widest text-gray-500 font-medium">Nombre Completo</label>
-                <input type="text" className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm uppercase tracking-widest text-gray-500 font-medium">Teléfono / WhatsApp</label>
-                <input type="tel" className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm uppercase tracking-widest text-gray-500 font-medium">Servicio de Interés</label>
-                <select className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors text-gray-700">
-                  <option>Estética Facial</option>
-                  <option>Estética Corporal</option>
-                  <option>Post-Operatorio</option>
-                  <option>Otro / Evaluación General</option>
-                </select>
-              </div>
-              <button type="button" className="w-full bg-[#1A1A1A] text-white py-4 mt-4 uppercase tracking-widest text-sm hover:bg-[#D4AF37] transition-colors">
-                Solicitar Cita
-              </button>
-            </form>
+            <ContactForm />
           </motion.div>
 
         </div>

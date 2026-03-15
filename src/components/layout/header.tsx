@@ -66,12 +66,12 @@ export function Header() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center group z-50">
-            <div className={`relative w-20 h-20 transition-all duration-500`}>
+            <div className={`relative w-32 h-32 md:w-40 md:h-40 transition-all duration-500`}>
               <Image 
                 src="/logo-black.png" 
                 alt="Jenny Vera Spa Logo" 
                 fill
-                className="object-contain"
+                className="object-contain mix-blend-multiply"
                 priority
               />
             </div>
