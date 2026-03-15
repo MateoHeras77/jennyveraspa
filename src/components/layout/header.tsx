@@ -206,21 +206,52 @@ export function Header() {
              </Link>
           </div>
 
-          {/* Mobile Toggle */}
-          <button 
-            className={cn(
-              "lg:hidden z-50 ml-auto p-2 rounded-full transition-colors",
-              useTransparentHeader
-                ? "text-white hover:bg-white/15"
-                : "text-gray-900 hover:bg-gray-100"
-            )}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? copy.closeMenu : copy.openMenu}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-navigation"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Controls */}
+          <div className="ml-auto flex items-center gap-2 lg:hidden z-50">
+            <div
+              className={cn(
+                "flex items-center rounded-full p-1 text-[10px] uppercase tracking-[0.14em]",
+                useTransparentHeader
+                  ? "border border-white/30 bg-white/10 backdrop-blur-sm"
+                  : "border border-gray-300 bg-white"
+              )}
+              aria-label="Language selector"
+            >
+              {(Object.keys(localeNames) as Locale[]).map((locale) => (
+                <button
+                  key={locale}
+                  type="button"
+                  onClick={() => switchLocale(locale)}
+                  className={cn(
+                    "rounded-full px-2 py-1 transition-colors",
+                    activeLocale === locale
+                      ? "bg-[#D4AF37] text-white"
+                      : useTransparentHeader
+                        ? "text-white/80 hover:text-white"
+                        : "text-gray-700 hover:text-[#D4AF37]"
+                  )}
+                  aria-label={`Switch language to ${localeNames[locale]}`}
+                >
+                  {localeNames[locale]}
+                </button>
+              ))}
+            </div>
+
+            <button
+              className={cn(
+                "p-2 rounded-full transition-colors",
+                useTransparentHeader
+                  ? "text-white hover:bg-white/15"
+                  : "text-gray-900 hover:bg-gray-100"
+              )}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? copy.closeMenu : copy.openMenu}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -259,7 +290,31 @@ export function Header() {
                 )}
               </div>
             ))}
-            <div className="pb-12 pt-8">
+            <div className="pt-4">
+              <div className="mb-6 flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white p-1 text-[10px] uppercase tracking-[0.18em]">
+                {(Object.keys(localeNames) as Locale[]).map((locale) => (
+                  <button
+                    key={locale}
+                    type="button"
+                    onClick={() => {
+                      switchLocale(locale);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "rounded-full px-3 py-1.5 transition-colors",
+                      activeLocale === locale
+                        ? "bg-[#D4AF37] text-white"
+                        : "text-gray-700 hover:text-[#D4AF37]"
+                    )}
+                    aria-label={`Switch language to ${localeNames[locale]}`}
+                  >
+                    {localeNames[locale]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="pb-12 pt-2">
               <Link
                 href={localizeHref("/contacto")}
                 prefetch={false}
