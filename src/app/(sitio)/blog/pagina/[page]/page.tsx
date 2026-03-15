@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { BlogListingSection } from "@/components/shared/blog-listing-section";
 import { getAllPosts, getBlogCanonical } from "@/lib/blog-content";
-import { getBlogListingState } from "@/lib/blog-listing";
+import { getBlogListingState, slugifyCategory } from "@/lib/blog-listing";
 
 type BlogPaginatedPageProps = {
   params: Promise<{ page: string }>;
@@ -58,15 +58,22 @@ export default async function BlogPaginatedPage({ params, searchParams }: BlogPa
   const [{ page }, query] = await Promise.all([params, searchParams]);
   const requestedPage = parsePageParam(page);
 
-  if (requestedPage <= 1) {
-    const target = query.categoria ? `/blog?categoria=${encodeURIComponent(query.categoria)}` : "/blog";
+  if (query.categoria) {
+    const categorySlug = slugifyCategory(query.categoria);
+    const target = requestedPage <= 1
+      ? `/blog/categoria/${categorySlug}`
+      : `/blog/categoria/${categorySlug}/pagina/${requestedPage}`;
     redirect(target);
+  }
+
+  if (requestedPage <= 1) {
+    redirect("/blog");
   }
 
   const posts = await getAllPosts();
   const state = getBlogListingState({
     posts,
-    categoryParam: query.categoria,
+    categorySlug: undefined,
     pageParam: String(requestedPage),
   });
 

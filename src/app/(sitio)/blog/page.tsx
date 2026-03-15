@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { BlogListingSection } from "@/components/shared/blog-listing-section";
 import { getAllPosts, getBlogCanonical } from "@/lib/blog-content";
-import { getBlogListingState } from "@/lib/blog-listing";
+import { getBlogListingState, slugifyCategory } from "@/lib/blog-listing";
 
 type BlogMetadataProps = {
   searchParams: Promise<{
@@ -12,7 +13,7 @@ type BlogMetadataProps = {
 
 export async function generateMetadata({ searchParams }: BlogMetadataProps): Promise<Metadata> {
   const params = await searchParams;
-  const isFiltered = Boolean(params.categoria);
+  const isLegacyFiltered = Boolean(params.categoria);
 
   return {
     title: "Blog de Estetica y Bienestar",
@@ -21,7 +22,7 @@ export async function generateMetadata({ searchParams }: BlogMetadataProps): Pro
     alternates: {
       canonical: getBlogCanonical("/blog"),
     },
-    robots: isFiltered
+    robots: isLegacyFiltered
       ? {
           index: false,
           follow: true,
@@ -64,9 +65,15 @@ type BlogPageProps = {
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const posts = await getAllPosts();
   const params = await searchParams;
+
+  if (params.categoria) {
+    const categorySlug = slugifyCategory(params.categoria);
+    redirect(`/blog/categoria/${categorySlug}`);
+  }
+
   const state = getBlogListingState({
     posts,
-    categoryParam: params.categoria,
+    categorySlug: undefined,
     pageParam: "1",
   });
 

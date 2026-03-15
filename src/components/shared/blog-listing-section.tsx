@@ -25,7 +25,7 @@ export function BlogListingSection({ state }: BlogListingSectionProps) {
         <Link
           href={buildBlogHref(1, null)}
           className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
-            state.activeCategory === null
+              !state.activeCategory
               ? "border-[#D4AF37] bg-[#D4AF37] text-white"
               : "border-[#D4AF37]/30 bg-white text-[#7A6422] hover:border-[#D4AF37]"
           }`}
@@ -34,15 +34,15 @@ export function BlogListingSection({ state }: BlogListingSectionProps) {
         </Link>
         {state.categories.map((category) => (
           <Link
-            key={category}
-            href={buildBlogHref(1, category)}
+            key={category.slug}
+            href={buildBlogHref(1, category.slug)}
             className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
-              state.activeCategory === category
+              state.activeCategory?.slug === category.slug
                 ? "border-[#D4AF37] bg-[#D4AF37] text-white"
                 : "border-[#D4AF37]/30 bg-white text-[#7A6422] hover:border-[#D4AF37]"
             }`}
           >
-            {category}
+            {category.name}
           </Link>
         ))}
       </div>
@@ -60,7 +60,7 @@ export function BlogListingSection({ state }: BlogListingSectionProps) {
       {state.totalPages > 1 ? (
         <nav className="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label="Paginacion del blog">
           <Link
-            href={buildBlogHref(Math.max(1, state.currentPage - 1), state.activeCategory)}
+            href={buildBlogHref(Math.max(1, state.currentPage - 1), state.activeCategory?.slug ?? null)}
             rel={state.currentPage > 1 ? "prev" : undefined}
             aria-disabled={state.currentPage === 1}
             className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
@@ -75,7 +75,7 @@ export function BlogListingSection({ state }: BlogListingSectionProps) {
           {Array.from({ length: state.totalPages }, (_, idx) => idx + 1).map((pageNumber) => (
             <Link
               key={pageNumber}
-              href={buildBlogHref(pageNumber, state.activeCategory)}
+              href={buildBlogHref(pageNumber, state.activeCategory?.slug ?? null)}
               className={`h-9 w-9 rounded-full border text-center text-xs font-semibold leading-9 transition ${
                 pageNumber === state.currentPage
                   ? "border-[#D4AF37] bg-[#D4AF37] text-white"
@@ -88,7 +88,7 @@ export function BlogListingSection({ state }: BlogListingSectionProps) {
           ))}
 
           <Link
-            href={buildBlogHref(Math.min(state.totalPages, state.currentPage + 1), state.activeCategory)}
+            href={buildBlogHref(Math.min(state.totalPages, state.currentPage + 1), state.activeCategory?.slug ?? null)}
             rel={state.currentPage < state.totalPages ? "next" : undefined}
             aria-disabled={state.currentPage === state.totalPages}
             className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
