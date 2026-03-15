@@ -3,6 +3,10 @@
 import nodemailer from "nodemailer";
 import { z } from "zod";
 
+function getEnvValue(key: "GMAIL_USER" | "GMAIL_PASS") {
+  return process.env[key]?.trim();
+}
+
 const contactSchema = z.object({
   name: z.string().min(2, "El nombre es muy corto"),
   phone: z.string().min(7, "El número de teléfono no es válido"), // Basic length check, the UI component handles strict validation
@@ -51,7 +55,10 @@ export async function sendContactEmail(prevState: ContactState, formData: FormDa
   const { name, phone, service, message } = validatedFields.data;
 
   // Check for environment variables
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
+  const gmailUser = getEnvValue("GMAIL_USER");
+  const gmailPass = getEnvValue("GMAIL_PASS");
+
+  if (!gmailUser || !gmailPass) {
     console.error("Missing Gmail credentials in .env file");
     return {
       success: false,
@@ -63,16 +70,18 @@ export async function sendContactEmail(prevState: ContactState, formData: FormDa
   try {
     // Configure Transporter
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: gmailUser,
+        pass: gmailPass,
       },
     });
 
     // Email Content
     const mailOptions = {
-      from: `"Jenny Vera Spa Web" <${process.env.GMAIL_USER}>`,
+      from: `"Jenny Vera Spa Web" <${gmailUser}>`,
       to: "chelis.vera@hotmail.com",
       cc: "wmateohv@hotmail.com",
       subject: `Nuevo Cliente desde la Web: ${name}`,
@@ -119,6 +128,18 @@ export async function sendContactEmail(prevState: ContactState, formData: FormDa
     };
 
   } catch (error) {
+    // Surface Gmail auth issues clearly while preserving a generic message to users.
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      (error as { code?: string }).code === "EAUTH"
+    ) {
+      console.error(
+        "Gmail auth failed. Use a valid App Password (16 chars, no spaces) and restart dev server after updating .env"
+      );
+    }
+
     console.error("Error sending email:", error);
     return {
       success: false,
