@@ -110,7 +110,7 @@ export default function HomePage({ posts }: HomePageProps) {
           className="pointer-events-none absolute -right-24 top-36 h-72 w-72 rounded-full bg-[#d9b861]/35 blur-[120px]"
         />
 
-        <div className="relative z-10 container mx-auto flex min-h-[98vh] items-end px-6 pb-14 pt-44 md:items-center md:pt-32 lg:px-10">
+        <div className="relative z-10 container mx-auto flex min-h-[98vh] items-start px-6 pb-8 pt-28 md:items-center md:pb-12 md:pt-32 lg:px-10">
           <div className="max-w-3xl">
             <motion.span
               initial={{ opacity: 0, y: 14 }}
@@ -181,14 +181,53 @@ export default function HomePage({ posts }: HomePageProps) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-[#d9c9a3]/45 bg-[#efe4cf] py-12">
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_60%)]" />
-        <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 px-6 text-center">
-          {["Diagnostico profesional", "Tecnologia segura", "Rituales de bienestar"].map((item) => (
-            <div key={item} className="inline-flex items-center gap-3">
-              <span className="font-serif text-xl italic text-[#2c221a] md:text-2xl">{item}</span>
-              <Star className="h-3.5 w-3.5 text-[#b69135]" fill="currentColor" />
-            </div>
+      <section className="relative overflow-hidden border-y border-[#d9c9a3]/45 bg-[#efe4cf] py-7 md:py-9">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0)_58%)]" />
+        <div className="absolute inset-x-0 top-1/2 hidden -translate-y-1/2 px-14 md:block">
+          <motion.svg
+            viewBox="0 0 1200 120"
+            className="h-12 w-full text-[#b99642]/35"
+            initial={{ opacity: 0.2 }}
+            animate={reducedMotion ? { opacity: 0.2 } : { opacity: [0.2, 0.38, 0.2] }}
+            transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          >
+            <motion.path
+              d="M20,60 C180,6 280,6 420,60 C560,112 670,112 810,60 C920,22 1020,20 1180,60"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeDasharray="4 10"
+              initial={{ pathLength: 0.15 }}
+              animate={reducedMotion ? { pathLength: 0.15 } : { pathLength: [0.15, 1, 0.15] }}
+              transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            />
+          </motion.svg>
+        </div>
+
+        <div className="relative mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-3 px-4 text-center md:gap-4 md:px-6">
+          {[
+            "Diagnostico Pro",
+            "Tecnologia Segura",
+            "Ritual Sensorial",
+          ].map((item, index) => (
+            <motion.div
+              key={item}
+              className="inline-flex items-center gap-2 rounded-full border border-[#c9b186]/70 bg-white/55 px-4 py-2 backdrop-blur-[1px] md:px-5"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: index * 0.08, ease: "easeOut" }}
+              animate={
+                reducedMotion
+                  ? undefined
+                  : { y: [0, -2, 0] }
+              }
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
+              <Star className="h-3 w-3 text-[#b69135]" fill="currentColor" />
+              <span className="font-serif text-lg italic leading-none text-[#2c221a] md:text-xl">{item}</span>
+            </motion.div>
           ))}
         </div>
       </section>

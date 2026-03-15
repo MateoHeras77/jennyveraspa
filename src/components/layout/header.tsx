@@ -67,7 +67,7 @@ export function Header() {
             : "bg-[#FDFBF7]/90 backdrop-blur-xl border-[#d8c9a0]/35 py-1.5 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.45)]"
         )}
       >
-        <div className="container mx-auto px-6 lg:px-12 flex items-center gap-12 relative">
+        <div className="container mx-auto px-6 lg:px-12 flex items-center gap-4 lg:gap-12 relative">
           
           {/* Logo */}
           <Link href="/" className="flex items-center group z-50 shrink-0">
@@ -168,7 +168,7 @@ export function Header() {
           {/* Mobile Toggle */}
           <button 
             className={cn(
-              "lg:hidden z-50 p-2 rounded-full transition-colors",
+              "lg:hidden z-50 ml-auto p-2 rounded-full transition-colors",
               useTransparentHeader
                 ? "text-white hover:bg-white/15"
                 : "text-gray-900 hover:bg-gray-100"
