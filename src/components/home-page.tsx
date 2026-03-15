@@ -110,7 +110,7 @@ export default function HomePage({ posts }: HomePageProps) {
           className="pointer-events-none absolute -right-24 top-36 h-72 w-72 rounded-full bg-[#d9b861]/35 blur-[120px]"
         />
 
-        <div className="relative z-10 container mx-auto flex min-h-[98vh] items-start px-6 pb-8 pt-28 md:items-center md:pb-12 md:pt-32 lg:px-10">
+        <div className="relative z-10 container mx-auto flex min-h-[98vh] items-start px-6 pb-8 pt-36 md:items-center md:pb-12 md:pt-32 lg:px-10">
           <div className="max-w-3xl">
             <motion.span
               initial={{ opacity: 0, y: 14 }}

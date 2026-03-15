@@ -1,6 +1,11 @@
 // src/lib/constants.ts
 // This file contains shared application data.
 
+export const CONTACT_PHONE_E164 = "+593999152853";
+export const CONTACT_PHONE_DISPLAY = "+593 999 152 853";
+export const WHATSAPP_CONTACT_URL =
+  "https://api.whatsapp.com/send/?phone=593999152853&text=%C2%A1Hola+desde+JennyVeraSpa+en+Cuenca%2C+Ecuador%21+%C2%BFC%C3%B3mo+podemos+ayudarte+hoy+con+nuestros+tratamientos+%3F+Estamos+aqu%C3%AD+para+ofrecerte+la+mejor+experiencia+de+spa.+%C2%A1Escr%C3%ADbenos+y+programa+tu+cita+ahora+mismo%21&type=phone_number&app_absent=0";
+
 export const SERVICE_CATEGORIES = [
   {
     category: "Faciales Avanzados",

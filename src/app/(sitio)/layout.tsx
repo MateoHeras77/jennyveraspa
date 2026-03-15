@@ -3,6 +3,7 @@
 import React from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppFloat } from "@/components/shared/whatsapp-float";
 
 export default function SitioLayout({
   children,
@@ -18,6 +19,7 @@ export default function SitioLayout({
         {children}
       </main>
 
+      <WhatsAppFloat />
       <Footer />
     </div>
   );

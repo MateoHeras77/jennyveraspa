@@ -73,11 +73,12 @@ export async function sendContactEmail(prevState: ContactState, formData: FormDa
     // Email Content
     const mailOptions = {
       from: `"Jenny Vera Spa Web" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER, // Sed to yourself (the spa owner)
-      subject: `Nueva Solicitud de Cita: ${name}`,
+      to: "chelis.vera@hotmail.com",
+      cc: "wmateohv@hotmail.com",
+      subject: `Nuevo Cliente desde la Web: ${name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #D4AF37; border-bottom: 2px solid #D4AF37; padding-bottom: 10px;">Nueva Solicitud de Cita</h2>
+          <h2 style="color: #D4AF37; border-bottom: 2px solid #D4AF37; padding-bottom: 10px;">Nuevo Cliente desde la Web</h2>
           <p>Has recibido un nuevo mensaje desde el formulario de contacto de la web.</p>
           
           <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">

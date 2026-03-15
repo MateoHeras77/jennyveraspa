@@ -1,3 +1,5 @@
+import { CONTACT_PHONE_E164 } from "@/lib/constants";
+
 export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
@@ -6,7 +8,7 @@ export function LocalBusinessSchema() {
     "image": "https://www.jennyveraspa.com/placeholder.png",
     "@id": "https://www.jennyveraspa.com",
     "url": "https://www.jennyveraspa.com",
-    "telephone": "+593900000000",
+    "telephone": CONTACT_PHONE_E164,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Av. Manuel de J. Calle y Paucarbamba, Edificio Plaza Médica 4to piso",

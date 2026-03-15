@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Facebook, MapPin, Phone } from "lucide-react";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -38,7 +39,9 @@ export function Footer() {
             </li>
             <li className="flex items-center gap-4">
               <Phone size={18} className="text-[#D4AF37] shrink-0" />
-              <span>+593 90 000 0000</span>
+              <a href={`tel:${CONTACT_PHONE_E164}`} className="hover:text-[#D4AF37] transition-colors">
+                {CONTACT_PHONE_DISPLAY}
+              </a>
             </li>
           </ul>
         </div>

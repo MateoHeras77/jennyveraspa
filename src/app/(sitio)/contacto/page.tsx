@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import { ContactForm } from "@/components/forms/contact-form";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/lib/constants";
 
 export default function ContactoPage() {
   return (
@@ -42,7 +43,9 @@ export default function ContactoPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-serif text-gray-900 mb-2">Llámanos</h3>
-                  <p className="text-gray-600 font-light">+593 90 000 0000</p>
+                  <a href={`tel:${CONTACT_PHONE_E164}`} className="text-gray-600 font-light hover:text-[#D4AF37] transition-colors">
+                    {CONTACT_PHONE_DISPLAY}
+                  </a>
                 </div>
               </div>
 
