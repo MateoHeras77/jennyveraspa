@@ -39,7 +39,7 @@ const categories: ServiceCategory[] = [
     category: "Faciales Avanzados",
     description:
       "Protocolos para iluminar, renovar y rejuvenecer tu rostro con resultados visibles y naturales.",
-    img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80",
+    img: "/images/unsplash/photo-1522335789203-aabd1fc54bc9.webp",
     icon: Sparkles,
     services: [
       {
@@ -80,7 +80,7 @@ const categories: ServiceCategory[] = [
     category: "Corporales y Bienestar",
     description:
       "Tratamientos diseñados para relajar, moldear y recuperar bienestar corporal con enfoque integral.",
-    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=80",
+    img: "/images/unsplash/photo-1544161515-4ab6ce6db874.webp",
     icon: Hand,
     services: [
       {
@@ -109,7 +109,7 @@ const categories: ServiceCategory[] = [
     category: "Láser y Zonas Específicas",
     description:
       "Tecnología láser para depilación, renovación y despigmentación en zonas estratégicas.",
-    img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1600&q=80",
+    img: "/images/unsplash/photo-1512290923902-8a9f81dc236c.webp",
     icon: ScanLine,
     services: [
       {
@@ -138,7 +138,7 @@ const categories: ServiceCategory[] = [
     category: "Post-Operatorios",
     description:
       "Acompanamiento especializado para acelerar recuperacion y potenciar resultados esteticos.",
-    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
+    img: "/images/unsplash/photo-1576091160550-2173dba999ef.webp",
     icon: ShieldCheck,
     services: [
       {

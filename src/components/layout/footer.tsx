@@ -10,7 +10,7 @@ export function Footer() {
         <div className="space-y-6 md:col-span-1">
           <div className="relative w-32 h-12 mb-6">
              <Image 
-               src="/logo-white.png" 
+               src="/logo-white.webp" 
                alt="Jenny Vera Spa" 
                fill
                className="object-contain object-left"

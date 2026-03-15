@@ -38,7 +38,7 @@ export function ArticleSchema({
       name: "Jenny Vera Spa",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.jennyveraspa.com/logo-white.png",
+        url: "https://www.jennyveraspa.com/logo-white.webp",
       },
     },
     mainEntityOfPage: {

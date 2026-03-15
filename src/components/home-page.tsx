@@ -93,7 +93,7 @@ export default function HomePage({ posts }: HomePageProps) {
           className="absolute inset-0 will-change-transform"
         >
           <Image
-            src="/image2.png"
+            src="/image2.webp"
             alt="Modelo en tratamiento facial en Jenny Vera Spa"
             fill
             priority
@@ -237,7 +237,7 @@ export default function HomePage({ posts }: HomePageProps) {
           <FadeIn>
             <div className="relative min-h-[420px] overflow-hidden rounded-[26px] shadow-[0_30px_70px_-35px_rgba(0,0,0,0.55)]">
               <Image
-                src="/image1.png"
+                src="/image1.webp"
                 alt="Tratamiento corporal relajante en Jenny Vera Spa"
                 fill
                 loading="lazy"

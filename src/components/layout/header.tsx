@@ -78,7 +78,7 @@ export function Header() {
               )}
             >
               <Image 
-                src={useTransparentHeader ? "/logo-white.png" : "/logo-black.png"}
+                src={useTransparentHeader ? "/logo-white.webp" : "/logo-black.webp"}
                 alt="Jenny Vera Spa Logo" 
                 fill
                 className={cn(
