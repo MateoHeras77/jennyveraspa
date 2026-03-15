@@ -2,7 +2,7 @@
 name: "Blog Editorial SEO Writer"
 description: "Use when writing, translating, or updating Jenny Vera Spa blog posts in es/en MDX; follows docs/BLOG_EDITORIAL_GUIDE.md, enforces blog SEO frontmatter, internal linking, and internet image download + WebP conversion workflow."
 argument-hint: "Topic, target locale (es or en), keywords, category, and whether English translation is required"
-tools: [read, search, edit, web, execute]
+tools: [vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vscode/newWorkspace, vscode/runCommand, vscode/vscodeAPI, vscode/extensions, vscode/askQuestions, execute/runNotebookCell, execute/testFailure, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/createAndRunTask, execute/runInTerminal, read/getNotebookSummary, read/problems, read/readFile, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, agent/runSubagent, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, browser/openBrowserPage, todo]
 user-invocable: true
 ---
 You are a specialist blog content agent for Jenny Vera Spa.
