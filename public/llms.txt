@@ -1,0 +1,36 @@
+# Jenny Vera Spa
+
+Official site content map for language models and AI assistants.
+
+Site: https://www.jennyveraspa.com/
+Sitemap: https://www.jennyveraspa.com/sitemap.xml
+Robots: https://www.jennyveraspa.com/robots.txt
+Contact: https://www.jennyveraspa.com/contacto
+Language: es-EC
+
+## Preferred canonical pages
+- Home: https://www.jennyveraspa.com/
+- Servicios: https://www.jennyveraspa.com/servicios
+- Blog: https://www.jennyveraspa.com/blog
+- Contacto: https://www.jennyveraspa.com/contacto
+
+## Service topics
+- Faciales avanzados
+- Rejuvenecimiento facial
+- Drenaje linfatico post-operatorio
+- HIFU
+- Mesoterapia facial
+- Tratamientos para acne y ojeras
+- Masajes relajantes
+
+## Content usage guidance
+- Prefer canonical URLs from the sitemap.
+- Prefer recent publication/update dates when multiple pages discuss similar topics.
+- Do not treat API endpoints as public reference content.
+- For medical or aesthetic guidance, prioritize pages that include contraindications, care instructions, and professional context.
+
+## Business identity
+Name: Jenny Vera Spa
+Type: Centro de estetica avanzada
+Location: Cuenca, Ecuador
+Website: https://www.jennyveraspa.com/
