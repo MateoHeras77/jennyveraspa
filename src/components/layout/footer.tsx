@@ -5,7 +5,7 @@ import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="bg-[#111111] text-gray-400 py-20 border-t border-[#222]">
+    <footer className="border-t border-[#222] bg-[#111111] py-20 text-gray-300">
       <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-4 gap-16">
         <div className="space-y-6 md:col-span-1">
           <div className="relative w-32 h-12 mb-6">
@@ -16,13 +16,13 @@ export function Footer() {
                className="object-contain object-left"
              />
           </div>
-          <p className="text-sm font-light leading-relaxed text-gray-500">
+          <p className="text-sm font-light leading-relaxed text-gray-300">
             Santuario de belleza y bienestar en Cuenca. Elevando la estética con ciencia, lujo y arte.
           </p>
         </div>
         
         <div className="space-y-6">
-          <h4 className="text-white uppercase tracking-[0.2em] text-xs font-semibold">Tratamientos</h4>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Tratamientos</h3>
           <ul className="space-y-3 text-sm font-light">
             <li><Link href="/servicios#faciales" className="hover:text-[#D4AF37] transition-colors">Rejuvenecimiento Facial</Link></li>
             <li><Link href="/servicios#corporales" className="hover:text-[#D4AF37] transition-colors">Remodelación Corporal</Link></li>
@@ -31,7 +31,7 @@ export function Footer() {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-white uppercase tracking-[0.2em] text-xs font-semibold">Ubicación</h4>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Ubicacion</h3>
           <ul className="space-y-4 text-sm font-light">
             <li className="flex items-start gap-4">
               <MapPin size={18} className="text-[#D4AF37] mt-0.5 shrink-0" />
@@ -47,12 +47,24 @@ export function Footer() {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-white uppercase tracking-[0.2em] text-xs font-semibold">Conecta</h4>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Conecta</h3>
           <div className="flex gap-4">
-            <a href="#" className="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram de Jenny Vera Spa"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-700 transition-all hover:border-[#D4AF37] hover:text-[#D4AF37]"
+            >
               <Instagram size={18} />
             </a>
-            <a href="#" className="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all">
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook de Jenny Vera Spa"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-700 transition-all hover:border-[#D4AF37] hover:text-[#D4AF37]"
+            >
               <Facebook size={18} />
             </a>
           </div>
@@ -60,7 +72,7 @@ export function Footer() {
       </div>
       
       <div className="container mx-auto px-6 lg:px-12 mt-20 pt-8 border-t border-gray-800 text-center flex flex-col md:flex-row justify-between items-center gap-4">
-        <span className="text-xs font-light text-gray-600 tracking-[0.1em] uppercase">
+        <span className="text-xs font-light uppercase tracking-[0.1em] text-gray-400">
           © {new Date().getFullYear()} Jenny Vera Spa.
         </span>
       </div>

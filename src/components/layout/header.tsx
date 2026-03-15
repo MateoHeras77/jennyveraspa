@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -43,7 +42,6 @@ export function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [hoveredResult, setHoveredResult] = useState<string | null>(null);
 
   const isHome = pathname === "/";
   const useTransparentHeader = isHome && !isScrolled && !mobileMenuOpen;
@@ -96,11 +94,10 @@ export function Header() {
               <div 
                 key={item.name} 
                 className="relative group py-2"
-                onMouseEnter={() => setHoveredResult(item.name)}
-                onMouseLeave={() => setHoveredResult(null)}
               >
                 <Link 
                   href={item.href}
+                  prefetch={false}
                   className={cn(
                     "flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300",
                     useTransparentHeader
@@ -114,37 +111,28 @@ export function Header() {
 
                 {/* Dropdown Menu */}
                 {item.submenu && (
-                  <AnimatePresence>
-                    {hoveredResult === item.name && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                        animate={{ opacity: 1, y: 0, clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-                        exit={{ opacity: 0, y: 5, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-6 min-w-[280px]"
-                      >
-                         <div className="bg-white rounded-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 p-2 overflow-hidden">
-                           {item.submenu.map((subItem) => (
-                             <Link
-                               key={subItem.name}
-                               href={subItem.href}
-                               className="flex flex-col px-4 py-3 hover:bg-[#FDFBF7] rounded-md group/item transition-colors"
-                             >
-                               <span className="text-xs font-semibold uppercase tracking-wider text-gray-800 group-hover/item:text-[#D4AF37] flex items-center justify-between">
-                                 {subItem.name}
-                                 <Sparkles className="w-3 h-3 opacity-0 group-hover/item:opacity-100 transition-opacity text-[#D4AF37]" />
-                               </span>
-                               {subItem.desc && (
-                                 <span className="text-[10px] text-gray-400 font-light mt-1 leading-tight">
-                                   {subItem.desc}
-                                 </span>
-                               )}
-                             </Link>
-                           ))}
-                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div className="pointer-events-none absolute top-full left-1/2 min-w-[280px] -translate-x-1/2 pt-6 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                     <div className="overflow-hidden rounded-lg border border-gray-100 bg-white p-2 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
+                       {item.submenu.map((subItem) => (
+                         <Link
+                           key={subItem.name}
+                           href={subItem.href}
+                               prefetch={false}
+                           className="group/item flex flex-col rounded-md px-4 py-3 transition-colors hover:bg-[#FDFBF7]"
+                         >
+                           <span className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-gray-800 group-hover/item:text-[#D4AF37]">
+                             {subItem.name}
+                             <Sparkles className="h-3 w-3 text-[#D4AF37] opacity-0 transition-opacity group-hover/item:opacity-100" />
+                           </span>
+                           {subItem.desc && (
+                             <span className="mt-1 text-[10px] font-light leading-tight text-gray-500">
+                               {subItem.desc}
+                             </span>
+                           )}
+                         </Link>
+                       ))}
+                     </div>
+                  </div>
                 )}
               </div>
             ))}
@@ -154,6 +142,7 @@ export function Header() {
           <div className="hidden lg:block z-50 ml-auto mr-auto">
              <Link 
                href="/contacto" 
+               prefetch={false}
                className={cn(
                  buttonVariants({ variant: "default", size: "sm" }), 
                  useTransparentHeader
@@ -174,6 +163,9 @@ export function Header() {
                 : "text-gray-900 hover:bg-gray-100"
             )}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Cerrar menu de navegacion" : "Abrir menu de navegacion"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -181,54 +173,53 @@ export function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-40 lg:hidden flex flex-col pt-32 px-6 overflow-y-auto"
-          >
-            <nav className="flex flex-col gap-6">
-              {navItems.map((item, idx) => (
-                <div key={item.name} className="border-b border-gray-100 pb-4 last:border-0">
-                  <Link 
-                    href={item.href}
-                    onClick={() => !item.submenu && setMobileMenuOpen(false)}
-                    className="flex items-center justify-between text-xl font-serif text-[#1B1B1B]"
-                  >
-                     {item.name}
-                  </Link>
-                  
-                  {item.submenu && (
-                    <div className="mt-4 pl-4 flex flex-col gap-3 border-l-2 border-[#D4AF37]/20">
-                      {item.submenu.map(subItem => (
-                        <Link 
-                          key={subItem.name}
-                          href={subItem.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="text-sm text-gray-500 hover:text-[#D4AF37] uppercase tracking-wider"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-              <div className="pt-8 pb-12">
-                <Link
-                  href="/contacto"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-center bg-[#D4AF37] text-white py-4 rounded-sm uppercase tracking-[0.2em] text-sm font-medium hover:bg-[#1B1B1B] transition-colors shadow-lg"
+      {mobileMenuOpen && (
+        <div
+          id="mobile-navigation"
+          className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-white/95 px-6 pt-32 backdrop-blur-xl lg:hidden"
+        >
+          <nav className="flex flex-col gap-6">
+            {navItems.map((item) => (
+              <div key={item.name} className="border-b border-gray-100 pb-4 last:border-0">
+                <Link 
+                  href={item.href}
+                  prefetch={false}
+                  onClick={() => !item.submenu && setMobileMenuOpen(false)}
+                  className="flex items-center justify-between text-xl font-serif text-[#1B1B1B]"
                 >
-                  Agendar Cita
+                   {item.name}
                 </Link>
+                
+                {item.submenu && (
+                  <div className="mt-4 flex flex-col gap-3 border-l-2 border-[#D4AF37]/20 pl-4">
+                    {item.submenu.map((subItem) => (
+                      <Link 
+                        key={subItem.name}
+                        href={subItem.href}
+                        prefetch={false}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-sm uppercase tracking-wider text-gray-600 hover:text-[#D4AF37]"
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <div className="pb-12 pt-8">
+              <Link
+                href="/contacto"
+                prefetch={false}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full rounded-sm bg-[#D4AF37] py-4 text-center text-sm font-medium uppercase tracking-[0.2em] text-white shadow-lg transition-colors hover:bg-[#1B1B1B]"
+              >
+                Agendar Cita
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
     </>
   );
 }
