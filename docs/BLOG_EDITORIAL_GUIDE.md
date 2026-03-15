@@ -9,23 +9,49 @@ Esta guia asegura que cada nuevo post:
 - mantenga el tono de marca,
 - cumpla estandares SEO tecnicos y on-page,
 - encaje visualmente con el template actual,
-- contribuya a la autoridad tematica del sitio.
+- contribuya a la autoridad tematica del sitio,
+- respete la estrategia de idiomas del proyecto.
 
-## 2. Arquitectura actual del blog
+## 2. Idiomas y cobertura oficial
 
-- Contenido fuente: `src/content/blog/*.mdx`
+Idiomas activos del blog:
+
+- Espanol (`es`) como idioma principal.
+- Ingles (`en`) como idioma secundario.
+
+Politica vigente:
+
+- Todo post nuevo se publica primero en espanol.
+- Ingles es cobertura parcial (no se traduce automaticamente todo).
+- Solo se traducen a ingles los posts priorizados por negocio/SEO.
+
+Regla operativa para creadores:
+
+- Si no hay instruccion explicita de traducir, crear solo version `es`.
+- Si el post fue marcado para ingles, crear tambien version `en` con el mismo `slug`.
+
+## 3. Arquitectura actual del blog
+
+### Contenido por idioma
+
+- Espanol: `src/content/blog/*.mdx`
+- Ingles (parcial): `src/content/blog/en/*.mdx`
+
+### Renderizado y rutas
+
 - Lectura y validacion de frontmatter: `src/lib/blog-content.ts`
-- Listado y paginacion: `src/app/(sitio)/blog/**`
+- Listado y paginacion localizados: `src/app/[locale]/(sitio)/blog/**`
+- Home localizada: `src/app/[locale]/(sitio)/page.tsx`
 - Filtros por categoria con rutas limpias:
-  - `/blog/categoria/[category]`
-  - `/blog/categoria/[category]/pagina/[page]`
+  - `/{locale}/blog/categoria/[category]`
+  - `/{locale}/blog/categoria/[category]/pagina/[page]`
 - Post individual:
-  - `/blog/[slug]`
+  - `/{locale}/blog/[slug]`
 - OG/Twitter dinamico:
-  - `src/app/(sitio)/blog/[slug]/opengraph-image.tsx`
-  - `src/app/(sitio)/blog/[slug]/twitter-image.tsx`
+  - `src/app/[locale]/(sitio)/blog/[slug]/opengraph-image.tsx`
+  - `src/app/[locale]/(sitio)/blog/[slug]/twitter-image.tsx`
 
-## 3. Frontmatter obligatorio
+## 4. Frontmatter obligatorio
 
 Todos los posts deben incluir estos campos.
 
@@ -50,11 +76,12 @@ tags:
 Reglas:
 
 - `slug` unico y estable (no cambiar luego de publicar).
+- `slug` debe ser identico entre `es` y `en` cuando exista traduccion.
 - `description` clara, con keyword principal, sin relleno.
 - `tags` minimo 3 (ideal 4-6) para potenciar relacionados.
 - `coverImageAlt` descriptivo (accesibilidad + SEO).
 
-## 4. URL y slug standards
+## 5. URL y slug standards
 
 Usar slugs:
 
@@ -67,7 +94,7 @@ Ejemplo correcto:
 
 - `tratamiento-eficaz-para-lineas-de-expresion-en-ecuador`
 
-## 5. Estructura recomendada del articulo
+## 6. Estructura recomendada del articulo
 
 Cada articulo debe seguir esta base:
 
@@ -83,7 +110,7 @@ Importante para TOC:
 - evitar saltos raros de jerarquia,
 - incluir al menos 3 headings para aprovechar la tabla de contenido.
 
-## 6. SEO on-page checklist (obligatorio)
+## 7. SEO on-page checklist (obligatorio)
 
 Antes de publicar, confirmar:
 
@@ -96,13 +123,30 @@ Antes de publicar, confirmar:
 - `coverImageAlt` explicativo.
 - CTA final hacia `/contacto`.
 
-## 7. Estrategia de enlazado interno
+## 8. SEO tecnico por locale (obligatorio)
+
+Antes de merge, confirmar que el post se comporte correctamente en su locale:
+
+- Canonical correcto: `/{locale}/blog/[slug]`.
+- `hreflang` presente via metadata (`es`, `en`, `x-default`).
+- Si el post solo existe en `es`, no debe aparecer en `/en/blog`.
+- Si el post existe en ambos idiomas, debe aparecer en ambos listados.
+
+Nota:
+
+- El sitemap se construye por locale. Si creas un post en `en`, aparecera en `/sitemap.xml` bajo rutas `/en/...`.
+
+## 9. Estrategia de enlazado interno
 
 Por post incluir minimo:
 
 - 1 enlace a servicio relacionado (`/servicios/...` o `/servicios`).
 - 1 enlace a otro post relacionado (`/blog/...`).
 - 1 enlace de conversion (`/contacto`).
+
+Para contenido en ingles:
+
+- Mantener los enlaces en rutas neutrales (`/blog/...`, `/servicios`, `/contacto`) para que el sistema los resuelva al locale actual.
 
 Objetivo:
 
@@ -111,7 +155,7 @@ Objetivo:
 - aumentar tiempo de sesion,
 - empujar conversion.
 
-## 8. Diseno y consistencia visual
+## 10. Diseno y consistencia visual
 
 El template ya define estilo editorial premium. El contenido debe respetar:
 
@@ -128,7 +172,7 @@ Evitar:
 - titulares clickbait,
 - promesas medicas absolutas.
 
-## 9. Imagenes (cover + social)
+## 11. Imagenes (cover + social)
 
 Recomendaciones:
 
@@ -137,7 +181,7 @@ Recomendaciones:
 - OG ideal: 1200x630 (se genera dinamico, pero la portada debe seguir siendo de calidad).
 - no usar imagenes borrosas o con texto ilegible.
 
-## 10. Categorias y tags
+## 12. Categorias y tags
 
 Categorias deben ser estables para no fragmentar filtros.
 
@@ -154,21 +198,37 @@ Reglas de tags:
 - usar tags reutilizables entre posts para activar "articulos relacionados".
 - mantener un tag puente comun cuando aplique (ej. `estetica avanzada`).
 
-## 11. Publicacion: flujo recomendado
+## 13. Flujo de publicacion (ES + EN)
+
+### Flujo A: nuevo post solo en espanol
 
 1. Definir keyword principal + 2 secundarias.
-2. Crear archivo MDX en `src/content/blog`.
+2. Crear MDX en `src/content/blog`.
 3. Completar frontmatter obligatorio.
 4. Escribir contenido con estructura recomendada.
 5. Agregar enlaces internos.
 6. Revisar ortografia y claridad.
 7. Ejecutar `npm run build`.
 8. Verificar visualmente:
-   - `/blog`
-   - `/blog/[slug]`
-   - categoria correspondiente.
+  - `/es/blog`
+  - `/es/blog/[slug]`
+  - categoria correspondiente.
 
-## 12. QA previo a merge
+### Flujo B: traduccion a ingles de un post existente
+
+1. Confirmar que el post fue priorizado para EN.
+2. Crear archivo en `src/content/blog/en`.
+3. Mantener el mismo `slug` del post en espanol.
+4. Traducir `title`, `description`, cuerpo y `coverImageAlt`.
+5. Ajustar copy de CTA y tono natural en ingles.
+6. Verificar que enlaces internos apunten a rutas del sitio.
+7. Ejecutar `npm run build`.
+8. Validar:
+  - aparece en `/en/blog`,
+  - carga en `/en/blog/[slug]`,
+  - no rompe categorias/paginacion EN.
+
+## 14. QA previo a merge
 
 Checklist rapido:
 
@@ -179,8 +239,12 @@ Checklist rapido:
 - [ ] Post entra en relacionados de otros articulos.
 - [ ] Categoria y paginacion muestran el post.
 - [ ] Imagen portada carga bien.
+- [ ] Locale correcto (`es` o `en`) segun carpeta.
+- [ ] Si existe en ambos idiomas, slug coincide 1:1.
+- [ ] Post EN aparece en `/en/blog`.
+- [ ] Post ES aparece en `/es/blog`.
 
-## 13. Frecuencia y mantenimiento
+## 15. Frecuencia y mantenimiento
 
 Recomendacion operativa:
 
@@ -193,7 +257,12 @@ Recomendacion operativa:
   - postoperatorio,
   - tecnologia (HIFU, etc).
 
-## 14. Plantilla base para nuevo post
+Sugerencia de cobertura EN:
+
+- Traducir al menos 1 post al mes al ingles.
+- Priorizar temas evergreen y de alta intencion comercial.
+
+## 16. Plantilla base para nuevo post
 
 ```mdx
 ---
@@ -233,4 +302,46 @@ Contenido...
 Contenido...
 
 Cierre + CTA a [agendar una valoracion](/contacto).
+```
+
+## 17. Plantilla base para traduccion EN
+
+```mdx
+---
+title: "English title"
+description: "SEO summary in English"
+slug: "mismo-slug-que-espanol"
+publishedAt: "YYYY-MM-DD"
+updatedAt: "YYYY-MM-DD"
+category: "Tecnologia Estetica"
+coverImage: "/images/..."
+coverImageAlt: "Useful image alt in English"
+author: "Jenny Vera Spa"
+tags:
+  - "primary keyword"
+  - "secondary keyword"
+  - "advanced aesthetics"
+---
+
+Short intro in English.
+
+## Main section
+
+Content...
+
+## Process or benefits
+
+### Point 1
+
+Content...
+
+### Point 2
+
+Content...
+
+## Final recommendations
+
+Content...
+
+Closing + CTA to [book an evaluation](/contacto).
 ```
