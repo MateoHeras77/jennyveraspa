@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Sparkles } from "lucide-react";
 import Image from "next/image";
@@ -39,9 +40,13 @@ const navItems = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredResult, setHoveredResult] = useState<string | null>(null);
+
+  const isHome = pathname === "/";
+  const useTransparentHeader = isHome && !isScrolled && !mobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,21 +62,24 @@ export function Header() {
       <header
         className={cn(
           "fixed top-0 w-full z-50 transition-all duration-500 border-b",
-          isScrolled
-            ? "bg-[#FDFBF7]/90 backdrop-blur-md border-gray-200/50 py-3 shadow-sm"
-            : "bg-transparent border-transparent py-6"
+          useTransparentHeader
+            ? "bg-transparent border-transparent py-6"
+            : "bg-[#FDFBF7]/90 backdrop-blur-xl border-[#d8c9a0]/35 py-3 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.45)]"
         )}
       >
-        <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center relative">
+        <div className="container mx-auto px-6 lg:px-12 flex items-center gap-12 relative">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center group z-50">
+          <Link href="/" className="flex items-center group z-50 shrink-0">
             <div className={`relative w-32 h-32 md:w-40 md:h-40 transition-all duration-500`}>
               <Image 
-                src="/logo-black.png" 
+                src={useTransparentHeader ? "/logo-white.png" : "/logo-black.png"}
                 alt="Jenny Vera Spa Logo" 
                 fill
-                className="object-contain mix-blend-multiply"
+                className={cn(
+                  "object-contain transition-all duration-500",
+                  useTransparentHeader ? "drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)]" : "mix-blend-multiply"
+                )}
                 priority
               />
             </div>
@@ -88,7 +96,12 @@ export function Header() {
               >
                 <Link 
                   href={item.href}
-                  className="flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300 text-gray-900 hover:text-[#D4AF37]"
+                  className={cn(
+                    "flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300",
+                    useTransparentHeader
+                      ? "text-white/90 hover:text-[#f7d678]"
+                      : "text-gray-900 hover:text-[#D4AF37]"
+                  )}
                 >
                   {item.name}
                   {item.submenu && <ChevronDown size={14} className="opacity-50 group-hover:rotate-180 transition-transform duration-300" />}
@@ -133,21 +146,28 @@ export function Header() {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:block z-50">
+          <div className="hidden lg:block z-50 ml-auto mr-auto">
              <Link 
                href="/contacto" 
                className={cn(
                  buttonVariants({ variant: "default", size: "sm" }), 
-                 "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] text-xs px-8 py-6 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
+                 useTransparentHeader
+                   ? "bg-white/12 text-white border border-white/35 hover:bg-white hover:text-[#1B1B1B] text-xs px-8 py-6 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm"
+                   : "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] text-xs px-8 py-6 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
                )}
              >
-               Reservar Cita
+               Reserva Cita
              </Link>
           </div>
 
           {/* Mobile Toggle */}
           <button 
-            className="lg:hidden text-gray-900 z-50 p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className={cn(
+              "lg:hidden z-50 p-2 rounded-full transition-colors",
+              useTransparentHeader
+                ? "text-white hover:bg-white/15"
+                : "text-gray-900 hover:bg-gray-100"
+            )}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

@@ -1,9 +1,16 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ArrowUpRight, Check, Star } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { ArrowRight, Sparkles, Star } from "lucide-react";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -14,30 +21,45 @@ const testimonials = [
   {
     name: "Carolina M.",
     text: "La atención de Jenny es inigualable. El tratamiento facial cambió mi piel por completo.",
-    rating: 5
+    rating: 5,
   },
   {
     name: "Andrea R.",
     text: "Un lugar mágico en Cuenca. Los masajes relajantes son una experiencia de otro nivel.",
-    rating: 5
+    rating: 5,
   },
   {
     name: "Gabriela S.",
     text: "Profesionalismo y calidez. Me sentí segura durante todo mi proceso post-operatorio.",
-    rating: 5
-  }
+    rating: 5,
+  },
 ];
 
-function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
+function FadeIn({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const reducedMotion = useReducedMotion();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 28 }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0 }
+          : reducedMotion
+            ? { opacity: 0 }
+            : { opacity: 0, y: 28 }
+      }
+      transition={{ duration: 0.75, delay, ease: "easeOut" }}
       className={className}
     >
       {children}
@@ -50,179 +72,220 @@ interface HomePageProps {
 }
 
 export default function HomePage({ posts }: HomePageProps) {
+  const reducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+
+  const heroImageY = useSpring(
+    useTransform(scrollY, [0, 700], [0, reducedMotion ? 0 : 90]),
+    { stiffness: 110, damping: 28 }
+  );
+
+  const glowY = useSpring(
+    useTransform(scrollY, [0, 700], [0, reducedMotion ? 0 : -70]),
+    { stiffness: 120, damping: 30 }
+  );
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen text-[#1B1B1B] overflow-hidden">
-      
-      {/* HERO SECTION */}
-      <section className="relative h-screen w-full bg-[#FDFBF7] overflow-hidden">
-        
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-           <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full bg-[#f8f5f0] block"></div>
-           <motion.div 
-             style={{ y: y1 }}
-             className="absolute top-[20%] right-[10%] w-[300px] h-[300px] rounded-full bg-[#D4AF37]/5 blur-[80px]" 
-           />
-        </div>
+    <div className="min-h-screen overflow-hidden bg-[#f6f1e9] text-[#1B1B1B]">
+      <section className="relative min-h-[98vh] w-full overflow-hidden">
+        <motion.div
+          style={{ y: heroImageY }}
+          className="absolute inset-0 will-change-transform"
+        >
+          <Image
+            src="/image2.png"
+            alt="Modelo en tratamiento facial en Jenny Vera Spa"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[58%_center] md:object-center"
+          />
+        </motion.div>
 
-        <div className="container mx-auto px-6 h-full flex flex-col lg:flex-row items-center relative z-10">
-          
-          {/* Text Content - Left Side */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left h-full pt-20 pb-10 lg:py-0 lg:pr-12">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="inline-block py-1 px-3 border border-[#D4AF37]/30 rounded-full text-xs font-medium tracking-[0.2em] uppercase text-[#D4AF37] mb-6">
-                Bienestar Integral
-              </span>
-            </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1410]/78 via-[#211913]/50 to-[#211913]/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0d0b]/48 via-transparent to-transparent" />
 
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          style={{ y: glowY }}
+          className="pointer-events-none absolute -right-24 top-36 h-72 w-72 rounded-full bg-[#d9b861]/35 blur-[120px]"
+        />
+
+        <div className="relative z-10 container mx-auto flex min-h-[98vh] items-end px-6 pb-14 pt-44 md:items-center md:pt-32 lg:px-10">
+          <div className="max-w-3xl">
+            <motion.span
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] text-[#1B1B1B] mb-8"
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.26em] text-[#fdebc2] backdrop-blur-sm"
             >
-              Arte & <br/>
-              <span className="italic text-[#D4AF37]">Ciencia</span> <br/>
-              Estética
+              <Sparkles className="h-3.5 w-3.5" />
+              Cuidado de lujo en Cuenca
+            </motion.span>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.12, ease: "easeOut" }}
+              className="font-serif text-5xl leading-[0.95] text-[#f8f5ef] sm:text-6xl lg:text-7xl"
+            >
+              Belleza que te
+              <span className="block italic text-[#f0cd73]">mira de frente</span>
             </motion.h1>
 
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg font-light text-gray-600 max-w-md mb-10 leading-relaxed"
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.22, ease: "easeOut" }}
+              className="mt-8 max-w-xl text-base font-light leading-relaxed text-[#efe7d8] md:text-lg"
             >
-              Descubre un espacio donde la tecnología avanzada y el cuidado holístico se unen para revelar tu mejor versión.
+              Tu primera impresión importa. Por eso abrimos con una mirada directa: confianza, técnica y una experiencia
+              sensorial diseñada para que te sientas segura desde el primer minuto.
             </motion.p>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+              className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
-              <Link 
+              <Link
                 href="/contacto"
-                className={cn(buttonVariants({ size: "lg" }), "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] rounded-sm px-10 py-7 text-sm tracking-widest uppercase transition-all duration-300")}
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "rounded-sm border border-[#f7d682]/50 bg-[#f0cd73] px-8 py-6 text-xs font-semibold tracking-[0.19em] text-[#1B1B1B] uppercase hover:bg-[#f8dda0]"
+                )}
               >
-                  Agendar Cita
+                Agenda tu cita
               </Link>
-              <Link 
+              <Link
                 href="/servicios"
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "border-[#1B1B1B] text-[#1B1B1B] hover:bg-[#F5F2EB] rounded-sm px-10 py-7 text-sm tracking-widest uppercase bg-transparent")}
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "rounded-sm border-white/50 bg-transparent px-8 py-6 text-xs font-semibold tracking-[0.19em] text-white uppercase hover:bg-white/12"
+                )}
               >
-                  Explorar
+                Ver tratamientos
               </Link>
             </motion.div>
-          </div>
 
-          {/* Image - Right Side (Rectangle) */}
-          <div className="w-full lg:w-1/2 h-[40vh] lg:h-full relative px-4 lg:px-0 lg:py-0">
-             <motion.div
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               transition={{ duration: 1, delay: 0.2 }}
-               className="relative w-full h-full overflow-hidden"
-             >
-               {/* Using a high quality Unsplash image for Spa/Esthetics */}
-               <Image 
-                 src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop"
-                 alt="Jenny Vera Spa Interior"
-                 fill
-                 className="object-cover"
-                 priority
-                 sizes="(max-width: 768px) 100vw, 50vw"
-               />
-               <div className="absolute inset-0 bg-black/5"></div>
-             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+              className="mt-10 inline-flex items-center gap-4 border-l border-[#f0cd73]/55 pl-4 text-[#e9dfcc]"
+            >
+              <span className="font-serif text-3xl text-[#f0cd73]">+400</span>
+              <p className="text-xs uppercase tracking-[0.2em]">Clientes felices en tratamientos faciales y corporales</p>
+            </motion.div>
           </div>
-
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-8 flex flex-col items-center gap-2 hidden lg:flex"
-        >
-          <span className="text-[10px] tracking-[0.3em] text-[#1B1B1B]/40 uppercase rotate-[-90deg] translate-y-8">Scroll</span>
-          <div className="w-[1px] h-24 bg-gradient-to-b from-[#1B1B1B]/20 to-transparent"></div>
-        </motion.div>
       </section>
 
-      {/* MARQUEE */}
-      <div className="relative w-full py-12 bg-[#1B1B1B] overflow-hidden rotate-[-1deg] scale-110 origin-center z-20 border-y border-white/10">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[...Array(10)].map((_, i) => (
-            <div key={i} className="flex items-center mx-8">
-              <span className="text-4xl md:text-6xl font-serif italic text-white/20 px-4">Belleza</span>
-              <Star className="text-[#D4AF37] w-4 h-4" fill="currentColor" />
-              <span className="text-4xl md:text-6xl font-serif italic text-white/20 px-4">Bienestar</span>
-              <Star className="text-[#D4AF37] w-4 h-4" fill="currentColor" />
-              <span className="text-4xl md:text-6xl font-serif italic text-white/20 px-4">Armonía</span>
-              <Star className="text-[#D4AF37] w-4 h-4" fill="currentColor" />
+      <section className="relative overflow-hidden border-y border-[#d9c9a3]/45 bg-[#efe4cf] py-12">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_60%)]" />
+        <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 px-6 text-center">
+          {["Diagnostico profesional", "Tecnologia segura", "Rituales de bienestar"].map((item) => (
+            <div key={item} className="inline-flex items-center gap-3">
+              <span className="font-serif text-xl italic text-[#2c221a] md:text-2xl">{item}</span>
+              <Star className="h-3.5 w-3.5 text-[#b69135]" fill="currentColor" />
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* PHILOSOPHY SECTION */}
-      <section className="py-24 md:py-32 container mx-auto px-6 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <FadeIn className="relative aspect-[4/5] md:aspect-square bg-gray-200 rounded-lg overflow-hidden order-2 lg:order-1">
-             {/* Placeholder for About Image - Using a div or Next Image if available */}
-             <div className="absolute inset-0 bg-neutral-200 flex items-center justify-center text-neutral-400">
-                <span className="uppercase tracking-widest text-sm">Imagen de Jenny o Espacio</span>
-             </div>
-             {/* Decorative Frame */}
-             <div className="absolute inset-4 border border-white/30 rounded-lg pointer-events-none"></div>
+      <section className="container mx-auto px-6 py-20 md:py-28 lg:px-10">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_1fr]">
+          <FadeIn>
+            <div className="relative min-h-[420px] overflow-hidden rounded-[26px] shadow-[0_30px_70px_-35px_rgba(0,0,0,0.55)]">
+              <Image
+                src="/image1.png"
+                alt="Tratamiento corporal relajante en Jenny Vera Spa"
+                fill
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 54vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1410]/60 via-[#1a1410]/12 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/30 bg-black/30 p-4 backdrop-blur-sm">
+                <p className="text-sm font-light leading-relaxed text-[#f6efe2]">
+                  Cada protocolo se adapta a tu historia: piel, ritmo de vida y objetivos reales.
+                </p>
+              </div>
+            </div>
           </FadeIn>
-          
-          <div className="order-1 lg:order-2">
+
+          <div>
             <FadeIn>
-              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#1B1B1B] mb-8 leading-tight">
-                La belleza es un estado de <span className="italic text-[#D4AF37]">armonía.</span>
+              <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.24em] text-[#a98634]">Nuestra firma</span>
+              <h2 className="font-serif text-4xl leading-tight text-[#1b1511] md:text-5xl">
+                Ciencia estética con tacto
+                <span className="block italic text-[#b48a2f]">humano y honesto.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-gray-600 text-lg font-light leading-relaxed mb-8">
-                En Jenny Vera Spa, creemos que cada rostro cuenta una historia única. Nuestro enfoque combina técnicas avanzadas con un cuidado holístico para realzar tu esencia, no para cambiarla.
-              </p>
-              <p className="text-gray-600 text-lg font-light leading-relaxed mb-8">
-                Desde tratamientos faciales de última generación hasta rituales corporales relajantes, cada experiencia está diseñada para detener el tiempo y renovar tu energía vital.
+              <p className="mt-6 text-lg font-light leading-relaxed text-[#4f4438]">
+                Diseñamos experiencias completas: evaluación profesional, protocolos personalizados y seguimiento para que cada
+                sesión genere resultados visibles y sostenibles.
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
-              <div className="flex items-center gap-4">
-                <div className="h-[1px] w-12 bg-[#D4AF37]"></div>
-                <span className="font-serif text-xl italic text-[#1B1B1B]">Jenny Vera</span>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {[
+                  "Faciales avanzados y rejuvenecimiento",
+                  "Drenaje, relajacion y armonia corporal",
+                  "Tecnologia de ultima generacion",
+                  "Atencion personalizada de inicio a fin",
+                ].map((item) => (
+                  <div key={item} className="rounded-xl border border-[#d9c9a4]/55 bg-white/70 px-4 py-3 text-sm text-[#332922]">
+                    {item}
+                  </div>
+                ))}
               </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* LATEST FROM JOURNAL - Replacing Services Grid */}
-      <section className="py-24 bg-[#F5F2EB]">
+      <section className="bg-[#1d1612] py-20 text-[#f6efe2] md:py-24">
+        <div className="container mx-auto px-6 lg:px-10">
+          <FadeIn className="max-w-3xl">
+            <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.24em] text-[#efcd77]">Experiencia Jenny Vera</span>
+            <h3 className="font-serif text-3xl leading-tight md:text-5xl">Un recorrido pensado para que te sientas cuidada de principio a fin.</h3>
+          </FadeIn>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[
+              "Diagnostico inicial con objetivos claros",
+              "Plan de tratamiento adaptado a ti",
+              "Seguimiento y ajustes inteligentes",
+            ].map((step, index) => (
+              <FadeIn
+                key={step}
+                delay={index * 0.1}
+                className="rounded-2xl border border-white/15 bg-white/6 p-6 backdrop-blur-sm"
+              >
+                <span className="text-xs uppercase tracking-[0.24em] text-[#f0cd73]">Paso {index + 1}</span>
+                <p className="mt-4 font-light leading-relaxed text-[#f7edd9]">{step}</p>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f4ede1] py-20 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <FadeIn className="max-w-xl">
-              <span className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Nuestro Blog</span>
-              <h2 className="font-serif text-4xl md:text-5xl text-[#1B1B1B]">Journal</h2>
+              <span className="mb-4 block text-xs font-bold uppercase tracking-[0.2em] text-[#b1882f]">Nuestro Blog</span>
+              <h2 className="font-serif text-4xl text-[#1B1B1B] md:text-5xl">Journal</h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-               <Link href="/blog" className="group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-[#D4AF37] transition-colors pb-1 border-b border-transparent hover:border-[#D4AF37]">
-                  Ver todos los artículos <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-               </Link>
+              <Link
+                href="/blog"
+                className="group flex items-center gap-2 border-b border-transparent pb-1 text-sm uppercase tracking-widest transition-colors hover:border-[#D4AF37] hover:text-[#D4AF37]"
+              >
+                Ver todos los artículos <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </FadeIn>
           </div>
 
@@ -236,22 +299,27 @@ export default function HomePage({ posts }: HomePageProps) {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="py-24 container mx-auto px-6 text-center">
+      <section className="container mx-auto px-6 py-20 text-center md:py-24">
         <FadeIn>
-           <span className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mb-4 block">Testimonios</span>
-           <h2 className="font-serif text-3xl md:text-5xl text-[#1B1B1B] mb-16">Voces de Confianza</h2>
+          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.2em] text-[#b1882f]">Los testimonios</span>
+          <h2 className="mb-14 font-serif text-3xl text-[#1B1B1B] md:text-5xl">Voces de Confianza</h2>
         </FadeIn>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           {testimonials.map((t, i) => (
-            <FadeIn key={i} delay={i * 0.1} className="p-8 bg-white border border-gray-100 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_30px_rgba(0,0,0,0.05)] transition-shadow">
+            <FadeIn
+              key={t.name}
+              delay={i * 0.1}
+              className="rounded-2xl border border-[#dccca8]/70 bg-white/80 p-8 shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-shadow hover:shadow-[0_15px_50px_-30px_rgba(0,0,0,0.45)]"
+            >
               <div className="flex gap-1 mb-6 text-[#D4AF37]">
-                {[...Array(t.rating)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                {[...Array(t.rating)].map((_, starIndex) => (
+                  <Star key={starIndex} size={16} fill="currentColor" />
+                ))}
               </div>
-              <p className="text-gray-600 font-light italic mb-6 leading-relaxed">"{t.text}"</p>
+              <p className="mb-6 font-light italic leading-relaxed text-[#5a4d3f]">"{t.text}"</p>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-[#1B1B1B]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f0e6d3] text-xs font-bold text-[#1B1B1B]">
                   {t.name[0]}
                 </div>
                 <span className="text-sm font-medium tracking-wide">{t.name}</span>
@@ -261,31 +329,31 @@ export default function HomePage({ posts }: HomePageProps) {
         </div>
       </section>
 
-      {/* CTA FOOTER */}
-      <section className="relative py-32 bg-[#1B1B1B] text-white overflow-hidden text-center">
+      <section className="relative overflow-hidden bg-[#1B1B1B] py-28 text-center text-white">
         <div className="absolute inset-0 opacity-20">
-           {/* Abstract shapes or pattern */}
-           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800 via-[#1B1B1B] to-[#1B1B1B]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800 via-[#1B1B1B] to-[#1B1B1B]" />
         </div>
 
         <div className="container relative z-10 mx-auto px-6">
           <FadeIn>
-            <h2 className="font-serif text-4xl md:text-6xl mb-6">Tu mejor versión comienza aquí</h2>
-            <p className="text-gray-400 max-w-xl mx-auto mb-10 text-lg font-light">
+            <h2 className="mb-6 font-serif text-4xl md:text-6xl">Tu mejor versión comienza aquí</h2>
+            <p className="mx-auto mb-10 max-w-xl text-lg font-light text-gray-400">
               Agenda tu cita hoy y déjanos cuidar de ti con la excelencia que mereces.
             </p>
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center">
               <Link
                 href="/contacto"
-                className={cn(buttonVariants({ size: "lg" }), "bg-[#D4AF37] text-white hover:bg-white hover:text-[#1B1B1B] rounded-full px-10 py-7 text-sm tracking-widest uppercase transition-all duration-300")}
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "rounded-full bg-[#D4AF37] px-10 py-7 text-sm uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-[#1B1B1B]"
+                )}
               >
-                Configurar Cita
+                Configura tu cita
               </Link>
             </div>
           </FadeIn>
         </div>
       </section>
-
     </div>
   );
 }
