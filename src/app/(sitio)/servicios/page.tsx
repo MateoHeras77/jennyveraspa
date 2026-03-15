@@ -26,6 +26,14 @@ type ServiceCategory = {
   services: ServiceItem[];
 };
 
+  getCategoryId(name: string) {
+  if (name.includes("Faciales")) return "faciales";
+  if (name.includes("Corporales")) return "corporales";
+  if (name.includes("Láser")) return "tecnologia";
+  if (name.includes("Post")) return "post-op";
+  return name.toLowerCase().replace(/\s+/g, "-");
+}
+
 const categories: ServiceCategory[] = [
   {
     category: "Faciales Avanzados",
