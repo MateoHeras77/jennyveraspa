@@ -1,0 +1,56 @@
+import HomePage from "@/components/home-page";
+import { getAllPosts } from "@/lib/blog-content";
+import { getLocaleAlternates, isValidLocale, type Locale } from "@/lib/i18n";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+type LocalizedHomeProps = {
+  params: Promise<{ locale: string }>;
+};
+
+const homeMetadataByLocale: Record<Locale, { title: string; description: string }> = {
+  es: {
+    title: "Jenny Vera Spa | Centro de Estetica Avanzada en Cuenca",
+    description:
+      "Tratamientos esteticos faciales y corporales, masajes relajantes y cuidados post-operatorios en Cuenca, Ecuador.",
+  },
+  en: {
+    title: "Jenny Vera Spa | Advanced Aesthetic Center in Cuenca",
+    description:
+      "Advanced facial and body treatments, relaxing massages, and post-operative care in Cuenca, Ecuador.",
+  },
+};
+
+export async function generateMetadata({ params }: LocalizedHomeProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!isValidLocale(locale)) {
+    return {};
+  }
+
+  const copy = homeMetadataByLocale[locale];
+
+  return {
+    title: copy.title,
+    description: copy.description,
+    alternates: getLocaleAlternates(locale, "/"),
+    openGraph: {
+      title: copy.title,
+      description: copy.description,
+      url: getLocaleAlternates(locale, "/").canonical,
+      locale: locale === "es" ? "es_EC" : "en_US",
+      type: "website",
+    },
+  };
+}
+
+export default async function LocalizedHomePage({ params }: LocalizedHomeProps) {
+  const { locale } = await params;
+
+  if (!isValidLocale(locale)) {
+    notFound();
+  }
+
+  const posts = await getAllPosts(locale);
+  return <HomePage posts={posts} locale={locale as Locale} />;
+}

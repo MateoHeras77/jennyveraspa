@@ -1,9 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Facebook, MapPin, Phone } from "lucide-react";
 import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/lib/constants";
+import { usePathname } from "next/navigation";
+import { DEFAULT_LOCALE, footerCopy, getLocaleFromPathname, withLocalePath } from "@/lib/i18n";
 
 export function Footer() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
+  const copy = footerCopy[locale];
+  const localizeHref = (path: string) => withLocalePath(locale, path);
+
   return (
     <footer className="border-t border-[#222] bg-[#111111] py-20 text-gray-300">
       <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-4 gap-16">
@@ -17,21 +26,21 @@ export function Footer() {
              />
           </div>
           <p className="text-sm font-light leading-relaxed text-gray-300">
-            Santuario de belleza y bienestar en Cuenca. Elevando la estética con ciencia, lujo y arte.
+            {copy.tagline}
           </p>
         </div>
         
         <div className="space-y-6">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Tratamientos</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.treatmentsTitle}</h3>
           <ul className="space-y-3 text-sm font-light">
-            <li><Link href="/servicios#faciales" className="hover:text-[#D4AF37] transition-colors">Rejuvenecimiento Facial</Link></li>
-            <li><Link href="/servicios#corporales" className="hover:text-[#D4AF37] transition-colors">Remodelación Corporal</Link></li>
-            <li><Link href="/servicios#post-op" className="hover:text-[#D4AF37] transition-colors">Post-Operatorios Especializados</Link></li>
+            <li><Link href={localizeHref("/servicios#faciales")} className="hover:text-[#D4AF37] transition-colors">{copy.facialRejuvenation}</Link></li>
+            <li><Link href={localizeHref("/servicios#corporales")} className="hover:text-[#D4AF37] transition-colors">{copy.bodyRemodeling}</Link></li>
+            <li><Link href={localizeHref("/servicios#post-op")} className="hover:text-[#D4AF37] transition-colors">{copy.postOp}</Link></li>
           </ul>
         </div>
 
         <div className="space-y-6">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Ubicacion</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.locationTitle}</h3>
           <ul className="space-y-4 text-sm font-light">
             <li className="flex items-start gap-4">
               <MapPin size={18} className="text-[#D4AF37] mt-0.5 shrink-0" />
@@ -47,7 +56,7 @@ export function Footer() {
         </div>
 
         <div className="space-y-6">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">Conecta</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.connectTitle}</h3>
           <div className="flex gap-4">
             <a
               href="https://www.instagram.com"

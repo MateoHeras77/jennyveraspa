@@ -7,44 +7,76 @@ import { Menu, X, ChevronDown, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-
-const navItems = [
-  { 
-    name: "Inicio", 
-    href: "/" 
-  },
-  { 
-    name: "Tratamientos", 
-    href: "/servicios",
-    submenu: [
-      { name: "Faciales", href: "/servicios#faciales", desc: "Rejuvenecimiento y cuidado de la piel" },
-      { name: "Corporales", href: "/servicios#corporales", desc: "Remodelación y reducción de medidas" },
-      { name: "Tecnología", href: "/servicios#tecnologia", desc: "Aparatología de última generación" },
-    ]
-  },
-  { 
-    name: "Journal", 
-    href: "/blog",
-    submenu: [
-      { name: "Ver Todo", href: "/blog", desc: "Todos nuestros artículos y consejos" },
-      { name: "Estética Facial", href: "/blog/categoria/estetica-facial", desc: "Guías para el cuidado del rostro" },
-      { name: "Recuperación", href: "/blog/categoria/recuperacion", desc: "Tips post-operatorios y drenajes" },
-      { name: "Bienestar", href: "/blog/categoria/tratamientos-corporales", desc: "Relajación y equilibrio corporal" },
-    ]
-  },
-  { 
-    name: "Contacto", 
-    href: "/contacto" 
-  },
-];
+import {
+  DEFAULT_LOCALE,
+  getLocaleFromPathname,
+  headerCopy,
+  localeNames,
+  stripLocaleFromPath,
+  type Locale,
+  withLocalePath,
+} from "@/lib/i18n";
 
 export function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isHome = pathname === "/";
+  const activeLocale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
+  const copy = headerCopy[activeLocale];
+  const pathWithoutLocale = stripLocaleFromPath(pathname);
+
+  const localizeHref = (path: string) => withLocalePath(activeLocale, path);
+
+  const navItems = [
+    {
+      name: copy.home,
+      href: localizeHref("/"),
+    },
+    {
+      name: copy.treatments,
+      href: localizeHref("/servicios"),
+      submenu: [
+        { name: copy.facials, href: localizeHref("/servicios#faciales"), desc: copy.facialsDesc },
+        { name: copy.body, href: localizeHref("/servicios#corporales"), desc: copy.bodyDesc },
+        { name: copy.technology, href: localizeHref("/servicios#tecnologia"), desc: copy.technologyDesc },
+      ],
+    },
+    {
+      name: copy.journal,
+      href: localizeHref("/blog"),
+      submenu: [
+        { name: copy.viewAll, href: localizeHref("/blog"), desc: copy.viewAll },
+        {
+          name: copy.facialCategory,
+          href: localizeHref("/blog/categoria/estetica-facial"),
+          desc: copy.facialCategoryDesc,
+        },
+        { name: copy.recovery, href: localizeHref("/blog/categoria/recuperacion"), desc: copy.recoveryDesc },
+        {
+          name: copy.wellness,
+          href: localizeHref("/blog/categoria/tratamientos-corporales"),
+          desc: copy.wellnessDesc,
+        },
+      ],
+    },
+    {
+      name: copy.contact,
+      href: localizeHref("/contacto"),
+    },
+  ];
+
+  const isHome = pathWithoutLocale === "/";
   const useTransparentHeader = isHome && !isScrolled && !mobileMenuOpen;
+
+  const switchLocale = (nextLocale: Locale) => {
+    if (nextLocale === activeLocale) {
+      return;
+    }
+
+    const nextPath = withLocalePath(nextLocale, pathWithoutLocale);
+    window.location.assign(nextPath);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +100,7 @@ export function Header() {
         <div className="container mx-auto px-6 lg:px-12 flex items-center gap-4 lg:gap-12 relative">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center group z-50 shrink-0">
+          <Link href={localizeHref("/")} className="flex items-center group z-50 shrink-0">
             <div
               className={cn(
                 "relative transition-all duration-500",
@@ -139,9 +171,29 @@ export function Header() {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:block z-50 ml-auto mr-auto">
+          <div className="hidden lg:flex z-50 ml-auto mr-auto items-center gap-3">
+             <div className="flex items-center rounded-full border border-white/25 bg-white/10 p-1 text-[10px] uppercase tracking-[0.18em] backdrop-blur-sm">
+               {(Object.keys(localeNames) as Locale[]).map((locale) => (
+                 <button
+                   key={locale}
+                   type="button"
+                   onClick={() => switchLocale(locale)}
+                   className={cn(
+                     "rounded-full px-2.5 py-1 transition-colors",
+                     activeLocale === locale
+                       ? "bg-[#D4AF37] text-white"
+                       : useTransparentHeader
+                         ? "text-white/80 hover:text-white"
+                         : "text-gray-700 hover:text-[#D4AF37]"
+                   )}
+                   aria-label={`Switch language to ${localeNames[locale]}`}
+                 >
+                   {localeNames[locale]}
+                 </button>
+               ))}
+             </div>
              <Link 
-               href="/contacto" 
+               href={localizeHref("/contacto")} 
                prefetch={false}
                className={cn(
                  buttonVariants({ variant: "default", size: "sm" }), 
@@ -150,7 +202,7 @@ export function Header() {
                    : "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] text-[11px] px-6 py-3 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
                )}
              >
-               Reserva Cita
+               {copy.bookNow}
              </Link>
           </div>
 
@@ -163,7 +215,7 @@ export function Header() {
                 : "text-gray-900 hover:bg-gray-100"
             )}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Cerrar menu de navegacion" : "Abrir menu de navegacion"}
+            aria-label={mobileMenuOpen ? copy.closeMenu : copy.openMenu}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
           >
@@ -209,12 +261,12 @@ export function Header() {
             ))}
             <div className="pb-12 pt-8">
               <Link
-                href="/contacto"
+                href={localizeHref("/contacto")}
                 prefetch={false}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block w-full rounded-sm bg-[#D4AF37] py-4 text-center text-sm font-medium uppercase tracking-[0.2em] text-white shadow-lg transition-colors hover:bg-[#1B1B1B]"
               >
-                Agendar Cita
+                {copy.scheduleNow}
               </Link>
             </div>
           </nav>

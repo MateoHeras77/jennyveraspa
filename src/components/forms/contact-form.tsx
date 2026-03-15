@@ -1,12 +1,41 @@
 "use client";
 
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useState } from "react";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { SERVICE_CATEGORIES } from "@/lib/constants";
 import { sendContactEmail } from "@/actions/contact";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import { DEFAULT_LOCALE, getLocaleFromPathname } from "@/lib/i18n";
+
+const formCopy = {
+    es: {
+        name: "Nombre Completo",
+        namePlaceholder: "Ej. Maria Perez",
+        phone: "Telefono / WhatsApp",
+        service: "Servicio de Interes",
+        selectService: "Selecciona un servicio...",
+        other: "Otro / Consulta General",
+        comments: "Comentarios Adicionales",
+        commentsPlaceholder: "Alguna duda especifica o preferencia de horario?",
+        sending: "Enviando...",
+        submit: "Solicitar Cita",
+    },
+    en: {
+        name: "Full Name",
+        namePlaceholder: "e.g. Maria Perez",
+        phone: "Phone / WhatsApp",
+        service: "Service of Interest",
+        selectService: "Select a service...",
+        other: "Other / General Inquiry",
+        comments: "Additional Notes",
+        commentsPlaceholder: "Any specific question or preferred schedule?",
+        sending: "Sending...",
+        submit: "Request Appointment",
+    },
+} as const;
 
 export function ContactForm() {
     const [state, formAction, isPending] = useActionState(sendContactEmail, {
@@ -18,13 +47,11 @@ export function ContactForm() {
         }
     });
 
-    const [phone, setPhone] = useState(state.inputs?.phone || "");
-
-    useEffect(() => {
-        if (state.inputs?.phone) {
-            setPhone(state.inputs.phone);
-        }
-    }, [state.inputs?.phone]);
+    const [phone, setPhone] = useState("");
+    const phoneValue = phone || state.inputs?.phone || "";
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
+    const copy = formCopy[locale];
 
     return (
         <form action={formAction} className="space-y-6">
@@ -48,7 +75,7 @@ export function ContactForm() {
             {/* Name Field */}
             <div className="space-y-2">
                 <label htmlFor="name" className="text-sm uppercase tracking-widest text-gray-500 font-medium">
-                    Nombre Completo <span className="text-red-500">*</span>
+                    {copy.name} <span className="text-red-500">*</span>
                 </label>
                 <input
                     type="text"
@@ -57,7 +84,7 @@ export function ContactForm() {
                     required
                     defaultValue={state.inputs?.name}
                     className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors"
-                    placeholder="Ej. María Pérez"
+                    placeholder={copy.namePlaceholder}
                 />
                 {state?.errors?.name && (
                     <p className="text-red-500 text-xs mt-1">{state.errors.name[0]}</p>
@@ -67,13 +94,13 @@ export function ContactForm() {
             {/* Phone Field */}
             <div className="space-y-2">
                 <label htmlFor="phone" className="text-sm uppercase tracking-widest text-gray-500 font-medium">
-                    Teléfono / WhatsApp <span className="text-red-500">*</span>
+                    {copy.phone} <span className="text-red-500">*</span>
                 </label>
                 <div className="phone-input-container">
-                    <input type="hidden" name="phone" value={phone} />
+                    <input type="hidden" name="phone" value={phoneValue} />
                     <PhoneInput
                         defaultCountry="ec"
-                        value={phone}
+                        value={phoneValue}
                         onChange={(phone) => setPhone(phone)}
                         required
                         inputClassName="!w-full !bg-white !border-gray-200 !p-4 !h-[58px] !rounded-none focus:!border-[#D4AF37] !text-base"
@@ -90,7 +117,7 @@ export function ContactForm() {
             {/* Service Selection */}
             <div className="space-y-2">
                 <label htmlFor="service" className="text-sm uppercase tracking-widest text-gray-500 font-medium">
-                    Servicio de Interés <span className="text-red-500">*</span>
+                    {copy.service} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                     <select
@@ -100,7 +127,7 @@ export function ContactForm() {
                         defaultValue={state.inputs?.service}
                         className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors text-gray-700 appearance-none rounded-none"
                     >
-                        <option value="" disabled>Selecciona un servicio...</option>
+                        <option value="" disabled>{copy.selectService}</option>
                         {SERVICE_CATEGORIES.map((category) => (
                             <optgroup key={category.category} label={category.category}>
                                 {category.services.map((service) => (
@@ -110,7 +137,7 @@ export function ContactForm() {
                                 ))}
                             </optgroup>
                         ))}
-                        <option value="Otro">Otro / Consulta General</option>
+                        <option value="Otro">{copy.other}</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -126,7 +153,7 @@ export function ContactForm() {
             {/* Message Field (Optional) */}
              <div className="space-y-2">
                 <label htmlFor="message" className="text-sm uppercase tracking-widest text-gray-500 font-medium">
-                    Comentarios Adicionales
+                    {copy.comments}
                 </label>
                 <textarea
                     id="message"
@@ -134,7 +161,7 @@ export function ContactForm() {
                     rows={4}
                     defaultValue={state.inputs?.message}
                     className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors resize-none"
-                    placeholder="¿Alguna duda específica o preferencia de horario?"
+                    placeholder={copy.commentsPlaceholder}
                 />
             </div>
 
@@ -150,10 +177,10 @@ export function ContactForm() {
                 {isPending ? (
                     <>
                         <Loader2 className="animate-spin" size={18} />
-                        Enviando...
+                        {copy.sending}
                     </>
                 ) : (
-                    "Solicitar Cita"
+                    copy.submit
                 )}
             </button>
         </form>

@@ -3,5 +3,5 @@ import HomePage from "@/components/home-page";
 
 export default async function Page() {
   const posts = getAllPosts();
-  return <HomePage posts={await posts} />;
+  return <HomePage posts={await posts} locale="es" />;
 }

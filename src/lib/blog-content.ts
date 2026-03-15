@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { DEFAULT_LOCALE, isValidLocale, type Locale } from "@/lib/i18n";
 
 const BLOG_CONTENT_DIR = path.join(process.cwd(), "src/content/blog");
 const BASE_URL = "https://www.jennyveraspa.com";
@@ -119,8 +120,16 @@ function validateFrontmatter(fileName: string, frontmatter: Partial<BlogPostFron
   };
 }
 
-async function readPostFile(fileName: string): Promise<BlogPost> {
-  const filePath = path.join(BLOG_CONTENT_DIR, fileName);
+function resolveContentDir(locale: Locale): string {
+  if (locale === "es") {
+    return BLOG_CONTENT_DIR;
+  }
+
+  return path.join(BLOG_CONTENT_DIR, locale);
+}
+
+async function readPostFile(fileName: string, locale: Locale): Promise<BlogPost> {
+  const filePath = path.join(resolveContentDir(locale), fileName);
   const source = await fs.readFile(filePath, "utf8");
   const { data, content } = matter(source);
   const frontmatter = validateFrontmatter(fileName, data as Partial<BlogPostFrontmatter>);
@@ -136,8 +145,8 @@ async function readPostFile(fileName: string): Promise<BlogPost> {
   };
 }
 
-async function readAllPostFiles(): Promise<string[]> {
-  const files = await fs.readdir(BLOG_CONTENT_DIR);
+async function readAllPostFiles(locale: Locale): Promise<string[]> {
+  const files = await fs.readdir(resolveContentDir(locale));
   return files.filter((file) => file.endsWith(".mdx"));
 }
 
@@ -166,21 +175,23 @@ function toSummary(post: BlogPost): BlogPostSummary {
   };
 }
 
-export const getAllPosts = cache(async (): Promise<BlogPostSummary[]> => {
-  const files = await readAllPostFiles();
-  const posts = await Promise.all(files.map((file) => readPostFile(file)));
+export const getAllPosts = cache(async (locale: Locale = DEFAULT_LOCALE): Promise<BlogPostSummary[]> => {
+  const resolvedLocale = isValidLocale(locale) ? locale : DEFAULT_LOCALE;
+  const files = await readAllPostFiles(resolvedLocale);
+  const posts = await Promise.all(files.map((file) => readPostFile(file, resolvedLocale)));
   return sortByDate(posts).map(toSummary);
 });
 
-export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
-  const files = await readAllPostFiles();
-  const posts = await Promise.all(files.map((file) => readPostFile(file)));
+export const getPostBySlug = cache(async (slug: string, locale: Locale = DEFAULT_LOCALE): Promise<BlogPost | null> => {
+  const resolvedLocale = isValidLocale(locale) ? locale : DEFAULT_LOCALE;
+  const files = await readAllPostFiles(resolvedLocale);
+  const posts = await Promise.all(files.map((file) => readPostFile(file, resolvedLocale)));
   const post = posts.find((entry) => entry.slug === slug);
   return post ?? null;
 });
 
-export const getAdjacentPosts = cache(async (slug: string) => {
-  const posts = await getAllPosts();
+export const getAdjacentPosts = cache(async (slug: string, locale: Locale = DEFAULT_LOCALE) => {
+  const posts = await getAllPosts(locale);
   const currentIndex = posts.findIndex((post) => post.slug === slug);
 
   if (currentIndex === -1) {
@@ -193,40 +204,42 @@ export const getAdjacentPosts = cache(async (slug: string) => {
   };
 });
 
-export const getAllBlogSlugs = cache(async (): Promise<string[]> => {
-  const posts = await getAllPosts();
+export const getAllBlogSlugs = cache(async (locale: Locale = DEFAULT_LOCALE): Promise<string[]> => {
+  const posts = await getAllPosts(locale);
   return posts.map((post) => post.slug);
 });
 
-export const getRelatedPostsByTags = cache(async (slug: string, limit = 3): Promise<BlogPostSummary[]> => {
-  const [current, posts] = await Promise.all([getPostBySlug(slug), getAllPosts()]);
+export const getRelatedPostsByTags = cache(
+  async (slug: string, limit = 3, locale: Locale = DEFAULT_LOCALE): Promise<BlogPostSummary[]> => {
+    const [current, posts] = await Promise.all([getPostBySlug(slug, locale), getAllPosts(locale)]);
 
-  if (!current) {
-    return [];
+    if (!current) {
+      return [];
+    }
+
+    const currentTags = new Set(current.tags.map((tag) => tag.toLowerCase()));
+
+    return posts
+      .filter((post) => post.slug !== slug)
+      .map((post) => {
+        const overlap = post.tags.reduce((score, tag) => {
+          return currentTags.has(tag.toLowerCase()) ? score + 1 : score;
+        }, 0);
+
+        return { post, overlap };
+      })
+      .filter((entry) => entry.overlap > 0)
+      .sort((a, b) => {
+        if (b.overlap !== a.overlap) {
+          return b.overlap - a.overlap;
+        }
+
+        return new Date(b.post.publishedAt).getTime() - new Date(a.post.publishedAt).getTime();
+      })
+      .slice(0, limit)
+      .map((entry) => entry.post);
   }
-
-  const currentTags = new Set(current.tags.map((tag) => tag.toLowerCase()));
-
-  return posts
-    .filter((post) => post.slug !== slug)
-    .map((post) => {
-      const overlap = post.tags.reduce((score, tag) => {
-        return currentTags.has(tag.toLowerCase()) ? score + 1 : score;
-      }, 0);
-
-      return { post, overlap };
-    })
-    .filter((entry) => entry.overlap > 0)
-    .sort((a, b) => {
-      if (b.overlap !== a.overlap) {
-        return b.overlap - a.overlap;
-      }
-
-      return new Date(b.post.publishedAt).getTime() - new Date(a.post.publishedAt).getTime();
-    })
-    .slice(0, limit)
-    .map((entry) => entry.post);
-});
+);
 
 export function getBlogCanonical(pathname: string): string {
   return `${BASE_URL}${pathname}`;

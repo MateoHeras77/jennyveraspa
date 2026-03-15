@@ -7,12 +7,12 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/es/', '/en/', '/llms.txt'],
         disallow: ['/api/'],
       },
       {
         userAgent: ['GPTBot', 'ChatGPT-User', 'ClaudeBot', 'PerplexityBot'],
-        allow: ['/', '/llms.txt'],
+        allow: ['/es/', '/en/', '/llms.txt'],
         disallow: ['/api/'],
       },
     ],

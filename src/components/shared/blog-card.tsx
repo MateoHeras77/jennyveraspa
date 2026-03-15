@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { BlogPostSummary } from "@/lib/blog-content";
+import { usePathname } from "next/navigation";
+import { DEFAULT_LOCALE, getLocaleFromPathname, withLocalePath } from "@/lib/i18n";
 
 type BlogCardProps = {
   post: BlogPostSummary;
@@ -9,9 +13,13 @@ type BlogCardProps = {
 };
 
 export function BlogCard({ post, priority = false }: BlogCardProps) {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
+  const postHref = withLocalePath(locale, post.href);
+
   return (
     <article className="group h-full rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm transition hover:-translate-y-1 hover:border-[#D4AF37]/50 hover:shadow-xl hover:shadow-black/5">
-      <Link href={post.href} className="block h-full">
+      <Link href={postHref} className="block h-full">
         <div className="relative h-56 overflow-hidden rounded-t-2xl">
           <Image
             src={post.coverImage}
