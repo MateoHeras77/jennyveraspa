@@ -14,19 +14,27 @@ const formCopy = {
     es: {
         name: "Nombre Completo",
         namePlaceholder: "Ej. Maria Perez",
-        phone: "Telefono / WhatsApp",
-        service: "Servicio de Interes",
+        email: "Correo Electrónico (Opcional)",
+        phone: "Teléfono / WhatsApp",
+        contactPreference: "Preferencia de Contacto",
+        whatsapp: "WhatsApp",
+        emailOption: "Correo Electrónico",
+        service: "Servicio de Interés",
         selectService: "Selecciona un servicio...",
         other: "Otro / Consulta General",
         comments: "Comentarios Adicionales",
-        commentsPlaceholder: "Alguna duda especifica o preferencia de horario?",
+        commentsPlaceholder: "¿Alguna duda específica o preferencia de horario?",
         sending: "Enviando...",
         submit: "Solicitar Cita",
     },
     en: {
         name: "Full Name",
         namePlaceholder: "e.g. Maria Perez",
+        email: "Email (Optional)",
         phone: "Phone / WhatsApp",
+        contactPreference: "Contact Preference",
+        whatsapp: "WhatsApp",
+        emailOption: "Email",
         service: "Service of Interest",
         selectService: "Select a service...",
         other: "Other / General Inquiry",
@@ -42,13 +50,19 @@ export function ContactForm() {
         inputs: {
             name: "",
             phone: "",
+            email: "",
             service: "",
+            contactPreference: "whatsapp",
             message: "",
         }
     });
 
     const [phone, setPhone] = useState("");
     const phoneValue = phone || state.inputs?.phone || "";
+    // Handle phone updates from server state if needed, though typically phone input manages its own state well.
+    // If state.inputs.phone changes (e.g. after error), update local state.
+    // However, react-international-phone is controlled.
+    
     const pathname = usePathname();
     const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
     const copy = formCopy[locale];
@@ -91,6 +105,24 @@ export function ContactForm() {
                 )}
             </div>
 
+            {/* Email Field */}
+            <div className="space-y-2">
+                <label htmlFor="email" className="text-sm uppercase tracking-widest text-gray-500 font-medium">
+                    {copy.email}
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    defaultValue={state.inputs?.email}
+                    className="w-full bg-white border border-gray-200 p-4 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                    placeholder="example@email.com"
+                />
+                {state?.errors?.email && (
+                    <p className="text-red-500 text-xs mt-1">{state.errors.email[0]}</p>
+                )}
+            </div>
+
             {/* Phone Field */}
             <div className="space-y-2">
                 <label htmlFor="phone" className="text-sm uppercase tracking-widest text-gray-500 font-medium">
@@ -111,6 +143,38 @@ export function ContactForm() {
                 </div>
                 {state?.errors?.phone && (
                     <p className="text-red-500 text-xs mt-1">{state.errors.phone[0]}</p>
+                )}
+            </div>
+
+            {/* Contact Preference */}
+            <div className="space-y-2">
+                <label className="text-sm uppercase tracking-widest text-gray-500 font-medium">
+                    {copy.contactPreference} <span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-6 items-center pt-1">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                            type="radio"
+                            name="contactPreference"
+                            value="whatsapp"
+                            defaultChecked={state.inputs?.contactPreference === "whatsapp" || !state.inputs?.contactPreference}
+                            className="accent-[#D4AF37] w-4 h-4"
+                        />
+                         <span className="text-gray-700">{copy.whatsapp}</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                            type="radio"
+                            name="contactPreference"
+                            value="email"
+                            defaultChecked={state.inputs?.contactPreference === "email"}
+                            className="accent-[#D4AF37] w-4 h-4"
+                        />
+                        <span className="text-gray-700">{copy.emailOption}</span>
+                    </label>
+                </div>
+                 {state?.errors?.contactPreference && (
+                    <p className="text-red-500 text-xs mt-1">{state.errors.contactPreference[0]}</p>
                 )}
             </div>
 

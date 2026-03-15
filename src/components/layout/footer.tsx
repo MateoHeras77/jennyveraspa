@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Facebook, MapPin, Phone } from "lucide-react";
+import { Instagram, Facebook, MapPin, Phone, Star } from "lucide-react";
 import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 import { DEFAULT_LOCALE, footerCopy, getLocaleFromPathname, withLocalePath } from "@/lib/i18n";
 
 export function Footer() {
+  const reviewUrl = "https://g.page/r/Cbso4rpRXTOYEAI/review";
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
   const copy = footerCopy[locale];
+  const reviewCtaLabel = locale === "es" ? "Dejar resena en Google" : "Leave a Google review";
   const localizeHref = (path: string) => withLocalePath(locale, path);
 
   return (
@@ -77,6 +79,16 @@ export function Footer() {
               <Facebook size={18} />
             </a>
           </div>
+          <a
+            href={reviewUrl}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="inline-flex w-full items-center justify-center rounded-sm border border-[#D4AF37]/45 bg-[#161616] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#D4AF37] hover:text-[#111111]"
+            aria-label={`${reviewCtaLabel} on Google`}
+          >
+            <Star size={14} className="mr-2" aria-hidden="true" />
+            {reviewCtaLabel}
+          </a>
         </div>
       </div>
       

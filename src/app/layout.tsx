@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   },
   description: "Tratamientos estéticos faciales y corporales, masajes relajantes y cuidados post-operatorios (HIFU, Botox, Drenaje Linfático) en Cuenca, Ecuador.",
   metadataBase: new URL("https://www.jennyveraspa.com"),
+  icons: {
+    icon: "/logo-black.ico",
+    shortcut: "/logo-black.ico",
+  },
   openGraph: {
     type: "website",
     locale: "es_EC",

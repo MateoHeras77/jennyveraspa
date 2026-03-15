@@ -198,8 +198,8 @@ export function Header() {
                className={cn(
                  buttonVariants({ variant: "default", size: "sm" }), 
                  useTransparentHeader
-                   ? "bg-white/12 text-white border border-white/35 hover:bg-white hover:text-[#1B1B1B] text-xs px-8 py-5 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm"
-                   : "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] text-[11px] px-6 py-3 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
+                   ? "bg-white/12 text-white border border-white/35 hover:bg-white hover:!text-[#1B1B1B] text-xs px-8 py-5 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm"
+                   : "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] hover:!text-white text-[11px] px-6 py-3 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
                )}
              >
                {copy.bookNow}
@@ -319,7 +319,7 @@ export function Header() {
                 href={localizeHref("/contacto")}
                 prefetch={false}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block w-full rounded-sm bg-[#D4AF37] py-4 text-center text-sm font-medium uppercase tracking-[0.2em] text-white shadow-lg transition-colors hover:bg-[#1B1B1B]"
+                className="block w-full rounded-sm bg-[#D4AF37] py-4 text-center text-sm font-medium uppercase tracking-[0.2em] text-white shadow-lg transition-colors hover:bg-[#1B1B1B] hover:!text-white"
               >
                 {copy.scheduleNow}
               </Link>
