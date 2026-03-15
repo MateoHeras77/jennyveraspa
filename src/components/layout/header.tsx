@@ -64,14 +64,19 @@ export function Header() {
           "fixed top-0 w-full z-50 transition-all duration-500 border-b",
           useTransparentHeader
             ? "bg-transparent border-transparent py-6"
-            : "bg-[#FDFBF7]/90 backdrop-blur-xl border-[#d8c9a0]/35 py-3 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.45)]"
+            : "bg-[#FDFBF7]/90 backdrop-blur-xl border-[#d8c9a0]/35 py-1.5 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.45)]"
         )}
       >
         <div className="container mx-auto px-6 lg:px-12 flex items-center gap-12 relative">
           
           {/* Logo */}
           <Link href="/" className="flex items-center group z-50 shrink-0">
-            <div className={`relative w-32 h-32 md:w-40 md:h-40 transition-all duration-500`}>
+            <div
+              className={cn(
+                "relative transition-all duration-500",
+                useTransparentHeader ? "h-20 w-20 md:h-24 md:w-24" : "h-11 w-11 md:h-12 md:w-12"
+              )}
+            >
               <Image 
                 src={useTransparentHeader ? "/logo-white.png" : "/logo-black.png"}
                 alt="Jenny Vera Spa Logo" 
@@ -90,7 +95,7 @@ export function Header() {
             {navItems.map((item) => (
               <div 
                 key={item.name} 
-                className="relative group py-4"
+                className="relative group py-2"
                 onMouseEnter={() => setHoveredResult(item.name)}
                 onMouseLeave={() => setHoveredResult(null)}
               >
@@ -152,8 +157,8 @@ export function Header() {
                className={cn(
                  buttonVariants({ variant: "default", size: "sm" }), 
                  useTransparentHeader
-                   ? "bg-white/12 text-white border border-white/35 hover:bg-white hover:text-[#1B1B1B] text-xs px-8 py-6 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm"
-                   : "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] text-xs px-8 py-6 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
+                   ? "bg-white/12 text-white border border-white/35 hover:bg-white hover:text-[#1B1B1B] text-xs px-8 py-5 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm"
+                   : "bg-[#1B1B1B] text-white hover:bg-[#D4AF37] text-[11px] px-6 py-3 rounded-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5"
                )}
              >
                Reserva Cita
