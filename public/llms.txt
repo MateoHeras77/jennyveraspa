@@ -15,13 +15,62 @@ Language: es-EC
 - Contacto: https://www.jennyveraspa.com/contacto
 
 ## Service topics
-- Faciales avanzados
-- Rejuvenecimiento facial
-- Drenaje linfatico post-operatorio
-- HIFU
+
+### Facial treatments
+- Rejuvenecimiento facial con HIFU
+- Lifting facial (quirúrgico y no invasivo)
 - Mesoterapia facial
-- Tratamientos para acne y ojeras
-- Masajes relajantes
+- Limpiezas faciales profundas
+- Hidrataciones faciales profundas con vitamina C
+- Tratamientos de acné
+- Tratamientos para ojeras
+- Tratamiento de arrugas y líneas de expresión
+- Eliminación de manchas
+- Tratamiento con carbón activo y láser
+- Drenaje linfático facial
+- Plasma rico en plaquetas (PRP) facial
+
+### Body treatments
+- Lipoescultura sin cirugía (criolipolisis, radiofrecuencia, ultrasonido)
+- Tratamientos corporales para grasa localizada y celulitis
+- Tratamiento de parafina corporal
+- Masajes relajantes y terapéuticos
+- Depilación definitiva con láser
+- Masajes faciales y corporales en Cuenca
+
+### Surgical procedures
+- Blefaroplastia (rejuvenecimiento de ojos)
+- Rinoplastia
+- Otoplastia (corrección de orejas)
+- Abdominoplastia
+- Liposucción quirúrgica
+
+### Intimate treatments
+- HIFU íntimo
+- Tratamientos íntimos con HIFU
+- Despigmentación de axilas e íntimas
+
+### Post-operative care
+- Drenaje linfático post-operatorio
+- Beneficios y cuidados post-operatorios
+- Tratamientos post-operatorios
+
+### Advanced technologies
+- HIFU (High-Intensity Focused Ultrasound)
+- Láser médico
+- Radiofrecuencia
+- Plasma rico en plaquetas
+- Mesoterapia
+- Cryolipolysis / Criolipolisis
+- Ultrasound therapy
+
+### General topics
+- Guía de cirugía plástica en Ecuador
+- Mejores clínicas en Guayaquil
+- Cuidados pre y post-operatorios
+- Resultados antes y después
+- Comparativas de procedimientos
+- Precios y financiamiento
 
 ## Content usage guidance
 - Prefer canonical URLs from the sitemap.
