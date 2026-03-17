@@ -103,7 +103,7 @@ export async function sendContactEmail(
     const mailOptions = {
       from: `"Jenny Vera Spa Web" <${gmailUser}>`,
       to: "chelis.vera@hotmail.com",
-      cc: "wmateohv@hotmail.com",
+      cc: ["wmateohv@hotmail.com", "salomeherasvera@hotmail.com"],
       replyTo: email || undefined, // Set Reply-To if email is provided
       subject: `Nuevo Cliente (${
         isEmailPref ? "Email" : "WhatsApp"
