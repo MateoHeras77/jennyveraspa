@@ -45,6 +45,36 @@ const formCopy = {
     },
 } as const;
 
+const serviceCategoryLabelsEn: Record<string, string> = {
+    "Faciales Avanzados": "Advanced Facial Treatments",
+    "Corporales y Bienestar": "Body and Wellness Treatments",
+    "Láser y Zonas Específicas": "Laser and Targeted Areas",
+    "Post-Operatorios": "Post-Operative Care",
+};
+
+const serviceLabelsEn: Record<string, string> = {
+    "Limpieza Facial Profunda": "Deep Facial Cleansing",
+    "Hidratación Profunda con Vitamina C": "Deep Hydration with Vitamin C",
+    "Tratamiento de Manchas": "Dark Spot Treatment",
+    "Control de Acné y Piel Grasa": "Acne and Oily Skin Control",
+    "Rejuvenecimiento Facial con HIFU": "HIFU Facial Rejuvenation",
+    "Plasma Rico en Plaquetas": "Platelet-Rich Plasma (PRP)",
+    "Mesoterapia Facial": "Facial Mesotherapy",
+    "Tratamiento de Ojeras": "Under-Eye Treatment",
+    "Masajes Relajantes": "Relaxing Massages",
+    "Masajes Reductores": "Body Sculpting Massages",
+    "Parafina para Manos y Pies": "Paraffin for Hands and Feet",
+    "Líneas de Expresión": "Expression Line Care",
+    "Drenaje Linfático Facial": "Facial Lymphatic Drainage",
+    "Depilación Definitiva con Láser Diodo": "Diode Laser Hair Reduction",
+    "Carbón Activo con Láser": "Laser Carbon Peel",
+    "HIFU Intimo": "Intimate HIFU",
+    "Despigmentacion de Zonas Intimas": "Intimate Area Brightening",
+    "Despigmentacion de Axilas": "Underarm Brightening",
+    "Post Operatorios de Cirugias Esteticas": "Post-Op Aesthetic Surgery Care",
+    "Drenajes Linfaticos Postoperatorios": "Post-Op Lymphatic Drainage",
+};
+
 export function ContactForm() {
     const [state, formAction, isPending] = useActionState(sendContactEmail, {
         inputs: {
@@ -66,6 +96,12 @@ export function ContactForm() {
     const pathname = usePathname();
     const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
     const copy = formCopy[locale];
+
+    const getCategoryLabel = (category: string) =>
+        locale === "en" ? (serviceCategoryLabelsEn[category] ?? category) : category;
+
+    const getServiceLabel = (serviceName: string) =>
+        locale === "en" ? (serviceLabelsEn[serviceName] ?? serviceName) : serviceName;
 
     return (
         <form action={formAction} className="space-y-6">
@@ -193,10 +229,10 @@ export function ContactForm() {
                     >
                         <option value="" disabled>{copy.selectService}</option>
                         {SERVICE_CATEGORIES.map((category) => (
-                            <optgroup key={category.category} label={category.category}>
+                            <optgroup key={category.category} label={getCategoryLabel(category.category)}>
                                 {category.services.map((service) => (
                                     <option key={service.name} value={service.name}>
-                                        {service.name}
+                                        {getServiceLabel(service.name)}
                                     </option>
                                 ))}
                             </optgroup>
