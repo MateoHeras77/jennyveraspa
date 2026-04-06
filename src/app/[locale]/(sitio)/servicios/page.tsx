@@ -11,12 +11,12 @@ const servicesMetadataByLocale: Record<Locale, { title: string; description: str
   es: {
     title: "Servicios de Estetica en Cuenca",
     description:
-      "Explora tratamientos faciales, corporales, laser y post-operatorios con evaluacion personalizada.",
+      "Explora tratamientos faciales, corporales, láser y post-operatorios en Jenny Vera Spa. Evaluación personalizada y tecnología avanzada en Cuenca, Ecuador.",
   },
   en: {
     title: "Aesthetic Services in Cuenca",
     description:
-      "Explore facial, body, laser, and post-operative treatments with a personalized evaluation.",
+      "Explore facial, body, laser, and post-operative treatments at Jenny Vera Spa in Cuenca. Personalized evaluation with advanced technology and proven results.",
   },
 };
 

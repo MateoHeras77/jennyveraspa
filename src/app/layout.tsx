@@ -50,6 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+      </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <LocalBusinessSchema />
         {children}

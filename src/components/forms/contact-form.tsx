@@ -180,6 +180,13 @@ export function ContactForm() {
                 </label>
                 <div className="phone-input-container">
                     <input type="hidden" name="phone" value={phoneValue} />
+                    {/*
+                      Accessibility note: react-international-phone renders flag SVGs via CDN
+                      (cdnjs.cloudflare.com) inside the country selector dropdown. These SVGs
+                      are injected by the library without alt text and cannot be controlled
+                      directly via component props. This is a known limitation of the package.
+                      The input field itself has an aria-label for screen reader accessibility.
+                    */}
                     <PhoneInput
                         defaultCountry="ec"
                         value={phoneValue}
@@ -189,6 +196,7 @@ export function ContactForm() {
                         inputClassName="!w-full !bg-white !border-gray-200 !p-4 !h-[58px] !rounded-none focus:!border-[#D4AF37] !text-base"
                         countrySelectorStyleProps={{
                             buttonClassName: "!bg-white !border-gray-200 !h-[58px] !rounded-none !px-3",
+                            buttonContentWrapperClassName: "!gap-2",
                         }}
                     />
                 </div>

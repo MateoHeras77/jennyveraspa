@@ -27,11 +27,14 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
   const alternates = getLocaleAlternates(locale, `/blog/categoria/${category}`);
 
   return {
-    title: locale === "es" ? `Blog - Categoria ${categoryTitle}` : `Blog - Category ${categoryTitle}`,
+    title:
+      locale === "es"
+        ? `${categoryTitle} | Blog Jenny Vera Spa`
+        : `${categoryTitle} | Jenny Vera Spa Blog`,
     description:
       locale === "es"
-        ? "Guias profesionales sobre estetica facial, corporal y cuidados postoperatorios para tomar mejores decisiones sobre tu bienestar."
-        : "Professional guides on facial aesthetics, body care, and post-operative recovery to support better wellness decisions.",
+        ? `Guías profesionales sobre ${categoryTitle.toLowerCase()} en Jenny Vera Spa. Tratamientos, consejos de expertos y cuidados para tomar mejores decisiones sobre tu bienestar.`
+        : `Professional guides on ${categoryTitle.toLowerCase()} at Jenny Vera Spa. Treatments, expert advice, and care tips to make better decisions about your wellness.`,
     alternates,
     robots: {
       index: true,

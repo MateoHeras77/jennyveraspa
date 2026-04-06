@@ -28,6 +28,12 @@ export function Header() {
 
   const localizeHref = (path: string) => withLocalePath(activeLocale, path);
 
+  const blogCategorySlugs = {
+    facial: activeLocale === "en" ? "facial-aesthetics" : "estetica-facial",
+    recovery: activeLocale === "en" ? "recovery" : "recuperacion",
+    wellness: activeLocale === "en" ? "body-treatments" : "tratamientos-corporales",
+  };
+
   const navItems = [
     {
       name: copy.home,
@@ -51,13 +57,13 @@ export function Header() {
         { name: copy.viewAll, href: localizeHref("/blog"), desc: copy.viewAll },
         {
           name: copy.facialCategory,
-          href: localizeHref("/blog/categoria/estetica-facial"),
+          href: localizeHref(`/blog/categoria/${blogCategorySlugs.facial}`),
           desc: copy.facialCategoryDesc,
         },
-        { name: copy.recovery, href: localizeHref("/blog/categoria/recuperacion"), desc: copy.recoveryDesc },
+        { name: copy.recovery, href: localizeHref(`/blog/categoria/${blogCategorySlugs.recovery}`), desc: copy.recoveryDesc },
         {
           name: copy.wellness,
-          href: localizeHref("/blog/categoria/tratamientos-corporales"),
+          href: localizeHref(`/blog/categoria/${blogCategorySlugs.wellness}`),
           desc: copy.wellnessDesc,
         },
       ],

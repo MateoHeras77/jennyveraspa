@@ -40,6 +40,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    {
+      url: toAbsoluteUrl(withLocalePath(locale, "/nosotros")),
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: toAbsoluteUrl(withLocalePath(locale, "/privacidad")),
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
   ]);
 
   const blogUrls: MetadataRoute.Sitemap = postsByLocale.flatMap(({ locale, posts }) =>
