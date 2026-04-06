@@ -27,7 +27,6 @@ export const SERVICE_CATEGORIES = [
     services: [
       { name: "Masajes Relajantes", benefit: "Alivian tensiones y promueven descanso profundo." },
       { name: "Masajes Reductores", benefit: "Favorecen modelado corporal y mejoran circulación." },
-      { name: "Parafina para Manos y Pies", benefit: "Hidratación intensa para una piel suave y renovada." },
       { name: "Líneas de Expresión", benefit: "Atenúa marcas finas para un rostro más descansado." },
       { name: "Drenaje Linfático Facial", benefit: "Reduce inflamación y mejora definición del contorno." },
     ],
@@ -49,6 +48,41 @@ export const SERVICE_CATEGORIES = [
     services: [
       { name: "Post Operatorios de Cirugias Esteticas", benefit: "Controla inflamacion y favorece una recuperacion segura." },
       { name: "Drenajes Linfaticos Postoperatorios", benefit: "Ayudan a desinflamar y mejorar la evolucion postquirurgica." },
+    ],
+  },
+  {
+    category: "Tratamientos con Láser",
+    description: "Soluciones laser avanzadas para cicatrices, rejuvenecimiento y zonas especificas con resultados precisos.",
+    services: [
+      { name: "CO2 Fraccionado", benefit: "Trata cicatrices de acne y rejuvenece la piel con resurfacing de precision." },
+      { name: "Láser para Eliminación de Lunares", benefit: "Elimina lunares de forma segura y con minima cicatrizacion." },
+      { name: "Láser Íntimo", benefit: "Reafirma y rejuvenece la zona intima sin cirugia." },
+    ],
+  },
+  {
+    category: "Tecnología Facial y Corporal",
+    description: "Equipos de ultima generacion para lifting, tensado y modelado corporal sin procedimientos invasivos.",
+    services: [
+      { name: "HIFU 360 Max (25D)", benefit: "Lifting facial y tensado corporal profundo con ultrasonido focalizado." },
+      { name: "Exilis Ultra 360", benefit: "Rejuvenecimiento facial y reduccion de grasa con radiofrecuencia y ultrasonido." },
+    ],
+  },
+  {
+    category: "Medicina Regenerativa y Rejuvenecimiento",
+    description: "Regeneracion celular avanzada para resultados profundos, duraderos y naturales desde el interior.",
+    services: [
+      { name: "Tratamientos con Exosomas", benefit: "Estimulan renovacion celular para una piel mas joven y luminosa." },
+      { name: "PDRN de Salmón", benefit: "Rejuvenecimiento celular profundo con bioestimulacion natural." },
+      { name: "Microneedling (Dermapen)", benefit: "Activa la produccion de colageno para mejorar textura y firmeza." },
+      { name: "Tratamientos con Células Madre", benefit: "Regeneracion tisular avanzada para resultados antiedad duraderos." },
+    ],
+  },
+  {
+    category: "Hidratación y Skin Boosters",
+    description: "Hidratacion profunda e inteligente con activos premium para una piel radiante y saludable.",
+    services: [
+      { name: "Hidratación Profunda con Exosomas", benefit: "Repone agua y nutrientes celulares para maxima luminosidad." },
+      { name: "Hidratación con PDRN", benefit: "Revitaliza y sella la hidratacion con factor de crecimiento celular." },
     ],
   },
 ] as const;

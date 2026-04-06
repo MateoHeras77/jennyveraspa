@@ -50,6 +50,10 @@ const serviceCategoryLabelsEn: Record<string, string> = {
     "Corporales y Bienestar": "Body and Wellness Treatments",
     "Láser y Zonas Específicas": "Laser and Targeted Areas",
     "Post-Operatorios": "Post-Operative Care",
+    "Tratamientos con Láser": "Laser Treatments",
+    "Tecnología Facial y Corporal": "Advanced Technology: Face & Body",
+    "Medicina Regenerativa y Rejuvenecimiento": "Regenerative Medicine & Rejuvenation",
+    "Hidratación y Skin Boosters": "Hydration & Skin Boosters",
 };
 
 const serviceLabelsEn: Record<string, string> = {
@@ -63,7 +67,6 @@ const serviceLabelsEn: Record<string, string> = {
     "Tratamiento de Ojeras": "Under-Eye Treatment",
     "Masajes Relajantes": "Relaxing Massages",
     "Masajes Reductores": "Body Sculpting Massages",
-    "Parafina para Manos y Pies": "Paraffin for Hands and Feet",
     "Líneas de Expresión": "Expression Line Care",
     "Drenaje Linfático Facial": "Facial Lymphatic Drainage",
     "Depilación Definitiva con Láser Diodo": "Diode Laser Hair Reduction",
@@ -73,6 +76,17 @@ const serviceLabelsEn: Record<string, string> = {
     "Despigmentacion de Axilas": "Underarm Brightening",
     "Post Operatorios de Cirugias Esteticas": "Post-Op Aesthetic Surgery Care",
     "Drenajes Linfaticos Postoperatorios": "Post-Op Lymphatic Drainage",
+    "CO2 Fraccionado": "Fractional CO2 Laser",
+    "Láser para Eliminación de Lunares": "Laser Mole Removal",
+    "Láser Íntimo": "Intimate Laser",
+    "HIFU 360 Max (25D)": "HIFU 360 Max (25D)",
+    "Exilis Ultra 360": "Exilis Ultra 360",
+    "Tratamientos con Exosomas": "Exosome Treatments",
+    "PDRN de Salmón": "Salmon PDRN (Cellular Rejuvenation)",
+    "Microneedling (Dermapen)": "Microneedling (Dermapen)",
+    "Tratamientos con Células Madre": "Stem Cell Treatments",
+    "Hidratación Profunda con Exosomas": "Deep Hydration with Exosomes",
+    "Hidratación con PDRN": "PDRN Hydration",
 };
 
 export function ContactForm() {

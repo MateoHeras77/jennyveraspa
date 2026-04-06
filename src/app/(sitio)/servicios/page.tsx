@@ -6,10 +6,14 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Check,
+  Cpu,
+  Droplets,
+  FlaskConical,
   Hand,
   ScanLine,
   ShieldCheck,
   Sparkles,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 import { type Locale, withLocalePath } from "@/lib/i18n";
@@ -46,9 +50,12 @@ type ServicesData = {
 };
 
 function getCategoryId(name: string) {
-  if (name.includes("Faciales") || name.includes("Facial")) return "faciales";
-  if (name.includes("Corporales") || name.includes("Body")) return "corporales";
-  if (name.includes("Laser") || name.includes("Laser")) return "tecnologia";
+  if (name.includes("Tecnolog") || name.includes("Technology") || name.includes("Facial y Corporal") || name.includes("Face & Body")) return "tecnologia-corporal";
+  if (name.includes("Regenerativa") || name.includes("Regenerative")) return "regenerativa";
+  if (name.includes("Hidratac") || name.includes("Hydration") || name.includes("Skin Booster")) return "hidratacion";
+  if (name.includes("Faciales") || name.includes("Advanced Facial")) return "faciales";
+  if (name.includes("Corporales") || name.includes("Body and")) return "corporales";
+  if (name.includes("Láser") || name.includes("Laser")) return "laser";
   if (name.includes("Post")) return "post-op";
   return name.toLowerCase().replace(/\s+/g, "-");
 }
@@ -127,10 +134,6 @@ const servicesByLocale: Record<Locale, ServicesData> = {
             benefit: "Favorecen modelado corporal y mejoran circulacion.",
           },
           {
-            name: "Parafina para Manos y Pies",
-            benefit: "Hidratacion intensa para una piel suave y renovada.",
-          },
-          {
             name: "Lineas de Expresion",
             benefit: "Atenua marcas finas para un rostro mas descansado.",
           },
@@ -183,6 +186,86 @@ const servicesByLocale: Record<Locale, ServicesData> = {
           {
             name: "Drenajes Linfaticos Postoperatorios",
             benefit: "Ayudan a desinflamar y mejorar la evolucion postquirurgica.",
+          },
+        ],
+      },
+      {
+        category: "Tratamientos con Láser",
+        description:
+          "Soluciones laser avanzadas para cicatrices de acne, rejuvenecimiento y zonas especificas con resultados de precision.",
+        img: "/images/unsplash/photo-1570172619644-dfd03ed5d881.webp",
+        icon: Zap,
+        services: [
+          {
+            name: "CO2 Fraccionado",
+            benefit: "Trata cicatrices de acne y rejuvenece la piel con resurfacing de precision.",
+          },
+          {
+            name: "Laser para Eliminacion de Lunares",
+            benefit: "Elimina lunares de forma segura y con minima cicatrizacion.",
+          },
+          {
+            name: "Laser Intimo",
+            benefit: "Reafirma y rejuvenece la zona intima sin cirugia.",
+          },
+        ],
+      },
+      {
+        category: "Tecnologia Facial y Corporal",
+        description:
+          "Equipos premium de ultima generacion para lifting, tensado y modelado corporal sin procedimientos invasivos.",
+        img: "/images/unsplash/photo-1612817288484-6f916006741a.webp",
+        icon: Cpu,
+        services: [
+          {
+            name: "HIFU 360 Max (25D)",
+            benefit: "Lifting facial y tensado corporal profundo con ultrasonido focalizado de alta intensidad.",
+          },
+          {
+            name: "Exilis Ultra 360",
+            benefit: "Rejuvenecimiento facial y reduccion de grasa con radiofrecuencia y ultrasonido combinados.",
+          },
+        ],
+      },
+      {
+        category: "Medicina Regenerativa y Rejuvenecimiento",
+        description:
+          "Regeneracion celular avanzada para resultados profundos, duraderos y naturales desde el interior.",
+        img: "/images/unsplash/photo-1552693673-1bf958298935.webp",
+        icon: FlaskConical,
+        services: [
+          {
+            name: "Tratamientos con Exosomas",
+            benefit: "Estimulan la renovacion celular para una piel mas joven y luminosa.",
+          },
+          {
+            name: "PDRN de Salmon",
+            benefit: "Rejuvenecimiento celular profundo con bioestimulacion natural de origen marino.",
+          },
+          {
+            name: "Microneedling (Dermapen)",
+            benefit: "Activa la produccion de colageno para mejorar textura y firmeza de la piel.",
+          },
+          {
+            name: "Tratamientos con Celulas Madre",
+            benefit: "Regeneracion tisular avanzada para resultados antiedad duraderos.",
+          },
+        ],
+      },
+      {
+        category: "Hidratacion y Skin Boosters",
+        description:
+          "Hidratacion profunda e inteligente con activos premium para una piel radiante y saludable.",
+        img: "/images/unsplash/photo-1526758097130-bab247274f58.webp",
+        icon: Droplets,
+        services: [
+          {
+            name: "Hidratacion Profunda con Exosomas",
+            benefit: "Repone agua y nutrientes celulares para maxima luminosidad y vitalidad.",
+          },
+          {
+            name: "Hidratacion con PDRN",
+            benefit: "Revitaliza y sella la hidratacion con factor de crecimiento celular.",
           },
         ],
       },
@@ -261,10 +344,6 @@ const servicesByLocale: Record<Locale, ServicesData> = {
             benefit: "Support contouring goals and improve circulation.",
           },
           {
-            name: "Paraffin for Hands and Feet",
-            benefit: "Intense hydration for soft, renewed skin.",
-          },
-          {
             name: "Expression Line Care",
             benefit: "Softens fine lines for a more rested appearance.",
           },
@@ -317,6 +396,86 @@ const servicesByLocale: Record<Locale, ServicesData> = {
           {
             name: "Post-Op Lymphatic Drainage",
             benefit: "Helps reduce swelling and improves post-surgical recovery progress.",
+          },
+        ],
+      },
+      {
+        category: "Laser Treatments",
+        description:
+          "Advanced laser solutions for acne scars, skin rejuvenation, and targeted areas with precise, lasting results.",
+        img: "/images/unsplash/photo-1570172619644-dfd03ed5d881.webp",
+        icon: Zap,
+        services: [
+          {
+            name: "Fractional CO2 Laser",
+            benefit: "Treats acne scars and rejuvenates skin through precision resurfacing.",
+          },
+          {
+            name: "Laser Mole Removal",
+            benefit: "Safely removes moles with minimal scarring and high precision.",
+          },
+          {
+            name: "Intimate Laser",
+            benefit: "Non-surgical firming and rejuvenation for the intimate area.",
+          },
+        ],
+      },
+      {
+        category: "Advanced Technology: Face & Body",
+        description:
+          "Premium, cutting-edge devices for lifting, tightening, and body contouring without invasive procedures.",
+        img: "/images/unsplash/photo-1612817288484-6f916006741a.webp",
+        icon: Cpu,
+        services: [
+          {
+            name: "HIFU 360 Max (25D)",
+            benefit: "Deep facial lifting and body tightening using high-intensity focused ultrasound.",
+          },
+          {
+            name: "Exilis Ultra 360",
+            benefit: "Facial rejuvenation and fat reduction combining radiofrequency and ultrasound.",
+          },
+        ],
+      },
+      {
+        category: "Regenerative Medicine & Rejuvenation",
+        description:
+          "Advanced cellular regeneration for deep, long-lasting, and natural-looking results from within.",
+        img: "/images/unsplash/photo-1552693673-1bf958298935.webp",
+        icon: FlaskConical,
+        services: [
+          {
+            name: "Exosome Treatments",
+            benefit: "Stimulate cellular renewal for younger, more radiant-looking skin.",
+          },
+          {
+            name: "Salmon PDRN (Cellular Rejuvenation)",
+            benefit: "Deep cellular rejuvenation through natural marine-origin biostimulation.",
+          },
+          {
+            name: "Microneedling (Dermapen)",
+            benefit: "Activates collagen production to improve skin texture and firmness.",
+          },
+          {
+            name: "Stem Cell Treatments",
+            benefit: "Advanced tissue regeneration for long-lasting anti-aging results.",
+          },
+        ],
+      },
+      {
+        category: "Hydration & Skin Boosters",
+        description:
+          "Deep, intelligent hydration with premium active ingredients for radiant, healthy skin.",
+        img: "/images/unsplash/photo-1526758097130-bab247274f58.webp",
+        icon: Droplets,
+        services: [
+          {
+            name: "Deep Hydration with Exosomes",
+            benefit: "Replenishes cellular water and nutrients for maximum glow and vitality.",
+          },
+          {
+            name: "PDRN Hydration",
+            benefit: "Revitalizes and seals in hydration with cellular growth factor.",
           },
         ],
       },

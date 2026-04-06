@@ -33,7 +33,6 @@ Language: es-EC
 ### Body treatments
 - Lipoescultura sin cirugía (criolipolisis, radiofrecuencia, ultrasonido)
 - Tratamientos corporales para grasa localizada y celulitis
-- Tratamiento de parafina corporal
 - Masajes relajantes y terapéuticos
 - Depilación definitiva con láser
 - Masajes faciales y corporales en Cuenca
@@ -55,11 +54,35 @@ Language: es-EC
 - Beneficios y cuidados post-operatorios
 - Tratamientos post-operatorios
 
+### Laser treatments
+- CO2 Fraccionado para cicatrices de acné y rejuvenecimiento facial (resurfacing)
+- Láser para eliminación de lunares
+- Láser íntimo
+
+### Advanced technology: face & body
+- HIFU 360 Max (25D) — rejuvenecimiento facial y tensado corporal
+- Exilis Ultra 360 — reducción de grasa y tonificación corporal
+
+### Regenerative medicine & rejuvenation
+- Tratamientos con exosomas
+- PDRN de salmón (rejuvenecimiento celular)
+- Microneedling (Dermapen)
+- Tratamientos con células madre
+
+### Hydration & skin boosters
+- Hidratación profunda con exosomas
+- Hidratación con PDRN
+
 ### Advanced technologies
 - HIFU (High-Intensity Focused Ultrasound)
+- HIFU 360 Max (25D)
+- Exilis Ultra 360
+- CO2 Fraccionado
 - Láser médico
 - Radiofrecuencia
 - Plasma rico en plaquetas
+- Exosomas
+- PDRN de salmón
 - Mesoterapia
 - Cryolipolysis / Criolipolisis
 - Ultrasound therapy
