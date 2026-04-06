@@ -40,6 +40,14 @@ export async function generateMetadata({ params }: LocalizedHomeProps): Promise<
       url: getLocaleAlternates(locale, "/").canonical,
       locale: locale === "es" ? "es_EC" : "en_US",
       type: "website",
+      images: [
+        {
+          url: "/image2.webp",
+          width: 1200,
+          height: 630,
+          alt: locale === "es" ? "Jenny Vera Spa — Centro de Estética Avanzada en Cuenca" : "Jenny Vera Spa — Advanced Aesthetic Center in Cuenca",
+        },
+      ],
     },
   };
 }

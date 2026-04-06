@@ -50,12 +50,13 @@ type ServicesData = {
 };
 
 function getCategoryId(name: string) {
+  if (name.includes("Tratamientos con") || name.includes("Laser Treatments")) return "laser";
   if (name.includes("Tecnolog") || name.includes("Technology") || name.includes("Facial y Corporal") || name.includes("Face & Body")) return "tecnologia-corporal";
   if (name.includes("Regenerativa") || name.includes("Regenerative")) return "regenerativa";
   if (name.includes("Hidratac") || name.includes("Hydration") || name.includes("Skin Booster")) return "hidratacion";
   if (name.includes("Faciales") || name.includes("Advanced Facial")) return "faciales";
   if (name.includes("Corporales") || name.includes("Body and")) return "corporales";
-  if (name.includes("Láser") || name.includes("Laser")) return "laser";
+  if (name.includes("Laser") || name.includes("Láser")) return "laser-zonas";
   if (name.includes("Post")) return "post-op";
   return name.toLowerCase().replace(/\s+/g, "-");
 }

@@ -17,7 +17,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-[#222] bg-[#111111] py-20 text-gray-300">
-      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-4 gap-16">
+      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
         <div className="space-y-6 md:col-span-1">
           <div className="relative w-32 h-12 mb-6">
              <Image 
@@ -58,6 +58,14 @@ export function Footer() {
         </div>
 
         <div className="space-y-6">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.legalTitle}</h3>
+          <ul className="space-y-3 text-sm font-light">
+            <li><Link href={localizeHref("/nosotros")} className="hover:text-[#D4AF37] transition-colors">{copy.aboutUs}</Link></li>
+            <li><Link href={localizeHref("/privacidad")} className="hover:text-[#D4AF37] transition-colors">{copy.privacyPolicy}</Link></li>
+          </ul>
+        </div>
+
+        <div className="space-y-6">
           <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.connectTitle}</h3>
           <div className="flex gap-4">
             <a
@@ -92,10 +100,18 @@ export function Footer() {
         </div>
       </div>
       
-      <div className="container mx-auto px-6 lg:px-12 mt-20 pt-8 border-t border-gray-800 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="container mx-auto px-6 lg:px-12 mt-20 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
         <span className="text-xs font-light uppercase tracking-[0.1em] text-gray-400">
           © {new Date().getFullYear()} Jenny Vera Spa.
         </span>
+        <div className="flex items-center gap-6 text-xs font-light text-gray-500">
+          <Link href={localizeHref("/nosotros")} className="hover:text-[#D4AF37] transition-colors uppercase tracking-[0.1em]">
+            {copy.aboutUs}
+          </Link>
+          <Link href={localizeHref("/privacidad")} className="hover:text-[#D4AF37] transition-colors uppercase tracking-[0.1em]">
+            {copy.privacyPolicy}
+          </Link>
+        </div>
       </div>
     </footer>
   );

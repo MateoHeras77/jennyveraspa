@@ -63,7 +63,7 @@ export default function ContactoPage() {
                   <MapPin className="text-[#D4AF37]" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-serif text-gray-900 mb-2">{copy.visit}</h3>
+                  <h2 className="text-lg font-serif text-gray-900 mb-2">{copy.visit}</h2>
                   <p className="text-gray-600 font-light">Edificio Plaza Médica 4to piso<br/>Av. Manuel de J. Calle y Paucarbamba<br/>Cuenca, Ecuador</p>
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function ContactoPage() {
                   <Phone className="text-[#D4AF37]" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-serif text-gray-900 mb-2">{copy.call}</h3>
+                  <h2 className="text-lg font-serif text-gray-900 mb-2">{copy.call}</h2>
                   <a href={`tel:${CONTACT_PHONE_E164}`} className="text-gray-600 font-light hover:text-[#D4AF37] transition-colors">
                     {CONTACT_PHONE_DISPLAY}
                   </a>
@@ -85,7 +85,7 @@ export default function ContactoPage() {
                   <Clock className="text-[#D4AF37]" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-serif text-gray-900 mb-2">{copy.hours}</h3>
+                  <h2 className="text-lg font-serif text-gray-900 mb-2">{copy.hours}</h2>
                   <p className="text-gray-600 font-light whitespace-pre-line">{copy.hoursValue}</p>
                 </div>
               </div>

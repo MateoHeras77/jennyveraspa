@@ -40,6 +40,14 @@ export async function generateMetadata({ params }: LocalizedContactProps): Promi
       url: alternates.canonical,
       locale: locale === "es" ? "es_EC" : "en_US",
       type: "website",
+      images: [
+        {
+          url: "/image2.webp",
+          width: 1200,
+          height: 630,
+          alt: locale === "es" ? "Agenda tu cita en Jenny Vera Spa, Cuenca" : "Book your appointment at Jenny Vera Spa, Cuenca",
+        },
+      ],
     },
   };
 }

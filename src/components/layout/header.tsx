@@ -37,9 +37,11 @@ export function Header() {
       name: copy.treatments,
       href: localizeHref("/servicios"),
       submenu: [
+        { name: copy.laser, href: localizeHref("/servicios#laser"), desc: copy.laserDesc },
         { name: copy.facials, href: localizeHref("/servicios#faciales"), desc: copy.facialsDesc },
         { name: copy.body, href: localizeHref("/servicios#corporales"), desc: copy.bodyDesc },
-        { name: copy.technology, href: localizeHref("/servicios#tecnologia"), desc: copy.technologyDesc },
+        { name: copy.technology, href: localizeHref("/servicios#tecnologia-corporal"), desc: copy.technologyDesc },
+        { name: copy.regenerative, href: localizeHref("/servicios#regenerativa"), desc: copy.regenerativeDesc },
       ],
     },
     {
@@ -256,11 +258,13 @@ export function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-white/95 px-6 pt-32 backdrop-blur-xl lg:hidden"
-        >
+      <div
+        id="mobile-navigation"
+        className={cn(
+          "fixed inset-0 z-40 flex flex-col overflow-y-auto bg-white/95 px-6 pt-32 backdrop-blur-xl lg:hidden",
+          mobileMenuOpen ? "block" : "hidden"
+        )}
+      >
           <nav className="flex flex-col gap-6">
             {navItems.map((item) => (
               <div key={item.name} className="border-b border-gray-100 pb-4 last:border-0">
@@ -326,7 +330,6 @@ export function Header() {
             </div>
           </nav>
         </div>
-      )}
     </>
   );
 }

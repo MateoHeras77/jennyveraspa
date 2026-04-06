@@ -40,6 +40,14 @@ export async function generateMetadata({ params }: LocalizedServicesProps): Prom
       url: alternates.canonical,
       locale: locale === "es" ? "es_EC" : "en_US",
       type: "website",
+      images: [
+        {
+          url: "/image1.webp",
+          width: 1200,
+          height: 630,
+          alt: locale === "es" ? "Tratamientos estéticos en Jenny Vera Spa, Cuenca" : "Aesthetic treatments at Jenny Vera Spa, Cuenca",
+        },
+      ],
     },
   };
 }

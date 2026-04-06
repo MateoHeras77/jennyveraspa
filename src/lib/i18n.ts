@@ -75,6 +75,10 @@ export type HeaderCopy = {
   bodyDesc: string;
   technology: string;
   technologyDesc: string;
+  laser: string;
+  laserDesc: string;
+  regenerative: string;
+  regenerativeDesc: string;
   viewAll: string;
   facialCategory: string;
   facialCategoryDesc: string;
@@ -99,7 +103,11 @@ export const headerCopy: Record<Locale, HeaderCopy> = {
     body: "Corporales",
     bodyDesc: "Remodelacion y reduccion de medidas",
     technology: "Tecnologia",
-    technologyDesc: "Aparatologia de ultima generacion",
+    technologyDesc: "HIFU 360 Max (25D) y Exilis Ultra 360",
+    laser: "Laser",
+    laserDesc: "CO2 fraccionado, lunares y laser intimo",
+    regenerative: "Regenerativa",
+    regenerativeDesc: "Exosomas, PDRN y celulas madre",
     viewAll: "Ver Todo",
     facialCategory: "Estetica Facial",
     facialCategoryDesc: "Guias para el cuidado del rostro",
@@ -122,7 +130,11 @@ export const headerCopy: Record<Locale, HeaderCopy> = {
     body: "Body",
     bodyDesc: "Body contouring and reduction",
     technology: "Technology",
-    technologyDesc: "Advanced aesthetic devices",
+    technologyDesc: "HIFU 360 Max (25D) & Exilis Ultra 360",
+    laser: "Laser",
+    laserDesc: "CO2 resurfacing, mole removal & intimate laser",
+    regenerative: "Regenerative",
+    regenerativeDesc: "Exosomes, PDRN & stem cells",
     viewAll: "View All",
     facialCategory: "Facial Aesthetics",
     facialCategoryDesc: "Guides for facial care",
@@ -147,6 +159,9 @@ export type FooterCopy = {
   callUs: string;
   hours: string;
   hoursValue: string;
+  legalTitle: string;
+  privacyPolicy: string;
+  aboutUs: string;
 };
 
 export const footerCopy: Record<Locale, FooterCopy> = {
@@ -162,6 +177,9 @@ export const footerCopy: Record<Locale, FooterCopy> = {
     callUs: "Llamanos",
     hours: "Horarios",
     hoursValue: "Lunes a Viernes: 09:00 - 18:00 | Sabados: 09:00 - 13:00",
+    legalTitle: "Legal",
+    privacyPolicy: "Politica de Privacidad",
+    aboutUs: "Nosotros",
   },
   en: {
     tagline: "A beauty and wellness sanctuary in Cuenca. Elevating aesthetics with science, luxury, and artistry.",
@@ -175,5 +193,8 @@ export const footerCopy: Record<Locale, FooterCopy> = {
     callUs: "Call Us",
     hours: "Hours",
     hoursValue: "Monday to Friday: 09:00 - 18:00 | Saturday: 09:00 - 13:00",
+    legalTitle: "Legal",
+    privacyPolicy: "Privacy Policy",
+    aboutUs: "About Us",
   },
 };

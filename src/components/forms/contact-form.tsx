@@ -185,6 +185,7 @@ export function ContactForm() {
                         value={phoneValue}
                         onChange={(phone) => setPhone(phone)}
                         required
+                        inputProps={{ id: "phone", "aria-label": copy.phone }}
                         inputClassName="!w-full !bg-white !border-gray-200 !p-4 !h-[58px] !rounded-none focus:!border-[#D4AF37] !text-base"
                         countrySelectorStyleProps={{
                             buttonClassName: "!bg-white !border-gray-200 !h-[58px] !rounded-none !px-3",
