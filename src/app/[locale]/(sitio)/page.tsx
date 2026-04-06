@@ -10,12 +10,12 @@ type LocalizedHomeProps = {
 
 const homeMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Jenny Vera Spa | Centro de Estetica Avanzada en Cuenca",
+    title: "Centro de Estetica Avanzada en Cuenca",
     description:
       "Tratamientos estéticos faciales y corporales, masajes relajantes y cuidados post-operatorios en Cuenca, Ecuador. Tecnología avanzada y atención personalizada.",
   },
   en: {
-    title: "Jenny Vera Spa | Advanced Aesthetic Center in Cuenca",
+    title: "Advanced Aesthetic Center in Cuenca",
     description:
       "Advanced facial and body aesthetic treatments, relaxing massages, and post-operative care in Cuenca, Ecuador. Personalized attention and proven results.",
   },
