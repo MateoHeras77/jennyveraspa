@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/seo/local-schema";
+import { WebSiteSchema } from "@/components/seo/website-schema";
 import "./globals.css";
 
 const inter = Inter({
@@ -55,6 +56,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <LocalBusinessSchema />
+        <WebSiteSchema />
         {children}
       </body>
     </html>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServiciosPage from "@/app/(sitio)/servicios/page";
-import { getLocaleAlternates, isValidLocale, type Locale } from "@/lib/i18n";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { getLocaleAlternates, isValidLocale, toAbsoluteUrl, withLocalePath, type Locale } from "@/lib/i18n";
 
 type LocalizedServicesProps = {
   params: Promise<{ locale: string }>;
@@ -59,5 +60,16 @@ export default async function LocalizedServicesPage({ params }: LocalizedService
     notFound();
   }
 
-  return <ServiciosPage locale={locale} />;
+  const isEs = locale === "es";
+  const breadcrumbs = [
+    { name: isEs ? "Inicio" : "Home", item: toAbsoluteUrl(withLocalePath(locale, "/")) },
+    { name: isEs ? "Servicios" : "Services", item: toAbsoluteUrl(withLocalePath(locale, "/servicios")) },
+  ];
+
+  return (
+    <>
+      <BreadcrumbSchema items={breadcrumbs} />
+      <ServiciosPage locale={locale} />
+    </>
+  );
 }

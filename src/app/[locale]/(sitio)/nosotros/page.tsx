@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import NosotrosPage from "@/app/(sitio)/nosotros/page";
-import { getLocaleAlternates, isValidLocale, type Locale } from "@/lib/i18n";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { getLocaleAlternates, isValidLocale, toAbsoluteUrl, withLocalePath, type Locale } from "@/lib/i18n";
 
 type LocalizedNosotrosProps = {
   params: Promise<{ locale: string }>;
@@ -51,5 +52,16 @@ export default async function LocalizedNosotrosPage({ params }: LocalizedNosotro
     notFound();
   }
 
-  return <NosotrosPage />;
+  const isEs = locale === "es";
+  const breadcrumbs = [
+    { name: isEs ? "Inicio" : "Home", item: toAbsoluteUrl(withLocalePath(locale, "/")) },
+    { name: isEs ? "Nosotros" : "About Us", item: toAbsoluteUrl(withLocalePath(locale, "/nosotros")) },
+  ];
+
+  return (
+    <>
+      <BreadcrumbSchema items={breadcrumbs} />
+      <NosotrosPage />
+    </>
+  );
 }
