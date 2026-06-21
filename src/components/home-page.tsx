@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BlogPostSummary } from "@/lib/blog-content";
 import { BlogCard } from "@/components/shared/blog-card";
+import { FaqSchema } from "@/components/seo/service-schema";
 import { withLocalePath, type Locale } from "@/lib/i18n";
 
 const homeCopy = {
@@ -46,6 +47,30 @@ const homeCopy = {
     finalTitle: "Tu mejor version comienza aqui",
     finalText: "Agenda tu cita hoy y dejanos cuidar de ti con la excelencia que mereces.",
     finalCta: "Configura tu cita",
+    faqEyebrow: "Preguntas frecuentes",
+    faqTitle: "Lo que necesitas saber",
+    faqs: [
+      {
+        question: "Donde esta ubicado Jenny Vera Spa?",
+        answer:
+          "Estamos en Cuenca, Ecuador, en el Edificio Plaza Medica, 4to piso, sobre la Av. Manuel de J. Calle y Paucarbamba.",
+      },
+      {
+        question: "Que tratamientos ofrecen?",
+        answer:
+          "Ofrecemos faciales avanzados, depilacion laser, HIFU, tratamiento de manchas, drenaje linfatico postoperatorio, exosomas, masajes reductores y mas tecnologia estetica de ultima generacion.",
+      },
+      {
+        question: "Atienden en ingles?",
+        answer:
+          "Si. Atendemos en espanol e ingles, incluyendo a la comunidad expat de Cuenca, para que recibas una experiencia clara y comoda en tu idioma.",
+      },
+      {
+        question: "Como agendo una cita?",
+        answer:
+          "Puedes escribirnos por WhatsApp o completar el formulario de contacto. Toda atencion comienza con una valoracion personalizada para recomendarte el tratamiento ideal.",
+      },
+    ],
     testimonials: [
       {
         name: "Carolina M.",
@@ -103,6 +128,30 @@ const homeCopy = {
     finalTitle: "Your best version starts here",
     finalText: "Book your appointment today and let us care for you with the excellence you deserve.",
     finalCta: "Plan your appointment",
+    faqEyebrow: "Frequently asked questions",
+    faqTitle: "What you need to know",
+    faqs: [
+      {
+        question: "Where is Jenny Vera Spa located?",
+        answer:
+          "We are in Cuenca, Ecuador, at the Plaza Medica building, 4th floor, on Av. Manuel de J. Calle and Paucarbamba.",
+      },
+      {
+        question: "What treatments do you offer?",
+        answer:
+          "We offer advanced facials, laser hair removal, HIFU, dark spot treatment, post-operative lymphatic drainage, exosomes, body contouring massages, and more cutting-edge aesthetic technology.",
+      },
+      {
+        question: "Do you speak English?",
+        answer:
+          "Yes. We serve clients in both Spanish and English, including Cuenca's expat community, so you receive a clear and comfortable experience in your language.",
+      },
+      {
+        question: "How do I book an appointment?",
+        answer:
+          "You can message us on WhatsApp or fill out the contact form. Every service begins with a personalized evaluation to recommend the ideal treatment for you.",
+      },
+    ],
     testimonials: [
       {
         name: "Carolina M.",
@@ -318,6 +367,25 @@ export default function HomePage({ posts, locale = "es" }: HomePageProps) {
                 <span className="text-sm font-medium tracking-wide">{t.name}</span>
               </div>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="container mx-auto px-6 pb-8 md:pb-12">
+        <FaqSchema items={copy.faqs.map((f) => ({ question: f.question, answer: f.answer }))} />
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.2em] text-[#b1882f]">{copy.faqEyebrow}</span>
+          <h2 className="mb-10 font-serif text-3xl text-[#1B1B1B] md:text-5xl">{copy.faqTitle}</h2>
+        </div>
+        <div className="mx-auto max-w-3xl divide-y divide-[#dccca8]/70 rounded-2xl border border-[#dccca8]/70 bg-white/80 px-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] md:px-10">
+          {copy.faqs.map((faq) => (
+            <details key={faq.question} className="group py-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-[#1B1B1B]">
+                <span>{faq.question}</span>
+                <span className="text-xl leading-none text-[#D4AF37] transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-3 font-light leading-relaxed text-[#5a4d3f]">{faq.answer}</p>
+            </details>
           ))}
         </div>
       </section>
