@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServiciosPage from "@/app/(sitio)/servicios/page";
-import { getLocaleAlternates, isValidLocale, type Locale } from "@/lib/i18n";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { getLocaleAlternates, isValidLocale, toAbsoluteUrl, withLocalePath, type Locale } from "@/lib/i18n";
 
 type LocalizedServicesProps = {
   params: Promise<{ locale: string }>;
@@ -9,14 +10,14 @@ type LocalizedServicesProps = {
 
 const servicesMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Servicios de Estetica en Cuenca",
+    title: "Servicios de Estetica en Cuenca, Ecuador",
     description:
       "Explora tratamientos faciales, corporales, láser y post-operatorios en Jenny Vera Spa. Evaluación personalizada y tecnología avanzada en Cuenca, Ecuador.",
   },
   en: {
-    title: "Aesthetic Services in Cuenca",
+    title: "Aesthetic Services in Cuenca, Ecuador",
     description:
-      "Explore facial, body, laser, and post-operative treatments at Jenny Vera Spa in Cuenca. Personalized evaluation with advanced technology and proven results.",
+      "Explore facial, body, laser, and post-operative treatments at Jenny Vera Spa in Cuenca, Ecuador. Personalized evaluation with advanced technology and proven results.",
   },
 };
 
@@ -59,5 +60,16 @@ export default async function LocalizedServicesPage({ params }: LocalizedService
     notFound();
   }
 
-  return <ServiciosPage locale={locale} />;
+  const isEs = locale === "es";
+  const breadcrumbs = [
+    { name: isEs ? "Inicio" : "Home", item: toAbsoluteUrl(withLocalePath(locale, "/")) },
+    { name: isEs ? "Servicios" : "Services", item: toAbsoluteUrl(withLocalePath(locale, "/servicios")) },
+  ];
+
+  return (
+    <>
+      <BreadcrumbSchema items={breadcrumbs} />
+      <ServiciosPage locale={locale} />
+    </>
+  );
 }

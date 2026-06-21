@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog-content";
+import { getAllServices } from "@/lib/services-content";
 import { POSTS_PER_PAGE, slugifyCategory } from "@/lib/blog-listing";
 import { SUPPORTED_LOCALES, withLocalePath } from "@/lib/i18n";
 
@@ -9,6 +10,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     SUPPORTED_LOCALES.map(async (locale) => ({
       locale,
       posts: await getAllPosts(locale),
+    }))
+  );
+  const servicesByLocale = await Promise.all(
+    SUPPORTED_LOCALES.map(async (locale) => ({
+      locale,
+      services: await getAllServices(locale),
     }))
   );
   const now = new Date();
@@ -53,6 +60,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.4,
     },
   ]);
+
+  const serviceUrls: MetadataRoute.Sitemap = servicesByLocale.flatMap(({ locale, services }) =>
+    services.map((service) => ({
+      url: toAbsoluteUrl(withLocalePath(locale, `/servicios/${service.slug}`)),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    }))
+  );
 
   const blogUrls: MetadataRoute.Sitemap = postsByLocale.flatMap(({ locale, posts }) =>
     posts.map((post) => ({
@@ -118,6 +134,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...localizedStaticUrls,
+    ...serviceUrls,
     ...categoryUrls,
     ...categoryPaginationUrls,
     ...blogPaginationUrls,

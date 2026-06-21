@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import NosotrosPage from "@/app/(sitio)/nosotros/page";
-import { getLocaleAlternates, isValidLocale, type Locale } from "@/lib/i18n";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { getLocaleAlternates, isValidLocale, toAbsoluteUrl, withLocalePath, type Locale } from "@/lib/i18n";
 
 type LocalizedNosotrosProps = {
   params: Promise<{ locale: string }>;
@@ -9,12 +10,12 @@ type LocalizedNosotrosProps = {
 
 const nosotrosMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Nosotros | Jenny Vera Spa",
+    title: "Nosotros — Centro de Estetica Avanzada en Cuenca, Ecuador",
     description:
       "Conoce la historia, mision y equipo profesional de Jenny Vera Spa, centro de estetica avanzada en Cuenca, Ecuador.",
   },
   en: {
-    title: "About Us | Jenny Vera Spa",
+    title: "About Us — Advanced Aesthetics Center in Cuenca, Ecuador",
     description:
       "Learn about the history, mission, and professional team of Jenny Vera Spa, an advanced aesthetics center in Cuenca, Ecuador.",
   },
@@ -51,5 +52,16 @@ export default async function LocalizedNosotrosPage({ params }: LocalizedNosotro
     notFound();
   }
 
-  return <NosotrosPage />;
+  const isEs = locale === "es";
+  const breadcrumbs = [
+    { name: isEs ? "Inicio" : "Home", item: toAbsoluteUrl(withLocalePath(locale, "/")) },
+    { name: isEs ? "Nosotros" : "About Us", item: toAbsoluteUrl(withLocalePath(locale, "/nosotros")) },
+  ];
+
+  return (
+    <>
+      <BreadcrumbSchema items={breadcrumbs} />
+      <NosotrosPage />
+    </>
+  );
 }

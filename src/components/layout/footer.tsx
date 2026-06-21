@@ -3,12 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Facebook, MapPin, Phone, Star } from "lucide-react";
-import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/lib/constants";
+import {
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_E164,
+  GOOGLE_REVIEW_URL,
+  SOCIAL_FACEBOOK_URL,
+  SOCIAL_INSTAGRAM_URL,
+  SOCIAL_TIKTOK_URL,
+} from "@/lib/constants";
 import { usePathname } from "next/navigation";
 import { DEFAULT_LOCALE, footerCopy, getLocaleFromPathname, withLocalePath } from "@/lib/i18n";
 
 export function Footer() {
-  const reviewUrl = "https://g.page/r/Cbso4rpRXTOYEAI/review";
+  const reviewUrl = `${GOOGLE_REVIEW_URL}/review`;
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
   const copy = footerCopy[locale];
@@ -35,9 +42,9 @@ export function Footer() {
         <div className="space-y-6">
           <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.treatmentsTitle}</h3>
           <ul className="space-y-3 text-sm font-light">
-            <li><Link href={localizeHref("/servicios#faciales")} className="hover:text-[#D4AF37] transition-colors">{copy.facialRejuvenation}</Link></li>
-            <li><Link href={localizeHref("/servicios#corporales")} className="hover:text-[#D4AF37] transition-colors">{copy.bodyRemodeling}</Link></li>
-            <li><Link href={localizeHref("/servicios#post-op")} className="hover:text-[#D4AF37] transition-colors">{copy.postOp}</Link></li>
+            <li><Link href={localizeHref("/servicios/hifu")} className="hover:text-[#D4AF37] transition-colors">{copy.facialRejuvenation}</Link></li>
+            <li><Link href={localizeHref("/servicios/masajes-reductores")} className="hover:text-[#D4AF37] transition-colors">{copy.bodyRemodeling}</Link></li>
+            <li><Link href={localizeHref("/servicios/drenaje-postoperatorio")} className="hover:text-[#D4AF37] transition-colors">{copy.postOp}</Link></li>
           </ul>
         </div>
 
@@ -69,7 +76,7 @@ export function Footer() {
           <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.connectTitle}</h3>
           <div className="flex gap-4">
             <a
-              href="https://www.instagram.com"
+              href={SOCIAL_INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram de Jenny Vera Spa"
@@ -78,13 +85,24 @@ export function Footer() {
               <Instagram size={18} />
             </a>
             <a
-              href="https://www.facebook.com"
+              href={SOCIAL_FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook de Jenny Vera Spa"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-700 transition-all hover:border-[#D4AF37] hover:text-[#D4AF37]"
             >
               <Facebook size={18} />
+            </a>
+            <a
+              href={SOCIAL_TIKTOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok de Jenny Vera Spa"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-700 transition-all hover:border-[#D4AF37] hover:text-[#D4AF37]"
+            >
+              <svg viewBox="0 0 24 24" width={18} height={18} fill="currentColor" aria-hidden="true">
+                <path d="M16.6 5.82a4.28 4.28 0 0 1-1.05-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1 0-5.18c.27 0 .53.04.78.12V9.66a5.68 5.68 0 0 0-.78-.05 5.69 5.69 0 1 0 5.69 5.69V9.01a7.35 7.35 0 0 0 4.3 1.38V7.28a4.28 4.28 0 0 1-3.25-1.46Z" />
+              </svg>
             </a>
           </div>
           <a
