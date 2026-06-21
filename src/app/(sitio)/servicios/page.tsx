@@ -18,6 +18,40 @@ import {
 } from "lucide-react";
 import { type Locale, withLocalePath } from "@/lib/i18n";
 
+type FeaturedTreatment = {
+  slug: string;
+  name: string;
+};
+
+const featuredTreatmentsByLocale: Record<Locale, { heading: string; treatments: FeaturedTreatment[] }> = {
+  es: {
+    heading: "Tratamientos destacados",
+    treatments: [
+      { slug: "hifu", name: "HIFU (lifting sin cirugia)" },
+      { slug: "depilacion-laser", name: "Depilacion laser" },
+      { slug: "limpieza-facial", name: "Limpieza facial profunda" },
+      { slug: "manchas", name: "Tratamiento de manchas" },
+      { slug: "drenaje-postoperatorio", name: "Drenaje postoperatorio" },
+      { slug: "eliminacion-lunares", name: "Eliminacion de lunares" },
+      { slug: "exosomas", name: "Exosomas" },
+      { slug: "masajes-reductores", name: "Masajes reductores" },
+    ],
+  },
+  en: {
+    heading: "Featured treatments",
+    treatments: [
+      { slug: "hifu", name: "HIFU (non-surgical lifting)" },
+      { slug: "depilacion-laser", name: "Laser hair removal" },
+      { slug: "limpieza-facial", name: "Deep facial cleansing" },
+      { slug: "manchas", name: "Dark spot treatment" },
+      { slug: "drenaje-postoperatorio", name: "Post-op lymphatic drainage" },
+      { slug: "eliminacion-lunares", name: "Laser mole removal" },
+      { slug: "exosomas", name: "Exosomes" },
+      { slug: "masajes-reductores", name: "Body sculpting massages" },
+    ],
+  },
+};
+
 type ServiceItem = {
   name: string;
   benefit: string;
@@ -491,6 +525,7 @@ type ServiciosPageProps = {
 export default function ServiciosPage({ locale = "es" }: ServiciosPageProps) {
   const localize = (path: string) => withLocalePath(locale, path);
   const { copy, categories } = servicesByLocale[locale];
+  const featured = featuredTreatmentsByLocale[locale];
 
   return (
     <div className="relative pt-32 pb-24 bg-[#FDFBF7] min-h-screen overflow-hidden">
@@ -517,6 +552,28 @@ export default function ServiciosPage({ locale = "es" }: ServiciosPageProps) {
               >
                 {group.category}
               </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto mb-24 max-w-5xl"
+        >
+          <h2 className="mb-6 text-center font-serif text-2xl text-gray-900 md:text-3xl">{featured.heading}</h2>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.treatments.map((treatment) => (
+              <Link
+                key={treatment.slug}
+                href={localize(`/servicios/${treatment.slug}`)}
+                className="group flex items-center justify-between gap-3 rounded-sm border border-gray-200 bg-white px-4 py-3 text-sm text-gray-800 shadow-sm transition-colors hover:border-[#D4AF37] hover:text-[#9A7A1F]"
+              >
+                {treatment.name}
+                <ArrowRight size={15} className="shrink-0 text-[#D4AF37] transition-transform group-hover:translate-x-1" />
+              </Link>
             ))}
           </div>
         </motion.div>

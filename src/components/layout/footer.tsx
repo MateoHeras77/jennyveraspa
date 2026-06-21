@@ -42,9 +42,9 @@ export function Footer() {
         <div className="space-y-6">
           <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">{copy.treatmentsTitle}</h3>
           <ul className="space-y-3 text-sm font-light">
-            <li><Link href={localizeHref("/servicios#faciales")} className="hover:text-[#D4AF37] transition-colors">{copy.facialRejuvenation}</Link></li>
-            <li><Link href={localizeHref("/servicios#corporales")} className="hover:text-[#D4AF37] transition-colors">{copy.bodyRemodeling}</Link></li>
-            <li><Link href={localizeHref("/servicios#post-op")} className="hover:text-[#D4AF37] transition-colors">{copy.postOp}</Link></li>
+            <li><Link href={localizeHref("/servicios/hifu")} className="hover:text-[#D4AF37] transition-colors">{copy.facialRejuvenation}</Link></li>
+            <li><Link href={localizeHref("/servicios/masajes-reductores")} className="hover:text-[#D4AF37] transition-colors">{copy.bodyRemodeling}</Link></li>
+            <li><Link href={localizeHref("/servicios/drenaje-postoperatorio")} className="hover:text-[#D4AF37] transition-colors">{copy.postOp}</Link></li>
           </ul>
         </div>
 
