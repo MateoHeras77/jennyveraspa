@@ -9,14 +9,14 @@ type LocalizedServicesProps = {
 
 const servicesMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Servicios de Estetica en Cuenca",
+    title: "Servicios de Estetica en Cuenca, Ecuador",
     description:
       "Explora tratamientos faciales, corporales, láser y post-operatorios en Jenny Vera Spa. Evaluación personalizada y tecnología avanzada en Cuenca, Ecuador.",
   },
   en: {
-    title: "Aesthetic Services in Cuenca",
+    title: "Aesthetic Services in Cuenca, Ecuador",
     description:
-      "Explore facial, body, laser, and post-operative treatments at Jenny Vera Spa in Cuenca. Personalized evaluation with advanced technology and proven results.",
+      "Explore facial, body, laser, and post-operative treatments at Jenny Vera Spa in Cuenca, Ecuador. Personalized evaluation with advanced technology and proven results.",
   },
 };
 

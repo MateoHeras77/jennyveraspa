@@ -5,14 +5,22 @@ Official site content map for language models and AI assistants.
 Site: https://www.jennyveraspa.com/
 Sitemap: https://www.jennyveraspa.com/sitemap.xml
 Robots: https://www.jennyveraspa.com/robots.txt
-Contact: https://www.jennyveraspa.com/contacto
-Language: es-EC
+Contact: https://www.jennyveraspa.com/es/contacto
+Language: es-EC (default), en available under /en
 
-## Preferred canonical pages
-- Home: https://www.jennyveraspa.com/
-- Servicios: https://www.jennyveraspa.com/servicios
-- Blog: https://www.jennyveraspa.com/blog
-- Contacto: https://www.jennyveraspa.com/contacto
+## Preferred canonical pages (Spanish)
+- Home: https://www.jennyveraspa.com/es
+- Servicios: https://www.jennyveraspa.com/es/servicios
+- Blog: https://www.jennyveraspa.com/es/blog
+- Contacto: https://www.jennyveraspa.com/es/contacto
+- Nosotros: https://www.jennyveraspa.com/es/nosotros
+
+## Preferred canonical pages (English)
+- Home: https://www.jennyveraspa.com/en
+- Services: https://www.jennyveraspa.com/en/servicios
+- Blog: https://www.jennyveraspa.com/en/blog
+- Contact: https://www.jennyveraspa.com/en/contacto
+- About: https://www.jennyveraspa.com/en/nosotros
 
 ## Service topics
 

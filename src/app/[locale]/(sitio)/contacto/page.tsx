@@ -9,14 +9,14 @@ type LocalizedContactProps = {
 
 const contactMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Contacto | Jenny Vera Spa",
+    title: "Contacto y Citas en Cuenca, Ecuador",
     description:
-      "Agenda tu evaluacion personalizada en Jenny Vera Spa y recibe una recomendacion profesional para tu tratamiento.",
+      "Agenda tu evaluacion personalizada en Jenny Vera Spa, Cuenca, Ecuador, y recibe una recomendacion profesional para tu tratamiento.",
   },
   en: {
-    title: "Contact | Jenny Vera Spa",
+    title: "Contact and Appointments in Cuenca, Ecuador",
     description:
-      "Book your personalized evaluation at Jenny Vera Spa and receive a professional treatment recommendation.",
+      "Book your personalized evaluation at Jenny Vera Spa in Cuenca, Ecuador, and receive a professional treatment recommendation.",
   },
 };
 

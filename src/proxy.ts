@@ -12,6 +12,17 @@ import {
 const PUBLIC_FILE = /\.(.*)$/;
 const ENGLISH_COUNTRIES = new Set(["us", "gb", "ca", "au", "nz", "ie"]);
 
+// Search engine and AI crawlers should land on the Spanish (default) version so
+// the canonical es-EC content is what gets indexed, instead of being redirected
+// to /en based on a missing or English Accept-Language header.
+const BOT_USER_AGENT =
+  /bot|crawler|spider|crawling|googlebot|bingbot|duckduckbot|baiduspider|yandex|slurp|gptbot|chatgpt|claudebot|perplexitybot|google-extended|facebookexternalhit|whatsapp|twitterbot|linkedinbot/i;
+
+function isBot(request: NextRequest): boolean {
+  const ua = request.headers.get("user-agent");
+  return ua ? BOT_USER_AGENT.test(ua) : false;
+}
+
 function detectBrowserLocale(request: NextRequest): Locale | null {
   const acceptLanguage = request.headers.get("accept-language");
   if (!acceptLanguage) {
@@ -52,6 +63,11 @@ function detectGeoLocale(request: NextRequest): Locale | null {
 }
 
 function resolveLocale(request: NextRequest): Locale {
+  // Crawlers always get the default (Spanish) locale for stable indexing.
+  if (isBot(request)) {
+    return DEFAULT_LOCALE;
+  }
+
   const cookieLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
   if (cookieLocale && isValidLocale(cookieLocale)) {
     return cookieLocale;

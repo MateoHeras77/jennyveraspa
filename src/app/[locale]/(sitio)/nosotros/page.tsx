@@ -9,12 +9,12 @@ type LocalizedNosotrosProps = {
 
 const nosotrosMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Nosotros | Jenny Vera Spa",
+    title: "Nosotros — Centro de Estetica Avanzada en Cuenca, Ecuador",
     description:
       "Conoce la historia, mision y equipo profesional de Jenny Vera Spa, centro de estetica avanzada en Cuenca, Ecuador.",
   },
   en: {
-    title: "About Us | Jenny Vera Spa",
+    title: "About Us — Advanced Aesthetics Center in Cuenca, Ecuador",
     description:
       "Learn about the history, mission, and professional team of Jenny Vera Spa, an advanced aesthetics center in Cuenca, Ecuador.",
   },

@@ -3,6 +3,12 @@
 
 export const CONTACT_PHONE_E164 = "+593999152853";
 export const CONTACT_PHONE_DISPLAY = "+593 999 152 853";
+
+export const SOCIAL_INSTAGRAM_URL = "https://www.instagram.com/jenny_vera_spa/";
+export const SOCIAL_FACEBOOK_URL = "https://www.facebook.com/JennyVeraSpa/";
+export const SOCIAL_TIKTOK_URL = "https://www.tiktok.com/@jennyveraspa";
+export const GOOGLE_REVIEW_URL = "https://g.page/r/Cbso4rpRXTOYEAI";
+
 export const WHATSAPP_CONTACT_URL =
   "https://api.whatsapp.com/send/?phone=593999152853&text=%C2%A1Hola+desde+JennyVeraSpa+en+Cuenca%2C+Ecuador%21+%C2%BFC%C3%B3mo+podemos+ayudarte+hoy+con+nuestros+tratamientos+%3F+Estamos+aqu%C3%AD+para+ofrecerte+la+mejor+experiencia+de+spa.+%C2%A1Escr%C3%ADbenos+y+programa+tu+cita+ahora+mismo%21&type=phone_number&app_absent=0";
 

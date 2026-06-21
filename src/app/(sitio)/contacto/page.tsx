@@ -18,6 +18,7 @@ const contactCopy = {
     hours: "Horarios",
     hoursValue: "Lunes a Viernes: 09:00 - 18:00\nSabados: 09:00 - 13:00",
     sendMessage: "Envianos un Mensaje",
+    mapTitle: "Ubicacion de Jenny Vera Spa en Cuenca, Ecuador",
   },
   en: {
     eyebrow: "Contact",
@@ -29,6 +30,7 @@ const contactCopy = {
     hours: "Business Hours",
     hoursValue: "Monday to Friday: 09:00 - 18:00\nSaturday: 09:00 - 13:00",
     sendMessage: "Send Us a Message",
+    mapTitle: "Jenny Vera Spa location in Cuenca, Ecuador",
   },
 } as const;
 
@@ -105,6 +107,25 @@ export default function ContactoPage() {
           </motion.div>
 
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-20 overflow-hidden rounded-sm border border-[#D4AF37]/10 shadow-xl"
+        >
+          <iframe
+            title={copy.mapTitle}
+            src="https://www.google.com/maps?q=Jenny+Vera+Spa+Edificio+Plaza+M%C3%A9dica+Av.+Manuel+de+J.+Calle+Cuenca+Ecuador&z=16&output=embed"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </motion.div>
       </div>
     </div>
   );
