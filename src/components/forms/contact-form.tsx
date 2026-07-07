@@ -65,6 +65,8 @@ const serviceLabelsEn: Record<string, string> = {
     "Plasma Rico en Plaquetas": "Platelet-Rich Plasma (PRP)",
     "Mesoterapia Facial": "Facial Mesotherapy",
     "Tratamiento de Ojeras": "Under-Eye Treatment",
+    "Botox": "Botox",
+    "Microblading": "Microblading",
     "Masajes Relajantes": "Relaxing Massages",
     "Masajes Reductores": "Body Sculpting Massages",
     "Líneas de Expresión": "Expression Line Care",
