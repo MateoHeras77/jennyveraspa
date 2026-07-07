@@ -25,6 +25,8 @@ export const SERVICE_CATEGORIES = [
       { name: "Plasma Rico en Plaquetas", benefit: "Estimula regeneración natural para una piel revitalizada." },
       { name: "Mesoterapia Facial", benefit: "Nutrición intensiva para piel más firme y uniforme." },
       { name: "Tratamiento de Ojeras", benefit: "Mejora el aspecto cansado y aporta frescura a la mirada." },
+      { name: "Botox", benefit: "Suaviza líneas de expresión con resultados naturales." },
+      { name: "Microblading", benefit: "Cejas definidas y naturales con técnica pelo a pelo." },
     ],
   },
   {

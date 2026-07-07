@@ -53,13 +53,13 @@ const nextConfig: NextConfig = {
       '/cirugia-estetica': '/es/servicios',
       // Blog (slug idéntico)
       '/tratamientos-de-acne': '/es/servicios/tratamiento-acne',
-      '/despigmentacion-de-axilas': '/es/blog/despigmentacion-de-axilas',
-      '/despigmentacion-en-zonas-intimas': '/es/blog/despigmentacion-en-zonas-intimas',
-      '/drenaje-linfatico-facial': '/es/blog/drenaje-linfatico-facial',
+      '/despigmentacion-de-axilas': '/es/servicios/despigmentacion-axilas',
+      '/despigmentacion-en-zonas-intimas': '/es/servicios/despigmentacion-zonas-intimas',
+      '/drenaje-linfatico-facial': '/es/servicios/drenaje-linfatico-facial',
       '/drenaje-linfatico-postoperatorio': '/es/blog/drenaje-linfatico-postoperatorio',
       '/hidratacion-profunda-con-vitamina-c': '/es/blog/hidratacion-profunda-con-vitamina-c',
       '/plasma-rico-en-plaquetas': '/es/servicios/plasma-rico-plaquetas',
-      '/tratamiento-intimo-con-hifu': '/es/blog/tratamiento-intimo-con-hifu',
+      '/tratamiento-intimo-con-hifu': '/es/servicios/hifu-intimo',
       '/masajes-relajantes': '/es/servicios/masajes-relajantes',
       '/masajes-relajantes-en-cuenca-ecuador': '/es/blog/masajes-relajantes-en-cuenca-ecuador',
       '/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional':
@@ -67,8 +67,8 @@ const nextConfig: NextConfig = {
       '/mejores-tratamientos-corporales-reducir-grasa-localizada-celulitis':
         '/es/blog/mejores-tratamientos-corporales-reducir-grasa-localizada-celulitis',
       // Blog (slug equivalente)
-      '/botox': '/es/blog/mitos-y-verdades-sobre-botox',
-      '/todo-sobre-botox-usos-cuidados-costos': '/es/blog/mitos-y-verdades-sobre-botox',
+      '/botox': '/es/servicios/botox',
+      '/todo-sobre-botox-usos-cuidados-costos': '/es/servicios/botox',
       '/masaje-relajante': '/es/servicios/masajes-relajantes',
       '/tipos-de-masajes-corporales-beneficios': '/es/blog/masajes-relajantes-en-cuenca-ecuador',
       '/alternativas-liposuccion-sin-cirugia-criolipolisis-laser-ultrasonido-focalizado':
