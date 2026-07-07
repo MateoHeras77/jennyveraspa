@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { BlogListingSection } from "@/components/shared/blog-listing-section";
 import { getAllPosts } from "@/lib/blog-content";
-import { getBlogListingState } from "@/lib/blog-listing";
+import { getBlogListingState, slugifyCategory } from "@/lib/blog-listing";
 import { getLocaleAlternates, isValidLocale, withLocalePath } from "@/lib/i18n";
 
 type BlogCategoryPaginatedPageProps = {
@@ -29,18 +29,22 @@ export async function generateMetadata({ params }: BlogCategoryPaginatedPageProp
   }
 
   const currentPage = parsePageParam(page);
-  const categoryTitle = titleFromCategorySlug(category);
+  const posts = await getAllPosts(locale);
+  const realCategoryName = posts
+    .map((post) => post.category)
+    .find((name) => name && slugifyCategory(name) === category);
+  const categoryTitle = realCategoryName ?? titleFromCategorySlug(category);
   const canonicalPath = `/blog/categoria/${category}/pagina/${Math.max(2, currentPage)}`;
   const alternates = getLocaleAlternates(locale, canonicalPath);
 
   return {
     title:
       locale === "es"
-        ? `${categoryTitle} - Pagina ${Math.max(2, currentPage)} | Blog Jenny Vera Spa`
-        : `${categoryTitle} - Page ${Math.max(2, currentPage)} | Jenny Vera Spa Blog`,
+        ? `${categoryTitle} — Blog, página ${Math.max(2, currentPage)}`
+        : `${categoryTitle} — Blog, page ${Math.max(2, currentPage)}`,
     description:
       locale === "es"
-        ? `Guias profesionales sobre ${categoryTitle.toLowerCase()} en Jenny Vera Spa. Pagina ${Math.max(2, currentPage)}.`
+        ? `Guías profesionales sobre ${categoryTitle.toLowerCase()} en Jenny Vera Spa. Página ${Math.max(2, currentPage)}.`
         : `Professional guides on ${categoryTitle.toLowerCase()} at Jenny Vera Spa. Page ${Math.max(2, currentPage)}.`,
     alternates,
     robots: {

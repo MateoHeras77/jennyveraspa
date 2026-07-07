@@ -30,7 +30,7 @@ export async function generateMetadata({ params, searchParams }: BlogPaginatedPa
     title: locale === "es" ? `Blog - Pagina ${Math.max(1, currentPage)}` : `Blog - Page ${Math.max(1, currentPage)}`,
     description:
       locale === "es"
-        ? "Guias profesionales sobre estetica facial, corporal y cuidados postoperatorios para tomar mejores decisiones sobre tu bienestar."
+        ? "Guías profesionales sobre estética facial, corporal y cuidados postoperatorios para tomar mejores decisiones sobre tu bienestar."
         : "Professional guides on facial aesthetics, body care, and post-operative recovery to support better wellness decisions.",
     alternates,
     robots: query.categoria
@@ -49,7 +49,7 @@ export async function generateMetadata({ params, searchParams }: BlogPaginatedPa
           : `Aesthetics and Wellness Blog - Page ${Math.max(1, currentPage)} | Jenny Vera Spa`,
       description:
         locale === "es"
-          ? "Articulos actualizados sobre Botox, HIFU, drenaje linfatico y protocolos esteticos con enfoque clinico y resultados naturales."
+          ? "Artículos actualizados sobre Botox, HIFU, drenaje linfático y protocolos estéticos con enfoque clínico y resultados naturales."
           : "Updated articles on Botox, HIFU, lymphatic drainage, and aesthetic protocols focused on natural results.",
       url: alternates.canonical,
       type: "website",

@@ -1,6 +1,7 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { WHATSAPP_CONTACT_URL } from "@/lib/constants";
 
 export function WhatsAppFloat() {
@@ -17,6 +18,7 @@ export function WhatsAppFloat() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
+        onClick={() => track("whatsapp_click", { source: "float" })}
         className="group flex h-14 w-14 animate-[float_2.4s_ease-in-out_infinite] items-center justify-center rounded-full border border-[#2dd06f] bg-[#25D366] text-white shadow-[0_14px_38px_-16px_rgba(37,211,102,0.9)] transition-transform hover:scale-105"
       >
         <MessageCircle size={27} strokeWidth={2.2} />

@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContactoPage from "@/app/(sitio)/contacto/page";
-import { getLocaleAlternates, isValidLocale, type Locale } from "@/lib/i18n";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import {
+  getLocaleAlternates,
+  isValidLocale,
+  toAbsoluteUrl,
+  withLocalePath,
+  type Locale,
+} from "@/lib/i18n";
 
 type LocalizedContactProps = {
   params: Promise<{ locale: string }>;
@@ -11,7 +18,7 @@ const contactMetadataByLocale: Record<Locale, { title: string; description: stri
   es: {
     title: "Contacto y Citas en Cuenca, Ecuador",
     description:
-      "Agenda tu evaluacion personalizada en Jenny Vera Spa, Cuenca, Ecuador, y recibe una recomendacion profesional para tu tratamiento.",
+      "Agenda tu evaluación personalizada en Jenny Vera Spa, Cuenca, Ecuador, y recibe una recomendación profesional para tu tratamiento.",
   },
   en: {
     title: "Contact and Appointments in Cuenca, Ecuador",
@@ -59,5 +66,18 @@ export default async function LocalizedContactPage({ params }: LocalizedContactP
     notFound();
   }
 
-  return <ContactoPage />;
+  const breadcrumbs = [
+    { name: locale === "es" ? "Inicio" : "Home", item: toAbsoluteUrl(withLocalePath(locale, "/")) },
+    {
+      name: locale === "es" ? "Contacto" : "Contact",
+      item: toAbsoluteUrl(withLocalePath(locale, "/contacto")),
+    },
+  ];
+
+  return (
+    <>
+      <BreadcrumbSchema items={breadcrumbs} />
+      <ContactoPage />
+    </>
+  );
 }

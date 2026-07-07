@@ -19,7 +19,7 @@ export function Footer() {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname) ?? DEFAULT_LOCALE;
   const copy = footerCopy[locale];
-  const reviewCtaLabel = locale === "es" ? "Dejar resena en Google" : "Leave a Google review";
+  const reviewCtaLabel = locale === "es" ? "Dejar reseña en Google" : "Leave a Google review";
   const localizeHref = (path: string) => withLocalePath(locale, path);
 
   return (

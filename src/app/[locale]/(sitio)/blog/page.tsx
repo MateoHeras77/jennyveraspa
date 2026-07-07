@@ -15,11 +15,11 @@ type BlogMetadataProps = {
 
 const blogMetaByLocale: Record<Locale, { title: string; description: string; ogDescription: string }> = {
   es: {
-    title: "Blog de Estetica y Bienestar",
+    title: "Blog de Estética y Bienestar",
     description:
-      "Guias profesionales sobre estetica facial, corporal y cuidados postoperatorios para tomar mejores decisiones sobre tu bienestar.",
+      "Guías profesionales sobre estética facial, corporal y cuidados postoperatorios para tomar mejores decisiones sobre tu bienestar.",
     ogDescription:
-      "Articulos actualizados sobre Botox, HIFU, drenaje linfatico y protocolos esteticos con enfoque clinico y resultados naturales.",
+      "Artículos actualizados sobre Botox, HIFU, drenaje linfático y protocolos estéticos con enfoque clínico y resultados naturales.",
   },
   en: {
     title: "Aesthetics and Wellness Blog",

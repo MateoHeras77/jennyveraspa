@@ -40,20 +40,70 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
+    // Mapa de migración: URLs del sitio anterior (planas, sin locale) hacia su
+    // equivalente actual. Deben vivir aquí (no en el proxy) porque los
+    // redirects de next.config se evalúan antes que la detección de idioma,
+    // evitando cadenas 307 → 404. Fuente: GSC, páginas legacy con impresiones.
+    const legacyMap: Record<string, string> = {
+      // Servicios
+      '/hifu': '/es/servicios/hifu',
+      '/depilacion-definitiva-con-laser': '/es/servicios/depilacion-laser',
+      '/limpiezas-faciales-profundas': '/es/servicios/limpieza-facial',
+      '/tratamientos-faciales-segun-tipo-de-piel': '/es/servicios/limpieza-facial',
+      '/cirugia-estetica': '/es/servicios',
+      // Blog (slug idéntico)
+      '/tratamientos-de-acne': '/es/blog/tratamientos-de-acne',
+      '/despigmentacion-de-axilas': '/es/blog/despigmentacion-de-axilas',
+      '/despigmentacion-en-zonas-intimas': '/es/blog/despigmentacion-en-zonas-intimas',
+      '/drenaje-linfatico-facial': '/es/blog/drenaje-linfatico-facial',
+      '/drenaje-linfatico-postoperatorio': '/es/blog/drenaje-linfatico-postoperatorio',
+      '/hidratacion-profunda-con-vitamina-c': '/es/blog/hidratacion-profunda-con-vitamina-c',
+      '/plasma-rico-en-plaquetas': '/es/blog/plasma-rico-en-plaquetas',
+      '/tratamiento-intimo-con-hifu': '/es/blog/tratamiento-intimo-con-hifu',
+      '/masajes-relajantes': '/es/blog/masajes-relajantes',
+      '/masajes-relajantes-en-cuenca-ecuador': '/es/blog/masajes-relajantes-en-cuenca-ecuador',
+      '/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional':
+        '/es/blog/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional',
+      '/mejores-tratamientos-corporales-reducir-grasa-localizada-celulitis':
+        '/es/blog/mejores-tratamientos-corporales-reducir-grasa-localizada-celulitis',
+      // Blog (slug equivalente)
+      '/botox': '/es/blog/mitos-y-verdades-sobre-botox',
+      '/todo-sobre-botox-usos-cuidados-costos': '/es/blog/mitos-y-verdades-sobre-botox',
+      '/masaje-relajante': '/es/blog/masajes-relajantes',
+      '/tipos-de-masajes-corporales-beneficios': '/es/blog/masajes-relajantes-en-cuenca-ecuador',
+      '/alternativas-liposuccion-sin-cirugia-criolipolisis-laser-ultrasonido-focalizado':
+        '/es/blog/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional',
+      '/blefaroplastia-en-ecuador': '/es/blog/todo-sobre-blefaroplastia',
+      '/rinoplastia-en-ecuador': '/es/blog/rinoplastia-ecuador-todo-lo-que-necesitas-saber',
+      '/tipos-de-nariz-segun-su-forma-y-estructura-procedimientos-esteticos':
+        '/es/blog/rinoplastia-ecuador-todo-lo-que-necesitas-saber',
+      '/comparativa-lifting-facial-botox-mejor-opcion':
+        '/es/blog/lifting-facial-procedimientos-quirurgicos-opciones-no-invasivas',
+      '/cuidados-postoperatorios-cirugias-esteticas-rinoplastia-liposuccion-blefaroplastia':
+        '/es/blog/tratamientos-post-operatorios',
+      '/diferencias-procedimientos-esteticos-cirugias-plasticas-beneficios-recomendaciones':
+        '/es/blog',
+      '/tratamiento-de-hidratacion-facial-profunda': '/es/blog/hidrataciones-faciales-profundas',
+      // Otras
+      '/agenda-un-cita': '/es/contacto',
+    };
+
     return [
+      ...Object.entries(legacyMap).map(([source, destination]) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
+      // Rutas nuevas compartidas sin prefijo de locale (indexadas por error):
+      // redirect permanente en vez de la negociación 307 del proxy.
       {
-        source: '/hifu',
-        destination: '/servicios/estetica-facial/hifu',
+        source: '/blog/:path*',
+        destination: '/es/blog/:path*',
         permanent: true,
       },
       {
-        source: '/botox',
-        destination: '/servicios/estetica-facial/botox',
-        permanent: true,
-      },
-      {
-        source: '/masaje-relajante',
-        destination: '/servicios/estetica-corporal/masajes-relajantes',
+        source: '/servicios/:path*',
+        destination: '/es/servicios/:path*',
         permanent: true,
       },
     ];

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { LocalBusinessSchema } from "@/components/seo/local-schema";
 import { WebSiteSchema } from "@/components/seo/website-schema";
 import "./globals.css";
@@ -16,7 +17,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Jenny Vera Spa | Centro de Estetica Avanzada en Cuenca",
+    default: "Jenny Vera Spa | Centro de Estética Avanzada en Cuenca",
     template: "%s | Jenny Vera Spa",
   },
   description: "Tratamientos estéticos faciales y corporales, masajes relajantes y cuidados post-operatorios (HIFU, Botox, Drenaje Linfático) en Cuenca, Ecuador.",
@@ -31,10 +32,10 @@ export const metadata: Metadata = {
     siteName: "Jenny Vera Spa",
     images: [
       {
-        url: "/placeholder.png",
+        url: "/image2.webp",
         width: 1200,
-        height: 630,
-        alt: "Jenny Vera Spa",
+        height: 801,
+        alt: "Tratamiento corporal en Jenny Vera Spa, Cuenca",
       },
     ],
   },
@@ -58,6 +59,7 @@ export default function RootLayout({
         <LocalBusinessSchema />
         <WebSiteSchema />
         {children}
+        <Analytics />
       </body>
     </html>
   );
