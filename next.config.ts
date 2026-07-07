@@ -52,15 +52,15 @@ const nextConfig: NextConfig = {
       '/tratamientos-faciales-segun-tipo-de-piel': '/es/servicios/limpieza-facial',
       '/cirugia-estetica': '/es/servicios',
       // Blog (slug idéntico)
-      '/tratamientos-de-acne': '/es/blog/tratamientos-de-acne',
+      '/tratamientos-de-acne': '/es/servicios/tratamiento-acne',
       '/despigmentacion-de-axilas': '/es/blog/despigmentacion-de-axilas',
       '/despigmentacion-en-zonas-intimas': '/es/blog/despigmentacion-en-zonas-intimas',
       '/drenaje-linfatico-facial': '/es/blog/drenaje-linfatico-facial',
       '/drenaje-linfatico-postoperatorio': '/es/blog/drenaje-linfatico-postoperatorio',
       '/hidratacion-profunda-con-vitamina-c': '/es/blog/hidratacion-profunda-con-vitamina-c',
-      '/plasma-rico-en-plaquetas': '/es/blog/plasma-rico-en-plaquetas',
+      '/plasma-rico-en-plaquetas': '/es/servicios/plasma-rico-plaquetas',
       '/tratamiento-intimo-con-hifu': '/es/blog/tratamiento-intimo-con-hifu',
-      '/masajes-relajantes': '/es/blog/masajes-relajantes',
+      '/masajes-relajantes': '/es/servicios/masajes-relajantes',
       '/masajes-relajantes-en-cuenca-ecuador': '/es/blog/masajes-relajantes-en-cuenca-ecuador',
       '/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional':
         '/es/blog/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional',
@@ -69,7 +69,7 @@ const nextConfig: NextConfig = {
       // Blog (slug equivalente)
       '/botox': '/es/blog/mitos-y-verdades-sobre-botox',
       '/todo-sobre-botox-usos-cuidados-costos': '/es/blog/mitos-y-verdades-sobre-botox',
-      '/masaje-relajante': '/es/blog/masajes-relajantes',
+      '/masaje-relajante': '/es/servicios/masajes-relajantes',
       '/tipos-de-masajes-corporales-beneficios': '/es/blog/masajes-relajantes-en-cuenca-ecuador',
       '/alternativas-liposuccion-sin-cirugia-criolipolisis-laser-ultrasonido-focalizado':
         '/es/blog/lipoescultura-sin-cirugia-tratamientos-efectivos-comparativa-liposuccion-tradicional',
