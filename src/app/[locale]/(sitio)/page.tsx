@@ -10,7 +10,7 @@ type LocalizedHomeProps = {
 
 const homeMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Centro de Estetica Avanzada en Cuenca",
+    title: "Centro de Estética Avanzada en Cuenca",
     description:
       "Tratamientos estéticos faciales y corporales, masajes relajantes y cuidados post-operatorios en Cuenca, Ecuador. Tecnología avanzada y atención personalizada.",
   },

@@ -13,78 +13,78 @@ const homeCopy = {
     heroTitle: "Belleza que te",
     heroAccent: "mira de frente",
     heroText:
-      "Tu primera impresion importa. Por eso abrimos con una mirada directa: confianza, tecnica y una experiencia sensorial disenada para que te sientas segura desde el primer minuto.",
+      "Tu primera impresión importa. Por eso abrimos con una mirada directa: confianza, técnica y una experiencia sensorial diseñada para que te sientas segura desde el primer minuto.",
     heroPrimaryCta: "Agenda tu cita",
     heroSecondaryCta: "Ver tratamientos",
     heroStatText: "Clientes felices en tratamientos faciales y corporales",
-    trustItems: ["Diagnostico Pro", "Tecnologia Segura", "Ritual Sensorial"],
+    trustItems: ["Diagnóstico Pro", "Tecnología Segura", "Ritual Sensorial"],
     imageCaption:
       "Cada protocolo se adapta a tu historia: piel, ritmo de vida y objetivos reales.",
     signatureEyebrow: "Nuestra firma",
-    signatureTitle: "Ciencia estetica con tacto",
+    signatureTitle: "Ciencia estética con tacto",
     signatureAccent: "humano y honesto.",
     signatureText:
-      "Disenamos experiencias completas: evaluacion profesional, protocolos personalizados y seguimiento para que cada sesion genere resultados visibles y sostenibles.",
+      "Diseñamos experiencias completas: evaluación profesional, protocolos personalizados y seguimiento para que cada sesión genere resultados visibles y sostenibles.",
     signaturePills: [
       "Faciales avanzados y rejuvenecimiento",
-      "Drenaje, relajacion y armonia corporal",
-      "Tecnologia de ultima generacion",
-      "Atencion personalizada de inicio a fin",
+      "Drenaje, relajación y armonía corporal",
+      "Tecnología de última generación",
+      "Atención personalizada de inicio a fin",
     ],
     experienceEyebrow: "Experiencia Jenny Vera",
     experienceTitle: "Un recorrido pensado para que te sientas cuidada de principio a fin.",
     stepLabel: "Paso",
     experienceSteps: [
-      "Diagnostico inicial con objetivos claros",
+      "Diagnóstico inicial con objetivos claros",
       "Plan de tratamiento adaptado a ti",
       "Seguimiento y ajustes inteligentes",
     ],
     blogEyebrow: "Nuestro Blog",
     blogTitle: "Journal",
-    blogAllCta: "Ver todos los articulos",
+    blogAllCta: "Ver todos los artículos",
     testimonialsEyebrow: "Los testimonios",
     testimonialsTitle: "Voces de Confianza",
-    finalTitle: "Tu mejor version comienza aqui",
-    finalText: "Agenda tu cita hoy y dejanos cuidar de ti con la excelencia que mereces.",
+    finalTitle: "Tu mejor versión comienza aquí",
+    finalText: "Agenda tu cita hoy y déjanos cuidar de ti con la excelencia que mereces.",
     finalCta: "Configura tu cita",
     faqEyebrow: "Preguntas frecuentes",
     faqTitle: "Lo que necesitas saber",
     faqs: [
       {
-        question: "Donde esta ubicado Jenny Vera Spa?",
+        question: "¿Dónde está ubicado Jenny Vera Spa?",
         answer:
-          "Estamos en Cuenca, Ecuador, en el Edificio Plaza Medica, 4to piso, sobre la Av. Manuel de J. Calle y Paucarbamba.",
+          "Estamos en Cuenca, Ecuador, en el Edificio Plaza Médica, 4to piso, sobre la Av. Manuel de J. Calle y Paucarbamba.",
       },
       {
-        question: "Que tratamientos ofrecen?",
+        question: "¿Qué tratamientos ofrecen?",
         answer:
-          "Ofrecemos faciales avanzados, depilacion laser, HIFU, tratamiento de manchas, drenaje linfatico postoperatorio, exosomas, masajes reductores y mas tecnologia estetica de ultima generacion.",
+          "Ofrecemos faciales avanzados, depilación láser, HIFU, tratamiento de manchas, drenaje linfático postoperatorio, exosomas, masajes reductores y más tecnología estética de última generación.",
       },
       {
-        question: "Atienden en ingles?",
+        question: "¿Atienden en inglés?",
         answer:
-          "Si. Atendemos en espanol e ingles, incluyendo a la comunidad expat de Cuenca, para que recibas una experiencia clara y comoda en tu idioma.",
+          "Sí. Atendemos en español e inglés, incluyendo a la comunidad expat de Cuenca, para que recibas una experiencia clara y cómoda en tu idioma.",
       },
       {
-        question: "Como agendo una cita?",
+        question: "¿Cómo agendo una cita?",
         answer:
-          "Puedes escribirnos por WhatsApp o completar el formulario de contacto. Toda atencion comienza con una valoracion personalizada para recomendarte el tratamiento ideal.",
+          "Puedes escribirnos por WhatsApp o completar el formulario de contacto. Toda atención comienza con una valoración personalizada para recomendarte el tratamiento ideal.",
       },
     ],
     testimonials: [
       {
         name: "Carolina M.",
-        text: "La atencion de Jenny es inigualable. El tratamiento facial cambio mi piel por completo.",
+        text: "La atención de Jenny es inigualable. El tratamiento facial cambió mi piel por completo.",
         rating: 5,
       },
       {
         name: "Andrea R.",
-        text: "Un lugar magico en Cuenca. Los masajes relajantes son una experiencia de otro nivel.",
+        text: "Un lugar mágico en Cuenca. Los masajes relajantes son una experiencia de otro nivel.",
         rating: 5,
       },
       {
         name: "Gabriela S.",
-        text: "Profesionalismo y calidez. Me senti segura durante todo mi proceso post-operatorio.",
+        text: "Profesionalismo y calidez. Me sentí segura durante todo mi proceso post-operatorio.",
         rating: 5,
       },
     ],
@@ -210,7 +210,7 @@ export default function HomePage({ posts, locale = "es" }: HomePageProps) {
             </span>
 
             <h1 className="font-serif text-5xl leading-[0.95] text-[#f8f5ef] sm:text-6xl lg:text-7xl">
-              {copy.heroTitle}
+              {copy.heroTitle}{" "}
               <span className="block italic text-[#f0cd73]">{copy.heroAccent}</span>
             </h1>
 

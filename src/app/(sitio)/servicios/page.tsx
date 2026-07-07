@@ -27,12 +27,12 @@ const featuredTreatmentsByLocale: Record<Locale, { heading: string; treatments: 
   es: {
     heading: "Tratamientos destacados",
     treatments: [
-      { slug: "hifu", name: "HIFU (lifting sin cirugia)" },
-      { slug: "depilacion-laser", name: "Depilacion laser" },
+      { slug: "hifu", name: "HIFU (lifting sin cirugía)" },
+      { slug: "depilacion-laser", name: "Depilación láser" },
       { slug: "limpieza-facial", name: "Limpieza facial profunda" },
       { slug: "manchas", name: "Tratamiento de manchas" },
       { slug: "drenaje-postoperatorio", name: "Drenaje postoperatorio" },
-      { slug: "eliminacion-lunares", name: "Eliminacion de lunares" },
+      { slug: "eliminacion-lunares", name: "Eliminación de lunares" },
       { slug: "exosomas", name: "Exosomas" },
       { slug: "masajes-reductores", name: "Masajes reductores" },
     ],
@@ -101,14 +101,14 @@ const servicesByLocale: Record<Locale, ServicesData> = {
       eyebrow: "Nuestros Tratamientos",
       title: "Servicios Que Cuidan Tu Belleza",
       subtitle:
-        "Seleccionamos nuestros tratamientos mas solicitados para que encuentres opciones claras, efectivas y adaptadas a tus objetivos.",
+        "Seleccionamos nuestros tratamientos más solicitados para que encuentres opciones claras, efectivas y adaptadas a tus objetivos.",
       specialty: "Especialidad",
-      scheduleEvaluation: "Agendar Evaluacion",
-      personalizedEval: "Evaluacion Personalizada",
+      scheduleEvaluation: "Agendar Evaluación",
+      personalizedEval: "Evaluación Personalizada",
       idealProtocol: "Te ayudamos a elegir el protocolo ideal para ti",
       finalText:
-        "Agenda tu cita y recibe una recomendacion profesional segun tu tipo de piel, objetivos y estilo de vida.",
-      finalCta: "Quiero mi valoracion",
+        "Agenda tu cita y recibe una recomendación profesional según tu tipo de piel, objetivos y estilo de vida.",
+      finalCta: "Quiero mi valoración",
       stepLabel: "Paso",
     },
     categories: [
@@ -121,31 +121,31 @@ const servicesByLocale: Record<Locale, ServicesData> = {
         services: [
           {
             name: "Limpieza Facial Profunda",
-            benefit: "Purifica poros y mejora textura desde la primera sesion.",
+            benefit: "Purifica poros y mejora textura desde la primera sesión.",
           },
           {
-            name: "Hidratacion Profunda con Vitamina C",
+            name: "Hidratación Profunda con Vitamina C",
             benefit: "Aporta luminosidad y suavidad en pieles opacas.",
           },
           {
             name: "Tratamiento de Manchas",
-            benefit: "Unifica el tono y reduce pigmentacion localizada.",
+            benefit: "Unifica el tono y reduce pigmentación localizada.",
           },
           {
-            name: "Control de Acne y Piel Grasa",
+            name: "Control de Acné y Piel Grasa",
             benefit: "Disminuye brotes activos y regula el exceso de sebo.",
           },
           {
             name: "Rejuvenecimiento Facial con HIFU",
-            benefit: "Efecto tensor sin cirugia para redefinir contornos.",
+            benefit: "Efecto tensor sin cirugía para redefinir contornos.",
           },
           {
             name: "Plasma Rico en Plaquetas",
-            benefit: "Estimula regeneracion natural para una piel revitalizada.",
+            benefit: "Estimula regeneración natural para una piel revitalizada.",
           },
           {
             name: "Mesoterapia Facial",
-            benefit: "Nutricion intensiva para piel mas firme y uniforme.",
+            benefit: "Nutrición intensiva para piel más firme y uniforme.",
           },
           {
             name: "Tratamiento de Ojeras",
@@ -156,7 +156,7 @@ const servicesByLocale: Record<Locale, ServicesData> = {
       {
         category: "Corporales y Bienestar",
         description:
-          "Tratamientos disenados para relajar, moldear y recuperar bienestar corporal con enfoque integral.",
+          "Tratamientos diseñados para relajar, moldear y recuperar bienestar corporal con enfoque integral.",
         img: "/images/unsplash/photo-1544161515-4ab6ce6db874.webp",
         icon: Hand,
         services: [
@@ -166,43 +166,43 @@ const servicesByLocale: Record<Locale, ServicesData> = {
           },
           {
             name: "Masajes Reductores",
-            benefit: "Favorecen modelado corporal y mejoran circulacion.",
+            benefit: "Favorecen modelado corporal y mejoran circulación.",
           },
           {
-            name: "Lineas de Expresion",
-            benefit: "Atenua marcas finas para un rostro mas descansado.",
+            name: "Líneas de Expresión",
+            benefit: "Atenúa marcas finas para un rostro más descansado.",
           },
           {
-            name: "Drenaje Linfatico Facial",
-            benefit: "Reduce inflamacion y mejora definicion del contorno.",
+            name: "Drenaje Linfático Facial",
+            benefit: "Reduce inflamación y mejora definición del contorno.",
           },
         ],
       },
       {
-        category: "Laser y Zonas Especificas",
+        category: "Láser y Zonas Específicas",
         description:
-          "Tecnologia laser para depilacion, renovacion y despigmentacion en zonas estrategicas.",
+          "Tecnología láser para depilación, renovación y despigmentación en zonas estrategicas.",
         img: "/images/unsplash/photo-1512290923902-8a9f81dc236c.webp",
         icon: ScanLine,
         services: [
           {
-            name: "Depilacion Definitiva con Laser Diodo",
+            name: "Depilación Definitiva con Láser Diodo",
             benefit: "Disminuye el vello de forma progresiva y duradera.",
           },
           {
-            name: "Carbon Activo con Laser",
+            name: "Carbón Activo con Láser",
             benefit: "Limpia, ilumina y mejora visiblemente la textura.",
           },
           {
-            name: "HIFU Intimo",
-            benefit: "Reafirma tejidos y mejora confort en zona intima.",
+            name: "HIFU Íntimo",
+            benefit: "Reafirma tejidos y mejora confort en zona íntima.",
           },
           {
-            name: "Despigmentacion de Zonas Intimas",
-            benefit: "Aclara de forma gradual para un tono mas uniforme.",
+            name: "Despigmentación de Zonas Íntimas",
+            benefit: "Aclara de forma gradual para un tono más uniforme.",
           },
           {
-            name: "Despigmentacion de Axilas",
+            name: "Despigmentación de Axilas",
             benefit: "Reduce oscurecimiento y homogeneiza el color.",
           },
         ],
@@ -210,45 +210,45 @@ const servicesByLocale: Record<Locale, ServicesData> = {
       {
         category: "Post-Operatorios",
         description:
-          "Acompanamiento especializado para acelerar recuperacion y potenciar resultados esteticos.",
+          "Acompañamiento especializado para acelerar recuperación y potenciar resultados estéticos.",
         img: "/images/unsplash/photo-1576091160550-2173dba999ef.webp",
         icon: ShieldCheck,
         services: [
           {
-            name: "Post Operatorios de Cirugias Esteticas",
-            benefit: "Controla inflamacion y favorece una recuperacion segura.",
+            name: "Post Operatorios de Cirugías Estéticas",
+            benefit: "Controla inflamación y favorece una recuperación segura.",
           },
           {
-            name: "Drenajes Linfaticos Postoperatorios",
-            benefit: "Ayudan a desinflamar y mejorar la evolucion postquirurgica.",
+            name: "Drenajes Linfáticos Postoperatorios",
+            benefit: "Ayudan a desinflamar y mejorar la evolución postquirúrgica.",
           },
         ],
       },
       {
         category: "Tratamientos con Láser",
         description:
-          "Soluciones laser avanzadas para cicatrices de acne, rejuvenecimiento y zonas especificas con resultados de precision.",
+          "Soluciones láser avanzadas para cicatrices de acné, rejuvenecimiento y zonas específicas con resultados de precision.",
         img: "/images/unsplash/photo-1570172619644-dfd03ed5d881.webp",
         icon: Zap,
         services: [
           {
             name: "CO2 Fraccionado",
-            benefit: "Trata cicatrices de acne y rejuvenece la piel con resurfacing de precision.",
+            benefit: "Trata cicatrices de acné y rejuvenece la piel con resurfacing de precision.",
           },
           {
-            name: "Laser para Eliminacion de Lunares",
-            benefit: "Elimina lunares de forma segura y con minima cicatrizacion.",
+            name: "Láser para Eliminación de Lunares",
+            benefit: "Elimina lunares de forma segura y con mínima cicatrización.",
           },
           {
-            name: "Laser Intimo",
-            benefit: "Reafirma y rejuvenece la zona intima sin cirugia.",
+            name: "Láser Íntimo",
+            benefit: "Reafirma y rejuvenece la zona íntima sin cirugía.",
           },
         ],
       },
       {
-        category: "Tecnologia Facial y Corporal",
+        category: "Tecnología Facial y Corporal",
         description:
-          "Equipos premium de ultima generacion para lifting, tensado y modelado corporal sin procedimientos invasivos.",
+          "Equipos premium de última generación para lifting, tensado y modelado corporal sin procedimientos invasivos.",
         img: "/images/unsplash/photo-1612817288484-6f916006741a.webp",
         icon: Cpu,
         services: [
@@ -258,48 +258,48 @@ const servicesByLocale: Record<Locale, ServicesData> = {
           },
           {
             name: "Exilis Ultra 360",
-            benefit: "Rejuvenecimiento facial y reduccion de grasa con radiofrecuencia y ultrasonido combinados.",
+            benefit: "Rejuvenecimiento facial y reducción de grasa con radiofrecuencia y ultrasonido combinados.",
           },
         ],
       },
       {
         category: "Medicina Regenerativa y Rejuvenecimiento",
         description:
-          "Regeneracion celular avanzada para resultados profundos, duraderos y naturales desde el interior.",
+          "Regeneración celular avanzada para resultados profundos, duraderos y naturales desde el interior.",
         img: "/images/unsplash/photo-1552693673-1bf958298935.webp",
         icon: FlaskConical,
         services: [
           {
             name: "Tratamientos con Exosomas",
-            benefit: "Estimulan la renovacion celular para una piel mas joven y luminosa.",
+            benefit: "Estimulan la renovación celular para una piel más joven y luminosa.",
           },
           {
-            name: "PDRN de Salmon",
-            benefit: "Rejuvenecimiento celular profundo con bioestimulacion natural de origen marino.",
+            name: "PDRN de Salmón",
+            benefit: "Rejuvenecimiento celular profundo con bioestimulación natural de origen marino.",
           },
           {
             name: "Microneedling (Dermapen)",
-            benefit: "Activa la produccion de colageno para mejorar textura y firmeza de la piel.",
+            benefit: "Activa la producción de colágeno para mejorar textura y firmeza de la piel.",
           },
           {
-            name: "Tratamientos con Celulas Madre",
-            benefit: "Regeneracion tisular avanzada para resultados antiedad duraderos.",
+            name: "Tratamientos con Células Madre",
+            benefit: "Regeneración tisular avanzada para resultados antiedad duraderos.",
           },
         ],
       },
       {
-        category: "Hidratacion y Skin Boosters",
+        category: "Hidratación y Skin Boosters",
         description:
-          "Hidratacion profunda e inteligente con activos premium para una piel radiante y saludable.",
+          "Hidratación profunda e inteligente con activos premium para una piel radiante y saludable.",
         img: "/images/unsplash/photo-1526758097130-bab247274f58.webp",
         icon: Droplets,
         services: [
           {
-            name: "Hidratacion Profunda con Exosomas",
-            benefit: "Repone agua y nutrientes celulares para maxima luminosidad y vitalidad.",
+            name: "Hidratación Profunda con Exosomas",
+            benefit: "Repone agua y nutrientes celulares para máxima luminosidad y vitalidad.",
           },
           {
-            name: "Hidratacion con PDRN",
+            name: "Hidratación con PDRN",
             benefit: "Revitaliza y sella la hidratacion con factor de crecimiento celular.",
           },
         ],

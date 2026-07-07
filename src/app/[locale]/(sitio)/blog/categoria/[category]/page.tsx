@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { BlogListingSection } from "@/components/shared/blog-listing-section";
 import { getAllPosts } from "@/lib/blog-content";
-import { getBlogListingState } from "@/lib/blog-listing";
+import { getBlogListingState, slugifyCategory } from "@/lib/blog-listing";
 import { getLocaleAlternates, isValidLocale, withLocalePath } from "@/lib/i18n";
 
 type BlogCategoryPageProps = {
@@ -23,14 +23,17 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
     return {};
   }
 
-  const categoryTitle = titleFromCategorySlug(category);
+  // Usa el nombre real de la categoría (con tildes) cuando exista un post que
+  // la declare; el slug des-slugificado queda solo como respaldo.
+  const posts = await getAllPosts(locale);
+  const realCategoryName = posts
+    .map((post) => post.category)
+    .find((name) => name && slugifyCategory(name) === category);
+  const categoryTitle = realCategoryName ?? titleFromCategorySlug(category);
   const alternates = getLocaleAlternates(locale, `/blog/categoria/${category}`);
 
   return {
-    title:
-      locale === "es"
-        ? `${categoryTitle} | Blog Jenny Vera Spa`
-        : `${categoryTitle} | Jenny Vera Spa Blog`,
+    title: `${categoryTitle} — Blog`,
     description:
       locale === "es"
         ? `Guías profesionales sobre ${categoryTitle.toLowerCase()} en Jenny Vera Spa. Tratamientos, consejos de expertos y cuidados para tomar mejores decisiones sobre tu bienestar.`

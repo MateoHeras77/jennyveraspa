@@ -9,9 +9,9 @@ type LocalizedPrivacidadProps = {
 
 const privacidadMetadataByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Politica de Privacidad | Jenny Vera Spa",
+    title: "Política de Privacidad | Jenny Vera Spa",
     description:
-      "Conoce como Jenny Vera Spa recopila, usa y protege tus datos personales conforme a la Ley de Proteccion de Datos del Ecuador.",
+      "Conoce cómo Jenny Vera Spa recopila, usa y protege tus datos personales conforme a la Ley de Protección de Datos del Ecuador.",
   },
   en: {
     title: "Privacy Policy | Jenny Vera Spa",
