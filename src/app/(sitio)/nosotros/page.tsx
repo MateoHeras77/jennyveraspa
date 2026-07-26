@@ -74,7 +74,7 @@ const copy = {
     locationTitle: "Dónde Encontrarnos",
     address: "Edificio Plaza Médica, 4to piso\nAv. Manuel de J. Calle, Cuenca, Ecuador",
     phone: "+593 96 939 5353",
-    hours: "Lunes a Viernes: 09:00 – 18:00\nSábados: 09:00 – 13:00",
+    hours: "Lunes a Sábado: 08:00 – 19:00",
     ctaTitle: "Tu mejor versión comienza aquí",
     ctaText:
       "Agenda tu evaluación personalizada y descubre el tratamiento ideal para ti. Estamos listas para acompañarte.",
@@ -146,7 +146,7 @@ const copy = {
     locationTitle: "Where to Find Us",
     address: "Edificio Plaza Médica, 4th floor\nAv. Manuel de J. Calle, Cuenca, Ecuador",
     phone: "+593 96 939 5353",
-    hours: "Monday to Friday: 09:00 – 18:00\nSaturday: 09:00 – 13:00",
+    hours: "Monday to Saturday: 08:00 – 19:00",
     ctaTitle: "Your best self starts here",
     ctaText:
       "Schedule your personalized evaluation and discover the ideal treatment for you. We are ready to accompany you.",
