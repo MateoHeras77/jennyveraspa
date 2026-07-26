@@ -11,7 +11,7 @@ const copy = {
     badge: "Legal",
     title: "Política de Privacidad",
     subtitle: "Jenny Vera Spa se compromete a proteger la privacidad y los datos personales de sus clientes y visitantes.",
-    lastUpdated: "Última actualización: abril de 2026",
+    lastUpdated: "Última actualización: julio de 2026",
     sections: [
       {
         icon: "FileText",
@@ -49,13 +49,14 @@ const copy = {
       },
       {
         icon: "Shield",
-        title: "4. No Compartimos sus Datos",
+        title: "4. Con Quién Compartimos sus Datos",
         content: [
-          "Jenny Vera Spa no vende, alquila ni transfiere sus datos personales a terceros con fines comerciales.",
-          "Sus datos únicamente pueden ser compartidos en los siguientes supuestos excepcionales:",
-          "• Con proveedores de servicios tecnológicos que nos asisten en la operación del sitio web (como servicios de correo electrónico transaccional), bajo estrictos acuerdos de confidencialidad.",
+          "Jenny Vera Spa no vende ni alquila sus datos personales a terceros.",
+          "Los datos que usted nos facilita voluntariamente a través del formulario de contacto (nombre, teléfono, correo electrónico y servicio de interés) no se comparten con plataformas publicitarias ni con redes sociales.",
+          "Sus datos únicamente pueden ser compartidos en los siguientes supuestos:",
+          "• Con proveedores de servicios tecnológicos que nos asisten en la operación del sitio web (como servicios de correo electrónico transaccional y de alojamiento), bajo estrictos acuerdos de confidencialidad.",
+          "• Con Meta Platforms, Inc., que recibe datos de navegación (páginas visitadas, dirección IP e identificadores de cookie) a través del píxel de seguimiento descrito en la sección 8, con fines de medición publicitaria. Esta transferencia no incluye los datos del formulario de contacto.",
           "• Cuando sea requerido por autoridades competentes en cumplimiento de obligaciones legales vigentes en Ecuador.",
-          "En ningún caso sus datos serán cedidos a empresas de publicidad, marketing o a terceras partes con fines ajenos a los descritos en esta política.",
         ],
       },
       {
@@ -95,8 +96,11 @@ const copy = {
         icon: "FileText",
         title: "8. Cookies y Tecnologías de Seguimiento",
         content: [
-          "Nuestro sitio web puede utilizar cookies técnicas necesarias para su correcto funcionamiento. Estas cookies no recopilan información personal identificable y son estrictamente necesarias para la operación del sitio.",
-          "En caso de utilizar cookies analíticas o de seguimiento adicionales, le informaremos mediante un aviso de cookies y solicitaremos su consentimiento previo.",
+          "Nuestro sitio web utiliza cookies técnicas necesarias para su correcto funcionamiento. Estas cookies no recopilan información personal identificable y son estrictamente necesarias para la operación del sitio.",
+          "Utilizamos además las siguientes tecnologías de medición:",
+          "• Analítica de tráfico: registramos de forma agregada las páginas visitadas, el país de origen y el tipo de dispositivo, sin identificar a visitantes concretos.",
+          "• Píxel de Meta (Facebook e Instagram): instala la cookie «_fbp» y comunica a Meta Platforms, Inc. las páginas que usted visita en este sitio, incluida la solicitud de contacto por WhatsApp. Lo empleamos para medir el rendimiento de nuestra publicidad y para mostrar anuncios a personas que ya han visitado nuestro sitio web.",
+          "Puede oponerse a este seguimiento en cualquier momento: bloqueando o eliminando las cookies desde la configuración de su navegador, activando el modo de navegación privada, o ajustando sus preferencias de anuncios en su cuenta de Facebook o Instagram. Bloquear estas cookies no afecta al funcionamiento del sitio ni a su capacidad de contactarnos.",
         ],
       },
       {
@@ -124,7 +128,7 @@ const copy = {
     badge: "Legal",
     title: "Privacy Policy",
     subtitle: "Jenny Vera Spa is committed to protecting the privacy and personal data of its clients and visitors.",
-    lastUpdated: "Last updated: April 2026",
+    lastUpdated: "Last updated: July 2026",
     sections: [
       {
         icon: "FileText",
@@ -162,13 +166,14 @@ const copy = {
       },
       {
         icon: "Shield",
-        title: "4. We Do Not Share Your Data",
+        title: "4. Who We Share Your Data With",
         content: [
-          "Jenny Vera Spa does not sell, rent, or transfer your personal data to third parties for commercial purposes.",
-          "Your data may only be shared in the following exceptional circumstances:",
-          "• With technology service providers who assist us in operating the website (such as transactional email services), under strict confidentiality agreements.",
+          "Jenny Vera Spa does not sell or rent your personal data to third parties.",
+          "The data you voluntarily provide through our contact form (name, phone number, email address and service of interest) is not shared with advertising platforms or social networks.",
+          "Your data may only be shared in the following circumstances:",
+          "• With technology service providers who assist us in operating the website (such as transactional email and hosting services), under strict confidentiality agreements.",
+          "• With Meta Platforms, Inc., which receives browsing data (pages visited, IP address and cookie identifiers) through the tracking pixel described in section 8, for advertising measurement purposes. This transfer does not include contact form data.",
           "• When required by competent authorities in compliance with legal obligations in force in Ecuador.",
-          "Under no circumstances will your data be transferred to advertising, marketing companies, or third parties for purposes other than those described in this policy.",
         ],
       },
       {
@@ -208,8 +213,11 @@ const copy = {
         icon: "FileText",
         title: "8. Cookies and Tracking Technologies",
         content: [
-          "Our website may use technical cookies necessary for its proper functioning. These cookies do not collect personally identifiable information and are strictly necessary for the site's operation.",
-          "If we use additional analytical or tracking cookies, we will inform you through a cookie notice and request your prior consent.",
+          "Our website uses technical cookies necessary for its proper functioning. These cookies do not collect personally identifiable information and are strictly necessary for the site's operation.",
+          "We also use the following measurement technologies:",
+          "• Traffic analytics: we record, in aggregate form, the pages visited, country of origin and device type, without identifying individual visitors.",
+          "• Meta Pixel (Facebook and Instagram): it sets the \"_fbp\" cookie and reports to Meta Platforms, Inc. which pages you visit on this site, including requests to contact us via WhatsApp. We use it to measure the performance of our advertising and to show ads to people who have already visited our website.",
+          "You can opt out of this tracking at any time: by blocking or deleting cookies in your browser settings, using private browsing mode, or adjusting your ad preferences in your Facebook or Instagram account. Blocking these cookies does not affect the operation of the site or your ability to contact us.",
         ],
       },
       {

@@ -9,6 +9,14 @@ export const SOCIAL_FACEBOOK_URL = "https://www.facebook.com/JennyVeraSpa/";
 export const SOCIAL_TIKTOK_URL = "https://www.tiktok.com/@jennyveraspa";
 export const GOOGLE_REVIEW_URL = "https://g.page/r/Cbso4rpRXTOYEAI";
 
+/**
+ * Pixel de Meta (dataset "WebsitePixel" de la cuenta act_1661223548424128).
+ * Vive aquí y no en una variable de entorno porque no es un secreto: viaja en
+ * el HTML que se sirve al navegador. El renderizado se limita a producción
+ * desde `layout.tsx` para que desarrollo y previews no ensucien los datos.
+ */
+export const META_PIXEL_ID = "882066591229888";
+
 export const WHATSAPP_CONTACT_URL =
   "https://api.whatsapp.com/send/?phone=593999152853&text=%C2%A1Hola+desde+JennyVeraSpa+en+Cuenca%2C+Ecuador%21+%C2%BFC%C3%B3mo+podemos+ayudarte+hoy+con+nuestros+tratamientos+%3F+Estamos+aqu%C3%AD+para+ofrecerte+la+mejor+experiencia+de+spa.+%C2%A1Escr%C3%ADbenos+y+programa+tu+cita+ahora+mismo%21&type=phone_number&app_absent=0";
 

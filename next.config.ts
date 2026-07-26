@@ -25,7 +25,12 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self';",
+            // `connect.facebook.net` está permitido explícitamente para el Pixel
+            // de Meta: sin esta excepción el navegador bloquea fbevents.js y el
+            // Pixel queda instalado pero mudo (no se registra ni un PageView).
+            // Vercel Analytics no la necesita porque se sirve desde el propio
+            // dominio (/_vercel/insights/script.js) y ya entra por 'self'.
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self';",
           },
           {
             key: 'X-Content-Type-Options',

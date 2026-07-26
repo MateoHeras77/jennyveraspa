@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { LocalBusinessSchema } from "@/components/seo/local-schema";
 import { WebSiteSchema } from "@/components/seo/website-schema";
+import { MetaPixel } from "@/components/seo/meta-pixel";
 import "./globals.css";
 
 const inter = Inter({
@@ -60,6 +61,9 @@ export default function RootLayout({
         <WebSiteSchema />
         {children}
         <Analytics />
+        {/* Solo en producción: los builds locales y los previews de Vercel
+            contaminarían el público del Pixel con tráfico que no es de clientes. */}
+        {process.env.NODE_ENV === "production" ? <MetaPixel /> : null}
       </body>
     </html>
   );

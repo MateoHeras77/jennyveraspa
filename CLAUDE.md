@@ -39,6 +39,19 @@ Sitio web de un centro de estética/spa en Cuenca, Ecuador (Edificio Plaza Médi
 - **Google Search Console**: cuenta de servicio `seo-claude@primeflight.iam.gserviceaccount.com`, clave en `~/.config/claude-seo/service_account.json`, propiedad `sc-domain:jennyveraspa.com`, permiso completo. Consultar vía API REST (`webmasters/v3`); requiere venv con `google-auth` + `requests`.
 - Ahrefs MCP conectado pero el plan NO cubre la API (solo el DR gratuito funciona).
 
+### Meta Ads CLI — SOLO LECTURA (regla dura)
+
+> **PROHIBIDO gastar dinero.** Está terminantemente prohibido crear, modificar, pausar, activar o eliminar campañas, ad sets, anuncios, creatividades, presupuestos o públicos. El CLI se usa **exclusivamente para analítica**. Todo cambio en la cuenta publicitaria lo ejecuta el equipo de marketing; nuestro papel es medir y recomendar.
+
+- Comandos permitidos: `meta auth status`, `meta ads <recurso> list`, `meta ads <recurso> get`, `meta ads insights get`.
+- Comandos prohibidos: cualquier `create`, `update`, `delete`, y cualquier flag de presupuesto o de estado.
+- Instalado con `uv tool install --python 3.13 meta-ads` (PyPI `meta-ads`, **no** npm; el binario se llama `meta`). Requiere Python 3.12/3.13 — la máquina tiene 3.14, por eso el `--python`.
+- **Token**: `~/.config/meta/credentials` contiene el **token pelado**, NO `ACCESS_TOKEN=…`. Si se escribe en formato dotenv, `meta auth status` responde "Authenticated" igualmente pero toda llamada real falla con *API error (190): Malformed access token*. `auth status` no valida contra la API — verificar siempre con `meta ads adaccount list`.
+- `AD_ACCOUNT_ID=act_1661223548424128` exportado en `~/.bashrc` (no se lee de `~/.config/meta/`).
+- El flag de salida JSON es **global y va antes del subcomando**: `meta --output json ads adset get <id> --fields …`.
+- `meta ads insights get` no tiene `--level`: se filtra con `--campaign-id`/`--adset-id`/`--ad-id` y se segmenta con `--breakdown` (age, gender, country, publisher_platform, device_platform, platform_position, impression_device).
+- Cuenta: `act_1661223548424128`. Página de Facebook: `1504934889727982`. Pixel: `WebsitePixel` `882066591229888`.
+
 ## Flujo de trabajo
 
 1. Cambios en rama de trabajo → `npm run build` (debe salir 0) → `npm run start -p <puerto>` y verificar con curl (títulos, 200s, redirects, schema).
