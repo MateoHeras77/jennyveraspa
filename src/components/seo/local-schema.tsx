@@ -11,6 +11,12 @@ export function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "HealthAndBeautyBusiness",
     "name": "Jenny Vera Spa",
+    // Nombre tal como figura en Google Business Profile. Se declara aquí para
+    // que Google reconozca ambas formas como la misma entidad sin tener que
+    // renombrar la ficha (renombrarla dispara reverificación) ni la marca del
+    // sitio (el template de title añade "| <marca>": una marca larga trunca
+    // todos los títulos en el SERP).
+    "alternateName": "Jenny Vera Estética Profesional & Spa",
     "image": "https://www.jennyveraspa.com/image2.webp",
     "@id": "https://www.jennyveraspa.com",
     "url": "https://www.jennyveraspa.com",
