@@ -12,7 +12,7 @@ import { blogMdxComponents } from "@/components/shared/blog-mdx";
 import { BlogCard } from "@/components/shared/blog-card";
 import { getPostBySlug, toAbsoluteUrl } from "@/lib/blog-content";
 import { getAllServiceSlugs, getServiceBySlug } from "@/lib/services-content";
-import { WHATSAPP_CONTACT_URL } from "@/lib/constants";
+import { whatsappBridgePath } from "@/lib/constants";
 import {
   getLocaleAlternates,
   isValidLocale,
@@ -135,9 +135,9 @@ export default async function LocalizedServiceDetailPage({ params }: ServicePage
           <p className="mt-5 max-w-2xl text-lg font-light leading-8 text-white/85">{service.summary}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href={WHATSAPP_CONTACT_URL}
+              href={whatsappBridgePath(locale, "servicio-hero")}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="inline-flex items-center gap-2 rounded-sm bg-[#D4AF37] px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#111111] transition-colors hover:bg-[#F3E5AB]"
             >
               <MessageCircle size={16} />
@@ -207,9 +207,9 @@ export default async function LocalizedServiceDetailPage({ params }: ServicePage
             </p>
           </div>
           <a
-            href={WHATSAPP_CONTACT_URL}
+            href={whatsappBridgePath(locale, "servicio-cta")}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="whitespace-nowrap rounded-sm bg-[#D4AF37] px-7 py-3 text-sm uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#b5952f]"
           >
             {ctaPrimary}

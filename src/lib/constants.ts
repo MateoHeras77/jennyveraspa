@@ -12,6 +12,21 @@ export const GOOGLE_REVIEW_URL = "https://g.page/r/Cbso4rpRXTOYEAI";
 export const WHATSAPP_CONTACT_URL =
   "https://api.whatsapp.com/send/?phone=593999152853&text=%C2%A1Hola+desde+JennyVeraSpa+en+Cuenca%2C+Ecuador%21+%C2%BFC%C3%B3mo+podemos+ayudarte+hoy+con+nuestros+tratamientos+%3F+Estamos+aqu%C3%AD+para+ofrecerte+la+mejor+experiencia+de+spa.+%C2%A1Escr%C3%ADbenos+y+programa+tu+cita+ahora+mismo%21&type=phone_number&app_absent=0";
 
+/**
+ * Ruta puente hacia WhatsApp. Los enlaces del sitio apuntan aquí en vez de ir
+ * directo a api.whatsapp.com: la visita a esta página queda registrada en
+ * Vercel Analytics (los pageviews son gratuitos; los eventos personalizados de
+ * `track()` exigen plan Pro y devuelven 402), de modo que se puede contar
+ * cuántos clics a WhatsApp genera el sitio. El `utm_source` llega a Analytics
+ * como dimensión `utmSource` y permite separar el origen del clic.
+ *
+ * Consulta:
+ *   npx vercel@latest api "/v1/query/web-analytics/visits/count?projectId=…&filter=requestPath eq '/es/whatsapp'"
+ */
+export function whatsappBridgePath(locale: string, source: string): string {
+  return `/${locale}/whatsapp?utm_source=${encodeURIComponent(source)}`;
+}
+
 export const SERVICE_CATEGORIES = [
   {
     category: "Faciales Avanzados",
