@@ -6,7 +6,14 @@ Sitio web de un centro de estética/spa en Cuenca, Ecuador (Edificio Plaza Médi
 
 - Next.js 16 (App Router) + React 19 + TypeScript, Tailwind v4, MDX (`next-mdx-remote` + `gray-matter`). Deploy: Vercel (auto-deploy al hacer push a `main`).
 - i18n propio: locales `es` (default) y `en` con prefijo obligatorio (`/es/...`, `/en/...`). La detección de idioma vive en `src/proxy.ts` (bots siempre reciben `es`). Helpers en `src/lib/i18n.ts`.
-- Analytics: Vercel Analytics (`<Analytics/>` en `src/app/layout.tsx`) + evento `whatsapp_click` en `src/components/shared/whatsapp-float.tsx`.
+- Analytics: Vercel Analytics (`<Analytics/>` en `src/app/layout.tsx`).
+- **Enlaces a WhatsApp**: NUNCA apuntar directo a `WHATSAPP_CONTACT_URL`. Usar siempre `whatsappBridgePath(locale, source)` de `src/lib/constants.ts`, que enruta por la página puente `/[locale]/whatsapp` (`src/app/[locale]/whatsapp/`). Motivo: los eventos personalizados de Vercel Analytics (`track()`) devuelven **402 — requieren plan Pro**; los pageviews sí son gratuitos, así que el puente es la única forma de contar clics a WhatsApp con el plan actual. El `source` (`float`, `servicio-hero`, `servicio-cta`, …) viaja como `utm_source` y en Analytics es la dimensión `utmSource`. La ruta es `noindex` y no está en el sitemap.
+- **Consultar Analytics**: el MCP de Vercel usa un endpoint equivocado (404). Usar el CLI, ya autenticado:
+  ```bash
+  npx vercel@latest api "/v1/query/web-analytics/visits/count?projectId=prj_BdpkHBYax30cnheL3fxsEs8qhfyc&teamId=team_7OZdvuZD5tNTtWTel7Eyqdhy&since=2026-07-08&until=2026-07-26&filter=requestPath eq '/es/whatsapp'"
+  # agregados: .../visits/aggregate?…&by=requestPath|country|referrerHostname|deviceType|utmSource&limit=15
+  ```
+  Ojo: parte del tráfico que muestra el dashboard es de bots (jul 2026: China y `/en/blog/eliminacion-de-lunares-con-laser` sumaban ~42 %, con proporción 1:1 entre visitantes y páginas vistas). Contrastar siempre contra GSC antes de dar cifras.
 
 ## Reglas de contenido (importantes)
 
