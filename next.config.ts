@@ -99,6 +99,20 @@ const nextConfig: NextConfig = {
         destination,
         permanent: true,
       })),
+      // Consolidación del cluster de masajes (13 ago 2026). `/es/blog/
+      // masajes-relajantes` era un casi duplicado de
+      // `masajes-relajantes-en-cuenca-ecuador`: mismo tema, misma fecha de
+      // publicación y un H2 idéntico al título del otro. Las dos competían
+      // entre sí y ninguna pasaba de la posición 11. Su contenido único
+      // (maderoterapia, masaje spa personalizado y cuándo agendar) se fusionó
+      // en el post que sí rendía, y este 301 traslada su autoridad.
+      // Ojo: la fuente lleva el prefijo `/es/`, así que no va en `legacyMap`,
+      // que es solo para las URLs planas del sitio anterior.
+      {
+        source: '/es/blog/masajes-relajantes',
+        destination: '/es/blog/masajes-relajantes-en-cuenca-ecuador',
+        permanent: true,
+      },
       // Rutas nuevas compartidas sin prefijo de locale (indexadas por error):
       // redirect permanente en vez de la negociación 307 del proxy.
       {
