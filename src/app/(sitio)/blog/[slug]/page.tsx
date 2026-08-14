@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { ArticleSchema } from "@/components/seo/article-schema";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { blogMdxComponents } from "@/components/shared/blog-mdx";
+import { formatPublishedDate } from "@/lib/dates";
 import { BlogCard } from "@/components/shared/blog-card";
 import { BlogToc } from "@/components/shared/blog-toc";
 import {
@@ -115,7 +116,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <h1 className="max-w-3xl font-serif text-4xl leading-tight md:text-6xl">{post.title}</h1>
           <p className="mt-5 max-w-2xl text-lg font-light leading-8 text-white/85">{post.description}</p>
           <div className="mt-8 flex flex-wrap gap-4 text-xs uppercase tracking-[0.14em] text-white/75">
-            <time dateTime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString("es-EC", { dateStyle: "long" })}</time>
+            <time dateTime={post.publishedAt}>{formatPublishedDate(post.publishedAt, "es", "long")}</time>
             <span className="inline-flex items-center gap-2">
               <Clock3 size={14} />
               {post.readingTime}

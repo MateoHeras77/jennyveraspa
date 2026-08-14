@@ -27,6 +27,7 @@ import {
   toAbsoluteUrl as toSiteAbsoluteUrl,
   withLocalePath,
 } from "@/lib/i18n";
+import { formatPublishedDate } from "@/lib/dates";
 
 type BlogPostPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -150,7 +151,7 @@ export default async function LocalizedBlogPostPage({ params }: BlogPostPageProp
           <p className="mt-5 max-w-2xl text-lg font-light leading-8 text-white/85">{post.description}</p>
           <div className="mt-8 flex flex-wrap gap-4 text-xs uppercase tracking-[0.14em] text-white/75">
             <time dateTime={post.publishedAt}>
-              {new Date(post.publishedAt).toLocaleDateString(locale === "es" ? "es-EC" : "en-US", { dateStyle: "long" })}
+              {formatPublishedDate(post.publishedAt, locale, "long")}
             </time>
             <span className="inline-flex items-center gap-2">
               <Clock3 size={14} />
