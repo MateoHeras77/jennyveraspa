@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { BlogPostSummary } from "@/lib/blog-content";
 import { usePathname } from "next/navigation";
 import { DEFAULT_LOCALE, getLocaleFromPathname, withLocalePath } from "@/lib/i18n";
+import { formatPublishedDate } from "@/lib/dates";
 
 type BlogCardProps = {
   post: BlogPostSummary;
@@ -37,7 +38,7 @@ export function BlogCard({ post, priority = false }: BlogCardProps) {
 
         <div className="flex h-[calc(100%-14rem)] flex-col p-6">
           <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs uppercase tracking-[0.14em] text-gray-500">
-            <time dateTime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString("es-EC", { dateStyle: "medium" })}</time>
+            <time dateTime={post.publishedAt}>{formatPublishedDate(post.publishedAt, locale)}</time>
             <span>{post.readingTime}</span>
           </div>
 
@@ -48,7 +49,7 @@ export function BlogCard({ post, priority = false }: BlogCardProps) {
           <p className="mb-6 flex-1 text-sm leading-6 text-gray-600">{post.description}</p>
 
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-900 transition-colors group-hover:text-[#9A7A1F]">
-            Leer articulo
+            {locale === "es" ? "Leer artículo" : "Read article"}
             <ArrowUpRight size={14} />
           </span>
         </div>
