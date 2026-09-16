@@ -32,18 +32,18 @@ El patrón que funciona: intención local + nicho poco disputado. Lo que **no** 
 
 ### 1.3 Renovar creatividades en Meta cada ~3 semanas
 
-Validado en dos ciclos independientes:
+Validado en tres ciclos independientes:
 
-| Ciclo | Antes de renovar | Después |
-|---|---|---|
-| 3 de agosto | $2,98 / conversación | **$1,03** |
-| 25 de agosto | $2,32 / conversación | **$0,74** |
+| Ciclo | Antes de renovar | Después | Tres semanas después |
+|---|---|---|---|
+| 3 de agosto | $2,98 / conversación | **$1,03** | $2,69 |
+| 25 de agosto | $2,32 / conversación | **$0,74** | $1,91 |
 
-El patrón es mecánico: renuevan → el coste se desploma; se dejan correr tres semanas → se duplica. Conviene que sea rutina de calendario, no reacción cuando el coste sube.
+El patrón es mecánico: renuevan → el coste se desploma; se dejan correr tres semanas → se multiplica por ~2,6. El 7 de septiembre quedó escrita la predicción de que el coste subiría esa semana, y subió. La señal limpia no es el coste diario (ruidoso con 1-6 conversaciones/día) sino **el CTR de la creatividad**, que baja de forma monótona semana a semana (2,95 → 2,41 → 2,21 %). Conviene programar la renovación para el día 14-18, y probar la segunda pieza en un ad set separado: en el mismo ad set Meta la estrangula a los tres días ($5,77 en 20 días para `REEL - CIRUGÍA`).
 
 ### 1.4 La página puente para medir clics a WhatsApp
 
-Los eventos personalizados de Vercel Analytics cuestan plan Pro (402). Enrutar todos los CTA por `/[locale]/whatsapp` convierte cada clic en un pageview, que sí es gratuito. Funciona y ya da la única métrica de conversión del sitio: **66 clics/mes, 10,2 % de los visitantes limpios**.
+Los eventos personalizados de Vercel Analytics cuestan plan Pro (402). Enrutar todos los CTA por `/[locale]/whatsapp` convierte cada clic en un pageview, que sí es gratuito. Funciona y ya da la única métrica de conversión del sitio: **84 clics/mes, 12,7 % de los visitantes limpios** (sep 2026; 66 y 10,2 % en agosto).
 
 ---
 
@@ -116,7 +116,11 @@ Un `relatedPost` que apunte a un slug inexistente en ese idioma **se ignora en s
 
 Entre el 25 % y el 42 % del panel es tráfico automatizado. La señal fiable es una proporción **visitantes : páginas vistas de exactamente 1:1** (un humano navega; un bot pide una página y se va).
 
-China lleva tres mediciones seguidas apareciendo así (100 → 203 → 222 visitantes). **Restarlo siempre antes de citar cualquier cifra**, y contrastar contra GSC.
+China lleva cuatro mediciones seguidas apareciendo así (100 → 203 → 222 → 162 visitantes). **Restarlo siempre antes de citar cualquier cifra**, y contrastar contra GSC.
+
+Desde septiembre de 2026 hay un **segundo bot con IPs rotadas por 14+ países** (México, Singapur, Hong Kong, Malasia… 4-16 visitantes cada uno, 1:1, sin referrer, cero Ecuador) que la regla «≥20 y 1:1» ya no atrapa. Infló `lipoescultura-360-ecuador-precios` de ~25 a 60 visitantes. Regla ampliada: **país 1:1 con ≥4 visitantes, sin referrer y 0 % Ecuador**. `filter=country ne 'CN'` funciona en la API y es la limpieza barata.
+
+Otros límites del panel descubiertos el 15 sep: el plan Hobby solo sirve **30 días** (la ventana anterior deja de ser consultable — comparar contra el snapshot escrito); `by=day` existe y es gratis; en `aggregate` hay que pasar `until=YYYY-MM-DDT23:59:59Z` o corta a la 01:00 de ese día.
 
 ### 3.3 Comparar sin ventanas simétricas engaña
 
@@ -144,11 +148,24 @@ Al comprobar si un deploy había propagado busqué `href="/en/blog/` en una pág
 
 ### 3.6 El paquete de mapas no se combate con código
 
-`best massage near me` lleva **tres mediciones consecutivas** en primera página (posición 5,7-6,6) con **cero clics**, y las impresiones ya empezaron a caer (903 → 426).
+`best massage near me` lleva **cuatro mediciones consecutivas** en primera página (posición 5,7-7,0) con **cero clics** (694 impr en la última ventana de 30 días).
 
 Cuando el título está bien, la posición es buena y aun así el CTR es cero, no es un problema técnico: el paquete de mapas se lleva el tráfico. La única palanca es el Google Business Profile (`fase-1-gbp-y-resenas.md`). Ninguna cantidad de trabajo en el repo lo va a mover.
 
 ---
+
+### 3.7 «Las redes no traen tráfico» tenía una causa trivial que nadie miró
+
+Tres snapshots seguidos (jul, ago, sep) reportaron cero visitas desde Instagram/TikTok y recomendaron «revisar el enlace de la bio». El 15 de septiembre se consultó la Graph API y la ficha pública: **ninguna de las tres redes tenía enlace al sitio** — Instagram con `bio_links` vacío, Facebook sin `website` y con «www.jenny vera. com» escrito con espacios en la descripción, TikTok sin enlace. Lección: **cuando una métrica lleva meses en cero exacto, verificar el mecanismo antes de seguir midiendo**. Un cero exacto casi nunca es «bajo rendimiento»; es que la tubería no existe.
+
+### 3.8 Que la baliza salga no significa que Meta la cuente
+
+El pixel registró 966 PageView y **cero `Contact`** en 28 días pese a 84 clics reales a WhatsApp. La baliza de imagen (`/tr?ev=Contact&noscript=1`) sí se envía y Meta responde 200 — verificado en Playwright —, pero Meta descarta hits sin `dl`, sin `fbp` ni contexto de navegador. **Verificar una integración de analítica por el lado del receptor** (`/{pixel}/stats?aggregation=event`), no solo por el emisor. Arreglo pendiente: stub `fbq` inline y `fbq('track','Contact')` con la cola estándar.
+
+### 3.9 Dos límites de la API de Search Console que cambian la lectura
+
+- **~80 % de los clics vienen de consultas anonimizadas** (63 de 314 visibles) porque la marca es un nombre de persona y Google oculta esas consultas. Toda tabla de consultas es una muestra del 20 %; «jenny vera spa» no aparecerá nunca. Los totales por página, país, dispositivo y fecha sí son completos: **usar esas dimensiones para las cifras y las consultas solo para dirección**.
+- El salto `/` → `/es|/en` del proxy es un **307** (`NextResponse.redirect` sin código), así que Google indexa la portada como `http://jennyveraspa.com/` (39 clics, pos 4,3) y reparte su señal entre tres URLs. Los clics no se pierden. Arreglo sin riesgo: 308 solo para bots.
 
 ## 4. Método de trabajo que se ha demostrado útil
 
@@ -173,5 +190,6 @@ Cuando el título está bien, la posición es buena y aun así el CTR es cero, n
 | 13 ago | Consolidación del cluster + cambio de título (P1) | **Malo.** −59 % en el cluster; posición 9,0 → 15,7 |
 | 13 ago | Fechas deterministas y fin del error de hidratación | **Correcto.** Las fechas se mostraban un día antes para todo el público |
 | 13 ago | Restauración de tildes (68 ficheros) | **Correcto.** Sin efecto medible en tráfico, pero era deuda de calidad |
-| 7 sep | «Ecuador» devuelto al título de masajes | Pendiente de medir (~10 de octubre) |
-| 7 sep | Enlazado de láser CO2 y temas íntimos | Pendiente de medir (~10 de octubre) |
+| 7 sep | «Ecuador» devuelto al título de masajes | Primer indicio positivo a 6 días (cluster pos 9,6, servicio 13,8 → 10,1). **Confirmar el 5 de octubre** |
+| 7 sep | Enlazado de láser CO2 y temas íntimos | CO2: el servicio pasó de 0 a 3 clics en la semana, impr ×2,4 en 30 d. Íntimos sin volumen. Confirmar el 5 de octubre |
+| 7 sep | Seis traducciones EN de posts de precio | Rastreadas el 11 sep; 2 de 6 con impresiones en pos 4,7-5,3 a los 6 días. Los originales ES sumaron +36 clics en el mes: la elección fue correcta. Medir el 5 de octubre |
