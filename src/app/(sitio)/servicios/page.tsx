@@ -16,6 +16,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
+import { SERVICE_PAGE_SLUGS } from "@/lib/constants";
 import { type Locale, withLocalePath } from "@/lib/i18n";
 
 type FeaturedTreatment = {
@@ -150,6 +151,18 @@ const servicesByLocale: Record<Locale, ServicesData> = {
           {
             name: "Tratamiento de Ojeras",
             benefit: "Mejora el aspecto cansado y aporta frescura a la mirada.",
+          },
+          {
+            name: "Botox",
+            benefit: "Suaviza líneas de expresión con resultados naturales.",
+          },
+          {
+            name: "Armonización Facial",
+            benefit: "Equilibra las proporciones del rostro con ácido hialurónico.",
+          },
+          {
+            name: "Microblading",
+            benefit: "Cejas definidas y naturales con técnica pelo a pelo.",
           },
         ],
       },
@@ -360,6 +373,18 @@ const servicesByLocale: Record<Locale, ServicesData> = {
           {
             name: "Under-Eye Treatment",
             benefit: "Improves tired-looking eyes and restores freshness.",
+          },
+          {
+            name: "Botox",
+            benefit: "Softens expression lines with natural-looking results.",
+          },
+          {
+            name: "Facial Harmonization",
+            benefit: "Balances facial proportions with hyaluronic acid.",
+          },
+          {
+            name: "Microblading",
+            benefit: "Defined, natural brows with hair-stroke technique.",
           },
         ],
       },
@@ -616,18 +641,49 @@ export default function ServiciosPage({ locale = "es" }: ServiciosPageProps) {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {group.services.map((service) => (
-                      <article
-                        key={service.name}
-                        className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm"
-                      >
-                        <h3 className="flex items-start gap-2 text-gray-900 font-medium leading-tight">
-                          <Check size={16} className="mt-1 shrink-0 text-[#D4AF37]" />
-                          {service.name}
-                        </h3>
-                        <p className="mt-2 text-sm text-gray-600 font-light">{service.benefit}</p>
-                      </article>
-                    ))}
+                    {group.services.map((service) => {
+                      const slug = SERVICE_PAGE_SLUGS[service.name];
+
+                      const contenido = (
+                        <>
+                          <h3 className="flex items-start gap-2 text-gray-900 font-medium leading-tight">
+                            <Check size={16} className="mt-1 shrink-0 text-[#D4AF37]" />
+                            {service.name}
+                            {slug ? (
+                              <ArrowRight
+                                size={15}
+                                className="mt-1 ml-auto shrink-0 text-[#D4AF37] transition-transform group-hover:translate-x-1"
+                              />
+                            ) : null}
+                          </h3>
+                          <p className="mt-2 text-sm text-gray-600 font-light">{service.benefit}</p>
+                        </>
+                      );
+
+                      // Los servicios que aún no tienen página de detalle se
+                      // quedan como tarjeta estática: enlazar a una URL
+                      // inexistente sería peor que no enlazar.
+                      if (!slug) {
+                        return (
+                          <article
+                            key={service.name}
+                            className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm"
+                          >
+                            {contenido}
+                          </article>
+                        );
+                      }
+
+                      return (
+                        <Link
+                          key={service.name}
+                          href={localize(`/servicios/${slug}`)}
+                          className="group block rounded-sm border border-gray-200 bg-white p-4 shadow-sm transition-colors hover:border-[#D4AF37]"
+                        >
+                          {contenido}
+                        </Link>
+                      );
+                    })}
                   </div>
 
                   <div className="pt-4 border-t border-gray-200">

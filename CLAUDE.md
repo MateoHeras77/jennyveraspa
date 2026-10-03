@@ -36,7 +36,13 @@ Sitio web de un centro de estética/spa en Cuenca, Ecuador (Edificio Plaza Médi
 - **Nunca combinar un 301 con un cambio de título en el mismo despliegue**: al medir es imposible saber cuál causó el efecto. Pasó en ago 2026 con el cluster de masajes.
 - **No escribir blogs nuevos por defecto.** Con 59 posts ES y 35 EN el limitante es la autoridad de dominio y la ficha de Google, no el volumen. Lo que sí rinde: enlazado interno hacia lo que ya existe, y traducciones EN de posts que ya rankean.
 - **Imágenes**: verificar que cada archivo de `public/images/` sea realmente una imagen (`file <ruta>`) antes de referenciarlo en `coverImage`. Han aparecido dos casos de descargas fallidas guardadas como `.jpg` que en realidad eran HTML de 404.
-- **Catálogo de servicios**: `SERVICE_CATEGORIES` en `src/lib/constants.ts`. Los `name` son CLAVES DE LOOKUP EXACTO contra `serviceLabelsEn`/`serviceCategoryLabelsEn` en `src/components/forms/contact-form.tsx` — si añades/renombras un servicio, actualiza ambos archivos con claves idénticas.
+- **Catálogo de servicios — vive en CUATRO sitios y se desincroniza.** `SERVICE_CATEGORIES` (`src/lib/constants.ts`) alimenta el formulario; `src/app/(sitio)/servicios/page.tsx` mantiene su **propia copia** de las categorías (necesita imagen, icono y textos en inglés) y es la que se renderiza en el listado. En oct 2026 esa copia llevaba meses sin Botox, Armonización Facial ni Microblading, y escribía «HIFU Íntimo» donde `constants.ts` dice «HIFU Intimo». Al añadir o renombrar un servicio hay que tocar los cuatro:
+  1. `SERVICE_CATEGORIES` en `src/lib/constants.ts`.
+  2. `SERVICE_PAGE_SLUGS` en el mismo archivo (mapa nombre → slug, con claves **ES y EN** tal y como las escribe la página de servicios). Sin entrada aquí, la tarjeta se muestra sin enlace.
+  3. `serviceLabelsEn` en `src/components/forms/contact-form.tsx`, con la clave EXACTA de `SERVICE_CATEGORIES`.
+  4. La copia de categorías de `src/app/(sitio)/servicios/page.tsx`, en ES **y** EN.
+
+  Verificación rápida tras tocarlo: `curl -s localhost:PUERTO/es/servicios | grep -o 'href="/es/servicios/[a-z0-9-]*"' | sort -u | wc -l` debe dar el número de MDX en `src/content/services/`.
 - Cirugías plásticas: el spa NO opera; ofrece post-operatorios. El contenido de cirugías es informativo y debe decirlo, con CTA a drenajes.
 
 ## SEO
