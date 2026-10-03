@@ -119,5 +119,86 @@ export const SERVICE_CATEGORIES = [
   },
 ] as const;
 
+/**
+ * Enlaza cada servicio del catálogo con su página de detalle.
+ *
+ * La clave es el `name` EXACTO de `SERVICE_CATEGORIES`; el valor, el slug del
+ * MDX de `src/content/services/`. Un servicio sin entrada aquí se muestra en el
+ * listado como tarjeta sin enlace, que es lo correcto cuando todavía no tiene
+ * página propia (p. ej. «Exilis Ultra 360»).
+ *
+ * Varias entradas del catálogo describen el mismo tratamiento desde ángulos
+ * distintos («Rejuvenecimiento Facial con HIFU» y «HIFU 360 Max (25D)»). Solo se
+ * mapea una de ellas a propósito: dos enlaces a la misma URL en la misma página
+ * no aportan nada y ensucian el grafo de enlaces.
+ *
+ * CUIDADO con dónde viven los nombres. `src/app/(sitio)/servicios/page.tsx`
+ * mantiene su PROPIA copia de las categorías (necesita imagen, icono y textos
+ * traducidos que no están aquí) y esa copia se había desincronizado: le
+ * faltaban Botox, Armonización Facial y Microblading, y escribía con tildes
+ * («HIFU Íntimo») lo que aquí va sin ellas («HIFU Intimo»). Las claves de este
+ * mapa son las de ESA página —ES y EN—, porque es la que lo consume.
+ *
+ * Al añadir un servicio nuevo hay que tocar cuatro sitios:
+ *   1. `SERVICE_CATEGORIES` (aquí) — alimenta el formulario de contacto.
+ *   2. Este mapa, con la clave tal y como la escribe la página de servicios.
+ *   3. `serviceLabelsEn` de `src/components/forms/contact-form.tsx`, con la
+ *      clave EXACTA de `SERVICE_CATEGORIES`.
+ *   4. La copia de categorías de `src/app/(sitio)/servicios/page.tsx`, en ES
+ *      y EN, o el servicio no se mostrará en el listado.
+ */
+export const SERVICE_PAGE_SLUGS: Record<string, string> = {
+  // --- Español ---
+  "Limpieza Facial Profunda": "limpieza-facial",
+  "Tratamiento de Manchas": "manchas",
+  "Control de Acné y Piel Grasa": "tratamiento-acne",
+  "Rejuvenecimiento Facial con HIFU": "hifu",
+  "Plasma Rico en Plaquetas": "plasma-rico-plaquetas",
+  "Mesoterapia Facial": "mesoterapia-facial",
+  "Tratamiento de Ojeras": "tratamiento-ojeras",
+  "Botox": "botox",
+  "Armonización Facial": "armonizacion-facial",
+  "Microblading": "microblading",
+  "Masajes Relajantes": "masajes-relajantes",
+  "Masajes Reductores": "masajes-reductores",
+  "Drenaje Linfático Facial": "drenaje-linfatico-facial",
+  "Depilación Definitiva con Láser Diodo": "depilacion-laser",
+  "Carbón Activo con Láser": "carbon-activo-laser",
+  "HIFU Íntimo": "hifu-intimo",
+  "Despigmentación de Zonas Íntimas": "despigmentacion-zonas-intimas",
+  "Despigmentación de Axilas": "despigmentacion-axilas",
+  "Drenajes Linfáticos Postoperatorios": "drenaje-postoperatorio",
+  "CO2 Fraccionado": "laser-co2-fraccionado",
+  "Láser para Eliminación de Lunares": "eliminacion-lunares",
+  "Tratamientos con Exosomas": "exosomas",
+  "PDRN de Salmón": "pdrn-salmon",
+  "Microneedling (Dermapen)": "microneedling",
+
+  // --- English ---
+  // Los nombres en inglés son propios de la página de servicios, no una
+  // traducción mecánica, así que necesitan sus propias claves.
+  "Deep Facial Cleansing": "limpieza-facial",
+  "Dark Spot Treatment": "manchas",
+  "Acne and Oily Skin Control": "tratamiento-acne",
+  "HIFU Facial Rejuvenation": "hifu",
+  "Platelet-Rich Plasma (PRP)": "plasma-rico-plaquetas",
+  "Facial Mesotherapy": "mesoterapia-facial",
+  "Under-Eye Treatment": "tratamiento-ojeras",
+  "Facial Harmonization": "armonizacion-facial",
+  "Relaxing Massages": "masajes-relajantes",
+  "Body Sculpting Massages": "masajes-reductores",
+  "Facial Lymphatic Drainage": "drenaje-linfatico-facial",
+  "Diode Laser Hair Reduction": "depilacion-laser",
+  "Laser Carbon Peel": "carbon-activo-laser",
+  "Intimate HIFU": "hifu-intimo",
+  "Intimate Area Brightening": "despigmentacion-zonas-intimas",
+  "Underarm Brightening": "despigmentacion-axilas",
+  "Post-Op Lymphatic Drainage": "drenaje-postoperatorio",
+  "Fractional CO2 Laser": "laser-co2-fraccionado",
+  "Laser Mole Removal": "eliminacion-lunares",
+  "Exosome Treatments": "exosomas",
+  "Salmon PDRN (Cellular Rejuvenation)": "pdrn-salmon",
+};
+
 export type ServiceCategory = typeof SERVICE_CATEGORIES[number];
 export type ServiceItem = ServiceCategory['services'][number];
