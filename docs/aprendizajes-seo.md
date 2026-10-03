@@ -223,7 +223,19 @@ Lo que de verdad ocurrió el 15 de septiembre fue **una poda de la cola de pági
 
 Caso aparte, sin resolver: `best massage near me` murió del 14 al 22 de septiembre (56 → 0 impresiones) con la posición intacta en 7,0 y su página sana, mientras ninguna otra consulta de CTR cero era castigada. La explicación que mejor encaja es una **corrección de desajuste de relevancia** (un post sobre Cuenca emparejado con una consulta «cerca de mí» sin calificador geográfico), no la inanición de clics. **n = 1: no es regla.**
 
-**Lección de método:** una hipótesis que explica un caso hay que probarla contra la cohorte completa antes de convertirla en regla. Esta estuvo dos semanas escrita en el CLAUDE.md como si fuera un hecho.
+El test, para poder repetirlo: cohorte definida del 2 jul al 13 sep (consultas en pos 1-10 con ≥20 impresiones), medida del 14 al 29 sep.
+
+| Cohorte | n | Impr/día antes → después | Retención |
+|---|---|---|---|
+| CTR cero, **con** `best massage near me` | 25 | 38,5 → 29,6 | 77 % |
+| CTR cero, **sin** `best massage near me` | 24 | 14,8 → 20,5 | **138 %** |
+| Con clics | 23 | 28,7 → 26,2 | 91 % |
+
+`best massage near me` aportaba **el 61 % de las impresiones de su propia cohorte**, y al quitarla el resultado se invierte. Casos con 0 clics en 74 días que *ganaron* exposición: `blefaroplastia precio ecuador` +385 %, `cuanto cuesta una lipo` +315 %, `botox allergan precio ecuador` +222 %, `abdominoplastia precio ecuador` +146 %.
+
+**La prueba para zanjar el caso suelto ya está montada sin tocar nada:** `depilacion laser cuenca` acumula 0 clics con 49 impresiones en pos 5,9, y `/es/blog/depilacion-laser-cuenca-precios` 123 impresiones en pos 6,1 con 0 clics. Si pierden exposición manteniendo la posición, gana la inanición; si la mantienen, queda descartada.
+
+**Lección de método:** una hipótesis que explica un caso hay que probarla contra la cohorte completa antes de convertirla en regla — y comprobar si el propio caso domina la cohorte. Esta llegó a estar escrita en el CLAUDE.md como un hecho antes de que el test la tumbara el mismo día.
 
 ### 3.12 `WebFetch` alucina al leer fichas públicas de redes sociales
 

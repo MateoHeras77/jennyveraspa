@@ -1,10 +1,5 @@
 # Informe de presencia digital — 3 de octubre de 2026
 
-> **NOTA DEL EDITOR (3 oct 2026).** Dos correcciones a este informe, verificadas aparte:
->
-> 1. La afirmación de que «solo 1 de las 54 conversaciones de Facebook recibió respuesta» y que «el cuello de botella está en cerrarlas» **es incorrecta**. Es un artefacto de `messaging_conversation_replied_7d`, que no tiene visibilidad en campañas de clic-a-WhatsApp porque la conversación ocurre dentro de WhatsApp. Los demás indicadores lo desmienten: `messaging_first_reply` = 61 sobre 71 (86 %), `messaging_user_depth_2_message_send` = 37 y `_depth_5_` = 35. Lo correcto: **no se puede medir desde Meta si las conversaciones acaban en cita.**
-> 2. La afirmación de que el informe de septiembre «dio a Skin Clinic la ventaja de sin web» no corresponde a un error: la tabla de septiembre decía correctamente que nosotros tenemos web y Skin Clinic no. Lo que sí es un aporte nuevo y válido de este informe es que **nuestra ficha de Google enlaza al sitio y es el único activo externo que devuelve tráfico.**
-
 Verificación de las tres recomendaciones entregadas el 15 de septiembre de 2026.
 Todo lo que sigue es **solo lectura**: peticiones GET al Graph API v21.0, consultas públicas con navegador y lecturas del repositorio. No se ha publicado, editado ni modificado nada.
 
