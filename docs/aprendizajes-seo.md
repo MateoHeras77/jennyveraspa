@@ -24,6 +24,12 @@ Es lo único que ha dado un retorno grande, rápido y sin efectos secundarios.
 
 **Cómo encontrar las oportunidades:** hay que construir el grafo **real**, no el aparente. Ver §3.1.
 
+### 1.1 bis Matiz medido el 3 oct 2026: el enlazado solo rinde si la página destino tiene volumen
+
+El enlazado interno funcionó espectacularmente en agosto (`abdominoplastia` ×4,5 en clics, `plasma-rico-plaquetas` +8 puestos) porque esas páginas ya recibían cientos de impresiones. Repetido en septiembre sobre páginas sin volumen, **no dio nada**: `/es/servicios/laser-co2-fraccionado` mueve 4-6 impresiones diarias y quedó en 6 clics frente a 5; `/es/servicios/hifu-intimo` tuvo **9 impresiones en 22 días**. No es que falle: es que a ese volumen no hay medición posible.
+
+**Regla:** antes de enlazar hacia una página, comprobar que tiene al menos ~100 impresiones mensuales. Si no las tiene, el problema no es el enlazado.
+
 ### 1.2 Contenido para keywords locales sin competencia
 
 `spa-para-hombres-cuenca` (creado el 7 de julio) está en **posición 6,3 con 14,8 % de CTR**. Es de los mejores rendimientos del sitio.
@@ -32,12 +38,19 @@ El patrón que funciona: intención local + nicho poco disputado. Lo que **no** 
 
 ### 1.3 Renovar creatividades en Meta cada ~3 semanas
 
-Validado en tres ciclos independientes:
+Validado en **cuatro** ciclos independientes (el cuarto, el del 20 de septiembre, es además la prueba de que renovar ANTES funciona mejor):
 
 | Ciclo | Antes de renovar | Después | Tres semanas después |
 |---|---|---|---|
 | 3 de agosto | $2,98 / conversación | **$1,03** | $2,69 |
 | 25 de agosto | $2,32 / conversación | **$0,74** | $1,91 |
+| **20 de septiembre** (renovaron el día 3, no en la semana 3) | $1,91 | **$0,71** · 29 conv · mejor semana histórica | por medir el 11 de octubre |
+
+El ciclo del 20 de septiembre cerró el mes a **$1,008/conversación con un 18 % menos de inversión y un 9 % más de conversaciones**, perdiendo cinco días de pausa. Renovar en el día 14-18 en lugar de esperar al 21 está validado.
+
+**Dos patrones colaterales confirmados tres veces cada uno:** Facebook Reels es la posición más barata ($0,70-0,83/conv frente a $1,08-1,74 del feed, que se lleva el 42-44 % del gasto); y **el reparto automático de Meta estrangula la pieza buena** si comparte conjunto de anuncios con otra (`REEL - FACIAL` convierte a $0,67 y cayó de $6,25 a $1,07 semanales *subiendo* su CTR, mientras `REEL - LÁSER CO 2` acaparaba el 73 % del gasto a $1,04). Una pieza que se quiera probar va en conjunto aparte.
+
+**Creencia derribada el 3 oct 2026:** la ventaja de los hombres ($0,86 frente a $1,75 de las mujeres en agosto) era **artefacto de la creatividad**, no del público: con las piezas nuevas quedó en $0,87 frente a $0,84, y el segmento 25-34 pasó de peor a mejor ($0,68). No resegmentar sobre un mes de datos.
 
 El patrón es mecánico: renuevan → el coste se desploma; se dejan correr tres semanas → se multiplica por ~2,6. El 7 de septiembre quedó escrita la predicción de que el coste subiría esa semana, y subió. La señal limpia no es el coste diario (ruidoso con 1-6 conversaciones/día) sino **el CTR de la creatividad**, que baja de forma monótona semana a semana (2,95 → 2,41 → 2,21 %). Conviene programar la renovación para el día 14-18, y probar la segunda pieza en un ad set separado: en el mismo ad set Meta la estrangula a los tres días ($5,77 en 20 días para `REEL - CIRUGÍA`).
 
@@ -74,6 +87,19 @@ Se acortó `Masajes Relajantes en Cuenca, Ecuador — Spa Profesional` a `Masaje
 
 > **Regla:** no tocar el título de una página que ya recibe clics. Si hay que tocarlo, cambiar uno solo, medir cuatro semanas y solo entonces extender. Nunca en lote.
 
+### 2.1 bis Confirmado el 3 oct 2026: devolver el modificador geográfico recuperó la página
+
+Cierre del experimento. Al devolver «Ecuador» al título de `/es/servicios/masajes-relajantes` el 7 de septiembre, medido a 22 días contra ventana simétrica:
+
+| | Post (8–29 sep) | Pre (16 ago–6 sep) |
+|---|---|---|
+| Clics | **11** | 3 |
+| Impresiones | **240** | 71 |
+| Posición | **8,3** | 12,4 |
+| `masajes cuenca ecuador` | pos **7,2** | pos 8,4 (y pos 58 en agosto, sin «Ecuador») |
+
+Impresiones ×7 y 4 puestos recuperados. **La regla de CLAUDE.md queda validada con datos en ambas direcciones**: quitarlo costó 6 puestos, devolverlo los recuperó. En inglés no hubo ningún efecto: el cambio solo movió el mercado ES.
+
 ### 2.2 Quitar el modificador geográfico
 
 Corolario del anterior, pero merece su propia regla porque el daño fue el mayor de todos.
@@ -101,6 +127,14 @@ Con 59 posts en español y 35 en inglés, el limitante no es el volumen. Las pá
 Lo que sí falta: traducciones al inglés de posts que ya rinden, y enlaces hacia lo que ya existe.
 
 ---
+
+### 2.5 Traducir al inglés posts que rankean en español — no rindió
+
+Era la táctica recomendada («lo que sí rinde: enlazado interno y traducciones EN de posts que ya rankean»). Medido a 22 días sobre las seis traducciones del 7 de septiembre: **5 clics en total**, 44-63 impresiones cada una, y **dos sin una sola impresión en tres meses** (`/en/blog/spa-para-hombres-cuenca`, `/en/blog/depilacion-laser-cuenca-precios`) pese a estar en el sitemap, devolver 200, tener canonical autorreferencial y no llevar `noindex`.
+
+La canibalización **sí quedó descartada** (las EN mueven el 1-6 % de las impresiones de sus pares ES, y donde el ES cae lo hace con más impresiones y menos CTR, que es patrón de SERP). Pero el conjunto del inglés retrocedió ese mes: `/en/contacto` −57 % de visitas, clics EN a WhatsApp 18 → 16.
+
+**Conclusión:** traducir no cuesta tráfico, pero tampoco lo trae por sí solo. Antes de traducir más, entender por qué dos no se indexaron y reenviar el sitemap (llevaba sin reenviarse desde el despliegue).
 
 ## 3. Trampas del entorno que ya nos han costado tiempo
 
@@ -167,6 +201,42 @@ El pixel registró 966 PageView y **cero `Contact`** en 28 días pese a 84 clics
 - **~80 % de los clics vienen de consultas anonimizadas** (63 de 314 visibles) porque la marca es un nombre de persona y Google oculta esas consultas. Toda tabla de consultas es una muestra del 20 %; «jenny vera spa» no aparecerá nunca. Los totales por página, país, dispositivo y fecha sí son completos: **usar esas dimensiones para las cifras y las consultas solo para dirección**.
 - El salto `/` → `/es|/en` del proxy es un **307** (`NextResponse.redirect` sin código), así que Google indexa la portada como `http://jennyveraspa.com/` (39 clics, pos 4,3) y reparte su señal entre tres URLs. Los clics no se pierden. Arreglo sin riesgo: 308 solo para bots.
 
+### 3.10 La posición media de este sitio no informa de nada
+
+En el snapshot del 15 sep 2026 reporté la mejora de 44,3 → 36,1 como logro. **Era un artefacto.** Medido el 3 de octubre:
+
+| Tramo | Antes | Ahora |
+|---|---|---|
+| Posiciones 1-10 | 3.057 impr | **3.649** (+592) |
+| Posiciones >50 | 9.939 impr | 5.169 (**−4.770**) |
+
+La media «mejoró» porque desapareció cola larga en página 8-10 que nunca dio un clic. El sitio mezcla dos poblaciones —páginas locales en posición 5-10 y posts informativos en posición 60-90— y promediarlas no significa nada. **Reportar impresiones por tramo de posición, no la media.**
+
+### 3.11 Google poda la cola larga por página — y el CTR cero NO cuesta exposición (hipótesis refutada)
+
+En septiembre de 2026 escribí como predicción que «una posición alta con CTR cero se consume». **Un test de cohortes en octubre la refutó**, y conviene dejarlo escrito para no repetir el error:
+
+- Las **24 consultas con cero clics en posiciones 1-10 ganaron un 38 % de exposición** (14,8 → 20,5 impresiones diarias), mejor que las 23 que sí recibían clics (+91 %).
+- `blefaroplastia precio ecuador`, con **cero clics en 74 días** en posición 8,4, **multiplicó sus impresiones por 3,9**.
+
+Lo que de verdad ocurrió el 15 de septiembre fue **una poda de la cola de página 8-10, por página y no por consulta**: los posts informativos de HIFU/CO2/PRP/manchas pasaron de 288,6 a 140,4 impresiones diarias (−49 %) **sin que su posición se moviera** (87,6 → 90,4). Con ella, **dos URL planas de la web antigua cayeron a cero exacto** (pos 81-83): los redirects 308 funcionan y Google soltó por fin los duplicados de la migración de abril. Esas impresiones había que perderlas.
+
+Caso aparte, sin resolver: `best massage near me` murió del 14 al 22 de septiembre (56 → 0 impresiones) con la posición intacta en 7,0 y su página sana, mientras ninguna otra consulta de CTR cero era castigada. La explicación que mejor encaja es una **corrección de desajuste de relevancia** (un post sobre Cuenca emparejado con una consulta «cerca de mí» sin calificador geográfico), no la inanición de clics. **n = 1: no es regla.**
+
+**Lección de método:** una hipótesis que explica un caso hay que probarla contra la cohorte completa antes de convertirla en regla. Esta estuvo dos semanas escrita en el CLAUDE.md como si fuera un hecho.
+
+### 3.12 `WebFetch` alucina al leer fichas públicas de redes sociales
+
+El 3 de octubre, un `WebFetch` del perfil de Instagram **informó de un enlace a jennyveraspa.com que no existe**, e inventó además una dirección postal deformada. Era exactamente el dato que esperábamos encontrar. Se verificó con navegador (Playwright) y es falso.
+
+**Para comprobar fichas públicas, navegador y no `WebFetch`.** Y desconfiar en particular cuando el resultado confirma lo que se quería ver.
+
+### 3.13 Métricas de Meta que no sirven en campañas de clic-a-WhatsApp
+
+`messaging_conversation_replied_7d` marcó **1** sobre 71 conversaciones, lo que sugiere que no se responden los mensajes. Es falso: `messaging_first_reply` = 61 (86 %), `messaging_user_depth_2_message_send` = 37 y `_depth_5_` = 35. Esa métrica no tiene visibilidad cuando la conversación ocurre dentro de WhatsApp, fuera del perímetro de Meta.
+
+**Usar `first_reply` y las de profundidad.** Y tener presente que **el cierre (si la conversación acaba en cita) no es medible desde Meta**: eso solo lo sabe quien atiende el WhatsApp.
+
 ## 4. Método de trabajo que se ha demostrado útil
 
 1. **Medir antes de tocar.** Los dos fracasos de título vinieron de actuar sobre una hipótesis razonable sin comprobarla primero.
@@ -190,6 +260,6 @@ El pixel registró 966 PageView y **cero `Contact`** en 28 días pese a 84 clics
 | 13 ago | Consolidación del cluster + cambio de título (P1) | **Malo.** −59 % en el cluster; posición 9,0 → 15,7 |
 | 13 ago | Fechas deterministas y fin del error de hidratación | **Correcto.** Las fechas se mostraban un día antes para todo el público |
 | 13 ago | Restauración de tildes (68 ficheros) | **Correcto.** Sin efecto medible en tráfico, pero era deuda de calidad |
-| 7 sep | «Ecuador» devuelto al título de masajes | Primer indicio positivo a 6 días (cluster pos 9,6, servicio 13,8 → 10,1). **Confirmar el 5 de octubre** |
-| 7 sep | Enlazado de láser CO2 y temas íntimos | CO2: el servicio pasó de 0 a 3 clics en la semana, impr ×2,4 en 30 d. Íntimos sin volumen. Confirmar el 5 de octubre |
-| 7 sep | Seis traducciones EN de posts de precio | Rastreadas el 11 sep; 2 de 6 con impresiones en pos 4,7-5,3 a los 6 días. Los originales ES sumaron +36 clics en el mes: la elección fue correcta. Medir el 5 de octubre |
+| 7 sep | «Ecuador» devuelto al título de masajes | **BUENO, confirmado el 3 oct.** 11 clics (vs 3), impresiones ×7, pos 12,4 → 8,3, `masajes cuenca ecuador` de vuelta en pos 7,2. Solo en ES |
+| 7 sep | Enlazado de láser CO2 y temas íntimos | **SIN SEÑAL.** CO2 6 clics vs 5 (menos en 30 d); `hifu-intimo` 9 impresiones en 22 días. Las páginas destino no tienen volumen para medir |
+| 7 sep | Seis traducciones EN de posts de precio | **FRACASO PARCIAL.** 5 clics en 22 días entre las seis; dos con 0 impresiones en 3 meses. Canibalización descartada. El conjunto del inglés retrocedió ese mes |
