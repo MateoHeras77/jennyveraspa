@@ -66,6 +66,7 @@ const serviceLabelsEn: Record<string, string> = {
     "Mesoterapia Facial": "Facial Mesotherapy",
     "Tratamiento de Ojeras": "Under-Eye Treatment",
     "Botox": "Botox",
+    "Armonización Facial": "Facial Harmonization",
     "Microblading": "Microblading",
     "Masajes Relajantes": "Relaxing Massages",
     "Masajes Reductores": "Body Sculpting Massages",
