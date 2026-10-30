@@ -15,7 +15,8 @@ Punto de partida del **nuevo equipo de marketing**. Todo informe posterior se co
 | Search Console | 29 sep – 28 oct 2026 | Último día consolidado: 28 oct |
 | Vercel | 30 sep – 29 oct 2026 | Solo guarda 30 días |
 | Meta Ads | 30 sep – 29 oct 2026 | Último gasto: 14 oct |
-| Redes y ficha | 30 oct 2026 | Datos públicos |
+| Ficha de Google (rendimiento) | may – 27 oct 2026 | Panel leído con el navegador en la cuenta del administrador |
+| Redes y reseñas | 30 oct 2026 | Datos públicos |
 
 ## Cifras
 
@@ -42,9 +43,16 @@ Punto de partida del **nuevo equipo de marketing**. Todo informe posterior se co
 | CTR · frecuencia | 2,78 % · 2,40 | | Insights |
 | Vida de la cuenta (19 jun – 14 oct) | $299,31 · 227 conv. · $1,32 | | Insights mensual |
 | Anuncios de tratamiento vs. cirugía (vida) | $0,97 vs. $2,00 por conversación | | Insights por anuncio, agrupado por nombre |
-| **Ficha de Google** | | | |
+| **Ficha de Google** (rendimiento: 1–27 oct) | | | |
+| Interacciones (llamadas + rutas + clics a la web) | **86** (7 · 54 · 25) | sep: 82 (10 · 47 · 25); ago: 138 | Business Profile → Rendimiento (leído a mano, sin API) |
+| Vistas de la ficha | **2.078** (búsqueda móvil 1.487 · Maps móvil 313 · búsqueda escritorio 245 · Maps escritorio 33) | sep: 2.081 | Ídem |
+| Búsquedas que mostraron la ficha | octubre aún no publicado | **sep: 242 (−63,5 % vs. sep 2025)** | Ídem; se publican al empezar el mes siguiente |
+| Interacciones vs. año anterior | sep: **−42,7 %** · vistas −31,5 % | | Ídem |
+| Seis meses (may – oct) | 603 interacciones · 59 llamadas · 333 rutas · 211 clics a la web · 0 reservas · 10.321 vistas · 811 búsquedas | | Ídem |
+| Búsquedas principales (may – oct) | drenaje linfático 142 · limpieza facial cuenca 112 · spa 112 · limpieza facial 102 · masajes cuenca 93 · jenny 91 · vera 40 · depilación láser cuenca 38 | | Ídem |
 | Reseñas · nota | **101** · 4,9 | 94 el 3 oct | Google Maps |
 | Categoría principal | Spa de masajes | sin cambios desde sep | Google Maps |
+| Ficha duplicada | «Jenny Vera Spa Plaza Médica» marcada «Duplicate» en el gestor | | Business Profile Manager |
 | **Redes** | | | |
 | Seguidores TikTok · Facebook · Instagram | 2.757 · 1.503 · 1.026 | 2.765 · 1.502 · 1.022 (3 oct) | Perfil público / Graph API |
 | Redes con enlace a la web | **0 de 3** | | Revisión de biografías |
@@ -59,3 +67,4 @@ País con páginas vistas ≤ 1,05 × visitantes, ≥ 4 visitantes, ≥ 90 % sin
 2. Meta apagado desde el 14 oct tras su mejor mes; las creatividades del 6 oct rindieron mal ($1,84 la semana del 5 oct).
 3. Clics a WhatsApp −30 % con el mismo tráfico. La puente funciona (verificado 30 oct, 200 + redirección correcta). Causa sin identificar; confirmar en noviembre.
 4. 0 de 3 recomendaciones del 15 sep aplicadas.
+5. La ficha de Google cae frente a 2025 (sep: −42,7 % interacciones, −63,5 % búsquedas) y tiene una ficha duplicada. Sus clics a la web bajaron de ~50 al mes (jul-ago) a 25 (sep-oct); no explica la caída de WhatsApp de octubre, porque en septiembre los clics a WhatsApp seguían en 83.
