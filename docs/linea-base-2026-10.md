@@ -68,3 +68,9 @@ País con páginas vistas ≤ 1,05 × visitantes, ≥ 4 visitantes, ≥ 90 % sin
 3. Clics a WhatsApp −30 % con el mismo tráfico. La puente funciona (verificado 30 oct, 200 + redirección correcta). Causa sin identificar; confirmar en noviembre.
 4. 0 de 3 recomendaciones del 15 sep aplicadas.
 5. La ficha de Google cae frente a 2025 (sep: −42,7 % interacciones, −63,5 % búsquedas) y tiene una ficha duplicada. Sus clics a la web bajaron de ~50 al mes (jul-ago) a 25 (sep-oct); no explica la caída de WhatsApp de octubre, porque en septiembre los clics a WhatsApp seguían en 83.
+
+## Cambios aplicados después de la línea base
+
+| Fecha | Cambio | Qué medir y cuándo |
+|---|---|---|
+| 30 oct 2026 | **Ficha de Google: categoría principal «Massage spa» → «Medical spa»**. «Massage spa» pasa a secundaria; se mantienen Facial spa, Health spa, Skin care clinic y Laser hair removal service. Enviado desde Business Profile, quedó «pendiente de revisión» (Google indica ~10 min). | El **27 nov 2026** (4 semanas): búsquedas que muestran la ficha (sep: 242), interacciones (1–27 oct: 86), consultas de estética en el panel («drenaje linfático», «limpieza facial cuenca») y que «masajes cuenca» no se hunda. Comparar contra septiembre y octubre de esta tabla; separar de cualquier reactivación de Meta. |
