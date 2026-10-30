@@ -1,0 +1,205 @@
+<!doctype html>
+<!--
+  PLANTILLA DE INFORME — Jenny Vera Spa
+  Copiar a la carpeta del informe (docs/informes/AAAA-MM-tema/informe.html),
+  sustituir el contenido y renderizar con:
+      .claude/skills/jvs-informe-pdf/scripts/render.sh informe.html --preview
+  {{SKILL}} lo resuelve render.sh: no tocarlo.
+  TODAS LAS CIFRAS DE ESTA PLANTILLA SON FICTICIAS.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Informe de resultados · Octubre 2026 · Jenny Vera Spa</title>
+<link rel="stylesheet" href="{{SKILL}}/assets/estilos.css">
+<script src="{{SKILL}}/assets/vendor/echarts.min.js"></script>
+<script src="{{SKILL}}/assets/graficos.js"></script>
+<style>
+  /* Periodo en la cabecera corrida de las páginas interiores */
+  @page { @top-right { content: "Informe · Octubre 2026"; } }
+</style>
+</head>
+<body>
+
+<!-- =================================================================== -->
+<!-- PORTADA: banner + cifras clave + lo esencial. Cabe en UNA página.    -->
+<!-- =================================================================== -->
+<section class="portada">
+  <header class="banner">
+    <img class="banner__logo" src="{{SKILL}}/assets/logos/logo-blanco.png" alt="Jenny Vera · Estética Profesional & Spa">
+    <img class="banner__isotipo" src="{{SKILL}}/assets/logos/isotipo-dorado.png" alt="">
+    <div class="banner__filete"></div>
+    <p class="banner__eyebrow">Informe de resultados · Plantilla con datos de ejemplo</p>
+    <h1 class="banner__titulo">Cómo va el negocio</h1>
+    <p class="banner__periodo">Octubre de 2026 · del 1 al 30 de octubre</p>
+  </header>
+
+  <div class="portada__cuerpo">
+    <p class="eyebrow">Las cifras del mes</p>
+    <div class="kpis">
+      <div class="kpi">
+        <p class="kpi__etiqueta">Contactos</p>
+        <p class="kpi__valor">127</p>
+        <p class="kpi__nota"><span class="delta delta--sube">+18 %</span> por WhatsApp</p>
+      </div>
+      <div class="kpi">
+        <p class="kpi__etiqueta">Clics desde Google</p>
+        <p class="kpi__valor">1.284</p>
+        <p class="kpi__nota"><span class="delta delta--sube">+9 %</span> vs. septiembre</p>
+        <div class="kpi__mini" id="m-clics"></div>
+        <script>JVS.mini("#m-clics", { canal: "gsc", datos: [136, 247, 304, 283, 1284 / 4] });</script>
+      </div>
+      <div class="kpi">
+        <p class="kpi__etiqueta">Coste por contacto</p>
+        <p class="kpi__valor"><small>$</small>3,40</p>
+        <p class="kpi__nota"><span class="delta delta--baja">+12 %</span> más caro</p>
+      </div>
+      <div class="kpi">
+        <p class="kpi__etiqueta">Reseñas en Google</p>
+        <p class="kpi__valor">64</p>
+        <p class="kpi__nota"><span class="delta delta--igual">0</span> sin cambios</p>
+      </div>
+    </div>
+
+    <p class="eyebrow">Lo esencial</p>
+    <ol class="esencial">
+      <li><strong>Los contactos suben por tercer mes seguido</strong> y el orgánico ya aporta uno de cada tres sin coste por clic.</li>
+      <li><strong>Meta trae más volumen pero se encarece:</strong> el coste por contacto subió un 12 % al renovar los anuncios tarde.</li>
+      <li><strong>La ficha de Google es el cuello de botella:</strong> sin reseñas nuevas en 30 días, perdemos el paquete de mapas.</li>
+    </ol>
+  </div>
+
+  <footer class="portada__pie">
+    <div><strong>Preparado para</strong><br>Dirección y equipo de marketing</div>
+    <div><strong>Fuentes</strong><br>Search Console · Meta Ads · Vercel Analytics</div>
+    <div><strong>Fecha</strong><br>30 de octubre de 2026</div>
+  </footer>
+</section>
+
+<!-- =================================================================== -->
+<!-- SECCIONES: número + título; la ENTRADILLA es la conclusión.          -->
+<!-- =================================================================== -->
+<section class="seccion">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">01</span>Contactos</p>
+    <h2>De dónde vienen los clientes</h2>
+  </div>
+  <p class="entradilla">Meta sigue siendo el primer canal, pero el orgánico crece más rápido y la ficha de Google duplicó sus contactos desde septiembre.</p>
+
+  <figure class="grafico">
+    <figcaption>Contactos de WhatsApp por semana y canal<span>Clics en el botón de WhatsApp · semanas de lunes a domingo</span></figcaption>
+    <div class="grafico-js" id="g-canales" style="height:64mm"></div>
+    <script>
+      JVS.linea("#g-canales", {
+        categorias: ["1 sep", "8 sep", "15 sep", "22 sep", "29 sep", "6 oct", "13 oct", "20 oct"],
+        series: [
+          { nombre: "Meta Ads", canal: "meta", datos: [14, 18, 11, 9, 16, 21, 19, 23] },
+          { nombre: "Google orgánico", canal: "gsc", datos: [9, 10, 12, 11, 13, 12, 15, 17] },
+          { nombre: "Ficha de Google", canal: "gbp", datos: [4, 3, 5, 6, 5, 7, 8, 9] },
+        ],
+        tramos: [{ desde: "15 sep", hasta: "22 sep", texto: "Pausa de Meta" }],
+      });
+    </script>
+  </figure>
+  <p class="fuente">Vercel Analytics (visitas a /es/whatsapp y /en/whatsapp, sin bots) y Meta Ads. Datos ficticios.</p>
+
+  <table class="datos">
+    <thead>
+      <tr><th>Canal</th><th class="num">Contactos</th><th class="num">Cuota</th><th class="num">Coste</th><th class="num">Coste por contacto</th><th class="num">vs. sep</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Meta Ads</td><td class="num">68</td><td class="num">54 %</td><td class="num">$231</td><td class="num">$3,40</td><td class="num"><span class="delta delta--baja">+12 %</span></td></tr>
+      <tr><td>Google orgánico</td><td class="num">41</td><td class="num">32 %</td><td class="num">$0</td><td class="num">—</td><td class="num"><span class="delta delta--sube">+21 %</span></td></tr>
+      <tr><td>Ficha de Google</td><td class="num">18</td><td class="num">14 %</td><td class="num">$0</td><td class="num">—</td><td class="num"><span class="delta delta--sube">+100 %</span></td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Total</td><td class="num">127</td><td class="num">100 %</td><td class="num">$231</td><td class="num">$1,82</td><td class="num"><span class="delta delta--sube">+18 %</span></td></tr>
+    </tfoot>
+  </table>
+  <p class="fuente">Meta Ads (gasto), Vercel Analytics (contactos). En «vs. sep», ▼ rojo = empeora aunque la cifra suba.</p>
+
+  <div class="nota">
+    <p class="nota__titulo">Cómo leer esta cifra</p>
+    <p>El total de contactos es exacto, pero el reparto por canal es una estimación: Vercel no permite desglosar el origen con el plan actual. Se reparte con la proporción de visitas de cada canal a la página puente.</p>
+  </div>
+</section>
+
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">02</span>Sitio web</p>
+    <h2>Qué se visita y cuánto cuesta la publicidad</h2>
+  </div>
+  <div class="dos-columnas">
+    <figure class="grafico">
+      <figcaption>Páginas más visitadas<span>Visitantes únicos · octubre</span></figcaption>
+      <div class="grafico-js" id="g-paginas" style="height:56mm"></div>
+      <script>
+        JVS.barras("#g-paginas", {
+          horizontal: true,
+          categorias: ["Depilación láser", "Blog: HIFU en Cuenca", "Masajes", "Limpieza facial", "Blog: drenaje linfático"],
+          series: [{ nombre: "Visitantes", canal: "total", datos: [412, 296, 241, 188, 133] }],
+        });
+      </script>
+    </figure>
+    <figure class="grafico">
+      <figcaption>Gasto mensual en Meta<span>Dólares · mayo a octubre</span></figcaption>
+      <div class="grafico-js" id="g-gasto" style="height:56mm"></div>
+      <script>
+        JVS.barras("#g-gasto", {
+          categorias: ["may", "jun", "jul", "ago", "sep", "oct"],
+          series: [{ nombre: "Gasto", canal: "meta", datos: [180, 210, 160, 0, 240, 260] }],
+          formato: "dolar",
+          etiquetaTexto: (v) => (v ? "$" + v : "pausa"),
+        });
+      </script>
+    </figure>
+  </div>
+  <p class="fuente">Vercel Analytics (sin bots, ver nota metodológica) y Meta Ads. Datos ficticios.</p>
+
+  <div class="kpis kpis--3">
+    <div class="kpi">
+      <p class="kpi__etiqueta">Visitantes reales</p>
+      <p class="kpi__valor">2.910</p>
+      <p class="kpi__nota">Tras restar 640 visitas de bots</p>
+    </div>
+    <div class="kpi">
+      <p class="kpi__etiqueta">Desde Ecuador</p>
+      <p class="kpi__valor">71 %</p>
+      <p class="kpi__nota"><span class="delta delta--sube">+4 pts</span> vs. septiembre</p>
+    </div>
+    <div class="kpi">
+      <p class="kpi__etiqueta">Desde móvil</p>
+      <p class="kpi__valor">83 %</p>
+      <p class="kpi__nota"><span class="delta delta--igual">0 pts</span> estable</p>
+    </div>
+  </div>
+
+  <div class="alerta">
+    <p class="alerta__titulo">Riesgo</p>
+    <p>Los anuncios activos llevan 26 días sin renovarse. En las cuatro veces anteriores, el coste por contacto subió a partir del día 18.</p>
+  </div>
+  <div class="ok">
+    <p class="ok__titulo">Funcionó</p>
+    <p>El enlazado interno hacia la página de abdominoplastia multiplicó sus clics por 4,5 en cuatro semanas.</p>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">03</span>Próximos pasos</p>
+    <h2>Qué hacemos en noviembre</h2>
+  </div>
+  <ul class="acciones">
+    <li><span><strong>Pedir 10 reseñas en Google</strong> a clientas de las dos últimas semanas.</span><span class="responsable">Dirección · 15 nov</span></li>
+    <li><span><strong>Renovar los anuncios de Meta</strong> entre el día 14 y el 18 del mes.</span><span class="responsable">Marketing · 18 nov</span></li>
+    <li><span><strong>Enlazar desde 3 posts</strong> hacia la página de armonización facial.</span><span class="responsable">Web · 10 nov</span></li>
+  </ul>
+
+  <div class="cierre">
+    <img src="{{SKILL}}/assets/logos/isotipo-dorado.png" alt="">
+    <div>Jenny Vera · Estética Profesional &amp; Spa — Edificio Plaza Médica, Av. Manuel J. Calle y Paucarbamba, Cuenca.<br>Informe interno. Las cifras de terceros se citan con su fuente; donde no hay dato, se dice.</div>
+  </div>
+</section>
+
+</body>
+</html>

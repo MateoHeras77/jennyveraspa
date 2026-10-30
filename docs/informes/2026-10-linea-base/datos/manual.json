@@ -1,0 +1,32 @@
+{
+  "_nota": "Fuentes sin API o ya no consultables. Cada valor con fecha y método. Actualizar a mano al re-extraer.",
+  "redes": {
+    "metodo": "Facebook: Graph API (followers_count). Instagram: meta description del perfil público. TikTok: perfil público con Playwright. Nunca WebFetch (alucina en fichas de redes).",
+    "serie": [
+      {"fecha": "2026-09-15", "facebook": 1496, "instagram": 1016, "tiktok": 2610, "fuente": "snapshot-2026-09-15.md"},
+      {"fecha": "2026-10-03", "facebook": 1502, "instagram": 1022, "tiktok": 2765, "fuente": "snapshot-2026-10-03.md"},
+      {"fecha": "2026-10-30", "facebook": 1503, "instagram": 1026, "tiktok": 2757, "fuente": "Graph API + Playwright, 30 oct 2026"}
+    ],
+    "enlace_al_sitio": {"facebook": false, "instagram": false, "tiktok": false, "verificado": "2026-10-03"},
+    "instagram_vinculado_a_meta": false,
+    "tiktok_vistas_ultimos_videos": [359, 6126, 132, 3, 170, 215, 228, 200, 198, 220, 213, 200, 274, 25, 14, 251]
+  },
+  "ficha_google": {
+    "metodo": "Google Maps con Playwright (place id 0x91cd3d557cd80507:0x98335d51bae228bb)",
+    "serie": [
+      {"fecha": "2026-09-15", "nota": 4.9, "resenas": 94, "categoria": "Spa de masajes", "fuente": "snapshot-2026-09-15.md"},
+      {"fecha": "2026-10-03", "nota": 4.9, "resenas": 94, "categoria": "Spa de masajes", "fuente": "snapshot-2026-10-03.md"},
+      {"fecha": "2026-10-30", "nota": 4.9, "resenas": 101, "categoria": "Spa de masajes", "fuente": "Playwright, 30 oct 2026"}
+    ],
+    "enlaza_al_sitio": true,
+    "fotos": 81
+  },
+  "vercel_historico": {
+    "_nota": "Vercel solo guarda 30 días: estas ventanas ya no se pueden consultar. Visitantes limpios = sin bots. Clics WA = páginas vistas de /es|/en/whatsapp (la puente existe desde el 25 jul).",
+    "serie": [
+      {"ventana": "8 ago – 7 sep", "corte": "2026-09-07", "visitantes_limpios": 650, "clics_whatsapp": 66, "fuente": "snapshot-2026-09-07.md"},
+      {"ventana": "16 ago – 14 sep", "corte": "2026-09-15", "visitantes_limpios": 664, "clics_whatsapp": 84, "fuente": "snapshot-2026-09-15.md"},
+      {"ventana": "3 sep – 2 oct", "corte": "2026-10-03", "visitantes_limpios": 691, "clics_whatsapp": 83, "fuente": "snapshot-2026-10-03.md"}
+    ]
+  }
+}

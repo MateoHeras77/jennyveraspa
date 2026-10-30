@@ -1,0 +1,501 @@
+<!doctype html>
+<!--
+  Informe de evolución y línea base — relevo del equipo de marketing.
+  Datos: datos/datos.js (generado por ./extraer.py) + datos/manual.json.
+  Render: .claude/skills/jvs-informe-pdf/scripts/render.sh docs/informes/2026-10-linea-base/informe.html --preview
+  Las cifras del TEXTO están escritas a mano a partir de datos.json (corte 30 oct 2026):
+  si se re-extrae, hay que revisarlas. Los gráficos se alimentan solos de DATOS.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Evolución y línea base · Octubre 2026 · Jenny Vera Spa</title>
+<link rel="stylesheet" href="{{SKILL}}/assets/estilos.css">
+<script src="{{SKILL}}/assets/vendor/echarts.min.js"></script>
+<script src="{{SKILL}}/assets/graficos.js"></script>
+<script src="datos/datos.js"></script>
+<style>
+  @page { @top-right { content: "Evolución y línea base · Octubre 2026"; } }
+  .dos-columnas.aprendizajes { gap: 6mm; }
+  .aprendizajes ul { padding-left: 4mm; }
+  .aprendizajes li { margin-bottom: 2mm; font-size: 8.8pt; }
+  table.datos.base td:first-child { width: 47%; }
+  table.datos.base td:last-child { font-size: 7.2pt; color: var(--tinta-2); width: 32%; }
+  table.datos.base td { padding-top: 1.3mm; padding-bottom: 1.3mm; }
+  table.datos.base tr.grupo td { padding-top: 2.6mm; }
+</style>
+<script>
+  // Utilidades sobre DATOS para los gráficos
+  const D = window.DATOS;
+  const MES = { "01": "ene", "02": "feb", "03": "mar", "04": "abr", "05": "may", "06": "jun",
+                "07": "jul", "08": "ago", "09": "sep", "10": "oct", "11": "nov", "12": "dic" };
+  const etiquetaMes = (m) => MES[m.slice(5, 7)] + (m.slice(5, 7) === "01" || m === D.gsc.mensual[0].mes ? " " + m.slice(2, 4) : "");
+</script>
+</head>
+<body>
+
+<!-- =================================================================== -->
+<!-- PORTADA                                                              -->
+<!-- =================================================================== -->
+<section class="portada">
+  <header class="banner">
+    <img class="banner__logo" src="{{SKILL}}/assets/logos/logo-blanco.png" alt="Jenny Vera · Estética Profesional & Spa">
+    <img class="banner__isotipo" src="{{SKILL}}/assets/logos/isotipo-dorado.png" alt="">
+    <div class="banner__filete"></div>
+    <p class="banner__eyebrow">Informe de relevo · Evolución y línea base</p>
+    <h1 class="banner__titulo">Dónde venimos y dónde estamos</h1>
+    <p class="banner__periodo">De julio de 2025 al 30 de octubre de 2026</p>
+  </header>
+
+  <div class="portada__cuerpo">
+    <p class="eyebrow">Cómo estamos · últimos 30 días</p>
+    <div class="kpis">
+      <div class="kpi">
+        <p class="kpi__etiqueta">Clics desde Google</p>
+        <p class="kpi__valor">297</p>
+        <p class="kpi__nota"><span class="delta delta--sube">+2 %</span> vs. 30 días antes</p>
+        <div class="kpi__mini" id="m-gsc"></div>
+      </div>
+      <div class="kpi">
+        <p class="kpi__etiqueta">Visitas reales</p>
+        <p class="kpi__valor">687</p>
+        <p class="kpi__nota"><span class="delta delta--igual">−1 %</span> estable</p>
+        <div class="kpi__mini" id="m-vis"></div>
+      </div>
+      <div class="kpi">
+        <p class="kpi__etiqueta">Clics a WhatsApp</p>
+        <p class="kpi__valor">58</p>
+        <p class="kpi__nota"><span class="delta delta--baja">−30 %</span> desde la web</p>
+        <div class="kpi__mini" id="m-wa"></div>
+      </div>
+      <div class="kpi">
+        <p class="kpi__etiqueta">Anuncios activos</p>
+        <p class="kpi__valor">0</p>
+        <p class="kpi__nota"><span class="delta delta--baja">Meta</span> apagado desde el 14 oct</p>
+        <div class="kpi__mini" id="m-meta"></div>
+      </div>
+    </div>
+
+    <p class="eyebrow">Lo esencial</p>
+    <ol class="esencial">
+      <li><strong>Google orgánico está en su mejor ritmo de los últimos 16 meses:</strong> 9,96 clics al día en octubre, por encima de la web antigua (258 al mes de media). La caída que provocó la migración de abril está superada.</li>
+      <li><strong>Meta Ads está apagado desde el 14 de octubre</strong>, justo después de su mejor mes: en septiembre cada conversación de WhatsApp costó $0,95. Reactivarlo es lo más urgente.</li>
+      <li><strong>Los clics a WhatsApp desde la web bajaron un 30 %</strong> (83 → 58) con el mismo tráfico, y las tres correcciones gratuitas de redes y ficha de Google siguen sin hacerse.</li>
+    </ol>
+  </div>
+
+  <footer class="portada__pie">
+    <div><strong>Preparado para</strong><br>Dirección y nuevo equipo de marketing</div>
+    <div><strong>Fuentes</strong><br>Search Console · Meta Ads · Vercel · Google Maps · redes</div>
+    <div><strong>Corte de datos</strong><br>30 de octubre de 2026</div>
+  </footer>
+</section>
+<script>
+  JVS.mini("#m-gsc", { canal: "gsc", datos: D.gsc.mensual.slice(-7).map((m) => m.clics_dia) });
+  JVS.mini("#m-vis", { canal: "total", datos: D.manual.vercel_historico.serie.map((s) => s.visitantes_limpios).concat(D.vercel.limpio.visitors), min: 0 });
+  JVS.mini("#m-wa", { canal: "total", datos: D.manual.vercel_historico.serie.map((s) => s.clics_whatsapp).concat(58), min: 0 });
+  JVS.mini("#m-meta", { canal: "meta", datos: D.meta.diario.filter((d) => d.dia >= "2026-09-01").map((d) => d.gasto).concat(Array(15).fill(0)), min: 0 });
+</script>
+
+<!-- =================================================================== -->
+<!-- 01 · LA HISTORIA                                                     -->
+<!-- =================================================================== -->
+<section class="seccion">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">01</span>La historia en una página</p>
+    <h2>Dieciséis meses en doce hechos</h2>
+  </div>
+  <p class="entradilla">El negocio pasó por una caída fuerte en abril, cuando se cambió de web, y la remontó en tres meses. Desde agosto el orgánico está estable en su mejor nivel, y la publicidad en Meta encontró en septiembre la fórmula que mejor funciona… y se apagó en octubre.</p>
+
+  <ul class="cronologia">
+    <li><span class="cronologia__fecha">Jul 25 – mar 26</span><span class="cronologia__hecho"><strong>Web antigua, estable</strong><span>Entre 218 y 293 clics al mes desde Google; 258 de media.</span></span></li>
+    <li class="malo"><span class="cronologia__fecha">Abril 2026</span><span class="cronologia__hecho"><strong>Migración a la web nueva</strong><span>Las direcciones antiguas dejaron de funcionar (error 404). Los clics cayeron de 287 a 108: −62 % en un mes.</span></span></li>
+    <li><span class="cronologia__fecha">19 jun 2026</span><span class="cronologia__hecho"><strong>Primera campaña en Meta</strong><span>«Promo Papá»: 31 conversaciones de WhatsApp a $1,01 cada una.</span></span></li>
+    <li class="clave"><span class="cronologia__fecha">7 jul 2026</span><span class="cronologia__hecho"><strong>Se recuperan las direcciones antiguas</strong><span>Redirecciones para todas las URL de la web vieja. Julio cierra en 247 clics: +82 % sobre junio.</span></span></li>
+    <li><span class="cronologia__fecha">25 jul 2026</span><span class="cronologia__hecho"><strong>Empieza a medirse WhatsApp</strong><span>Página puente que cuenta cada clic al botón de WhatsApp de la web.</span></span></li>
+    <li class="clave"><span class="cronologia__fecha">Agosto 2026</span><span class="cronologia__hecho"><strong>Mejor mes orgánico del año</strong><span>304 clics. El enlazado interno multiplica por 4,5 los clics de la página de abdominoplastia.</span></span></li>
+    <li><span class="cronologia__fecha">15 sep 2026</span><span class="cronologia__hecho"><strong>Auditoría e investigación de mercado</strong><span>Tres recomendaciones gratuitas al negocio (enlace en redes, vincular Instagram, categoría de la ficha). Ninguna aplicada a día de hoy.</span></span></li>
+    <li><span class="cronologia__fecha">15 – 19 sep</span><span class="cronologia__hecho"><strong>Pausa de cinco días en Meta</strong><span>Se cerró la campaña y el 20 de septiembre se abrió otra con creatividades nuevas.</span></span></li>
+    <li class="clave"><span class="cronologia__fecha">Septiembre 2026</span><span class="cronologia__hecho"><strong>Mejor mes de Meta</strong><span>76 conversaciones a $0,95. La semana del 21 al 27 marca el récord: $0,71.</span></span></li>
+    <li><span class="cronologia__fecha">3 oct 2026</span><span class="cronologia__hecho"><strong>Página de armonización facial</strong><span>Servicio nuevo en la web, y el listado de servicios pasa a enlazar las 24 páginas (antes 8).</span></span></li>
+    <li class="malo"><span class="cronologia__fecha">14 oct 2026</span><span class="cronologia__hecho"><strong>Último día con anuncios en Meta</strong><span>Las 22 creatividades de la cuenta están en pausa desde entonces.</span></span></li>
+    <li><span class="cronologia__fecha">Octubre 2026</span><span class="cronologia__hecho"><strong>Relevo del equipo de marketing</strong><span>Este informe fija la línea base desde la que medirá el equipo nuevo.</span></span></li>
+  </ul>
+</section>
+
+<!-- =================================================================== -->
+<!-- 02 · GOOGLE ORGÁNICO                                                 -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">02</span>Google orgánico</p>
+    <h2>Recuperado y en su mejor ritmo</h2>
+  </div>
+  <p class="entradilla">Octubre va a 9,96 clics al día: si mantiene el ritmo hasta el 31, cerrará en unos 309, el mejor mes de la serie. No es que haya más búsquedas, es que salimos más arriba: las apariciones en las tres primeras posiciones se han triplicado desde junio.</p>
+
+  <figure class="grafico">
+    <figcaption>Clics diarios desde Google, media de cada mes<span>Se usa la media diaria para poder comparar octubre, que aún no ha terminado · julio 2025 – octubre 2026</span></figcaption>
+    <div class="grafico-js" id="g-gsc" style="height:54mm"></div>
+  </figure>
+  <p class="fuente">Google Search Console, datos consolidados hasta el 28 de octubre de 2026.</p>
+
+  <div class="dos-columnas">
+    <figure class="grafico">
+      <figcaption>Dónde aparecemos en Google<span>Impresiones según el puesto en Google · junio – octubre 2026</span></figcaption>
+      <div class="grafico-js" id="g-tramos" style="height:54mm"></div>
+    </figure>
+    <div>
+      <h3 style="margin-top:0">Cómo leer este gráfico</h3>
+      <p>Cada barra es todo lo que Google nos enseñó ese mes, separado según en qué puesto salimos. Lo que importa es lo dorado oscuro, las posiciones 1 a 10, que es donde la gente pulsa.</p>
+      <p>Entre junio y octubre las posiciones 1 a 3 pasan de 203 a 612 impresiones (×3) y las 4 a 10 de 1.422 a 3.245 (×2,3). La cola de posición 51 o peor cae a menos de la mitad: Google dejó de enseñarnos donde nadie mira, y eso no cuesta clics.</p>
+      <p class="muted" style="font-size:7.5pt">No se informa de la «posición media»: mezcla páginas en el puesto 5 con artículos en el 80 y engaña.</p>
+    </div>
+  </div>
+  <p class="fuente">Search Console, nivel consulta (solo el ~20 % de búsquedas que Google no anonimiza). Octubre hasta el día 28.</p>
+
+  <table class="datos">
+    <thead><tr><th>Página</th><th class="num">Clics</th><th class="num">Impresiones</th><th class="num">Puesto</th></tr></thead>
+    <tbody>
+      <tr><td>Masajes relajantes (servicio)</td><td class="num">36</td><td class="num">745</td><td class="num">6,7</td></tr>
+      <tr><td>Spa para hombres en Cuenca (blog)</td><td class="num">27</td><td class="num">251</td><td class="num">7,4</td></tr>
+      <tr><td>Lipoescultura 360: precios en Ecuador (blog)</td><td class="num">25</td><td class="num">2.872</td><td class="num">8,1</td></tr>
+      <tr><td>Portada</td><td class="num">25</td><td class="num">1.345</td><td class="num">3,9</td></tr>
+    </tbody>
+  </table>
+  <p class="fuente">Search Console, las cuatro páginas con más clics del 29 sep al 28 oct 2026. El 85 % de los clics viene de Ecuador y el 84 % desde el móvil.</p>
+</section>
+<script>
+  JVS.linea("#g-gsc", {
+    categorias: D.gsc.mensual.map((m) => etiquetaMes(m.mes)),
+    series: [{ nombre: "Clics al día", canal: "gsc", datos: D.gsc.mensual.map((m) => m.clics_dia), area: true }],
+    formato: (v) => JVS.fmt(v, 0),
+    tramos: [{ desde: "abr", hasta: "jun", texto: "Migración" }],
+    destacar: { x: "ultimo", texto: "9,96" },
+    min: 0,
+  });
+  const meses5 = Object.keys(D.gsc.tramos_mes);
+  const nombresTramo = { "1-3": "1-3", "4-10": "4-10", "11-20": "11-20", "21-50": "21-50", "51+": "51+" };
+  JVS.barras("#g-tramos", {
+    apilado: true,
+    categorias: meses5.map((m) => MES[m.slice(5, 7)]),
+    series: ["1-3", "4-10", "11-20", "21-50", "51+"].map((t, i) => ({
+      nombre: nombresTramo[t], color: JVS.RAMPA_ORO.slice().reverse()[i] ,
+      datos: meses5.map((m) => D.gsc.tramos_mes[m][t].impresiones),
+    })),
+  });
+</script>
+
+<!-- =================================================================== -->
+<!-- 03 · META ADS                                                        -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">03</span>Meta Ads · Facebook e Instagram</p>
+    <h2>Barato cuando se renueva, caro cuando se desgasta</h2>
+  </div>
+  <p class="entradilla">En cuatro meses la cuenta invirtió $299 y generó 227 conversaciones de WhatsApp: $1,32 cada una. El coste depende sobre todo de dos cosas: lo nuevas que sean las creatividades y de qué traten.</p>
+
+  <div class="dos-columnas">
+    <figure class="grafico">
+      <figcaption>Conversaciones de WhatsApp por mes<span>Junio desde el día 19 · octubre hasta el 14</span></figcaption>
+      <div class="grafico-js" id="g-meta-conv" style="height:52mm"></div>
+    </figure>
+    <figure class="grafico">
+      <figcaption>Coste por conversación<span>Dólares · cuanto más bajo, mejor</span></figcaption>
+      <div class="grafico-js" id="g-meta-coste" style="height:52mm"></div>
+    </figure>
+  </div>
+  <p class="fuente">Meta Marketing API, cuenta act_1661223548424128, solo lectura. Inversión total: $299,31.</p>
+
+  <div class="kpis kpis--3">
+    <div class="kpi">
+      <p class="kpi__etiqueta">Anuncios de tratamiento</p>
+      <p class="kpi__valor"><small>$</small>0,97</p>
+      <p class="kpi__nota">por conversación · 150 conversaciones con $146</p>
+    </div>
+    <div class="kpi">
+      <p class="kpi__etiqueta">Anuncios de cirugía</p>
+      <p class="kpi__valor"><small>$</small>2,00</p>
+      <p class="kpi__nota">por conversación · 77 conversaciones con $154</p>
+    </div>
+    <div class="kpi">
+      <p class="kpi__etiqueta">Facebook vs. Instagram</p>
+      <p class="kpi__valor">3 <small>a</small> 1</p>
+      <p class="kpi__nota">conversaciones (25 frente a 8), últimos 30 días</p>
+    </div>
+  </div>
+
+  <table class="datos">
+    <thead><tr><th>Anuncio</th><th class="num">Inversión</th><th class="num">Conversaciones</th><th class="num">Coste</th><th class="num">CTR</th></tr></thead>
+    <tbody>
+      <tr><td>Reel · Limpieza facial (25 ago)</td><td class="num">$54,02</td><td class="num">52</td><td class="num">$1,04</td><td class="num">2,50 %</td></tr>
+      <tr><td>Reel · Láser CO2 (20 sep)</td><td class="num">$33,42</td><td class="num">34</td><td class="num">$0,98</td><td class="num">2,62 %</td></tr>
+      <tr><td>Post · Promo Papá (19 jun)</td><td class="num">$31,32</td><td class="num">31</td><td class="num">$1,01</td><td class="num">2,00 %</td></tr>
+      <tr><td>Reel · Facial (23 sep)</td><td class="num">$8,41</td><td class="num">12</td><td class="num">$0,70</td><td class="num">3,46 %</td></tr>
+      <tr><td>Reel · Masaje linfático (3 ago) — <em>rechazado por Meta</em></td><td class="num">$7,41</td><td class="num">11</td><td class="num">$0,67</td><td class="num">2,95 %</td></tr>
+      <tr><td>Post · Promo HIFU −20 % (2 oct)</td><td class="num">$4,44</td><td class="num">10</td><td class="num">$0,44</td><td class="num">5,05 %</td></tr>
+      <tr><td>Reel · Masaje postoperatorio (8 ago)</td><td class="num">$47,16</td><td class="num">19</td><td class="num"><span class="delta delta--baja">$2,48</span></td><td class="num">2,15 %</td></tr>
+      <tr><td>Reel · Fibrosis (6 oct)</td><td class="num">$10,85</td><td class="num">3</td><td class="num"><span class="delta delta--baja">$3,62</span></td><td class="num">1,77 %</td></tr>
+    </tbody>
+  </table>
+  <p class="fuente">Meta Ads, rendimiento de cada anuncio en toda su vida (19 jun – 14 oct 2026). Se muestran los seis mejores y los dos peores de los 22.</p>
+</section>
+<script>
+  const mm = D.meta.mensual;
+  JVS.barras("#g-meta-conv", {
+    categorias: mm.map((m) => MES[m.mes.slice(5, 7)]),
+    series: [{ nombre: "Conversaciones", canal: "meta", datos: mm.map((m) => m.conversaciones) }],
+  });
+  JVS.linea("#g-meta-coste", {
+    categorias: mm.map((m) => MES[m.mes.slice(5, 7)]),
+    series: [{ nombre: "Coste por conversación", canal: "meta", datos: mm.map((m) => m.coste_conv), valores: "todos" }],
+    formato: "dolar2",
+  });
+</script>
+
+<!-- =================================================================== -->
+<!-- 04 · WEB Y WHATSAPP                                                  -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">04</span>Web y WhatsApp</p>
+    <h2>El mismo tráfico, menos contactos</h2>
+  </div>
+  <p class="entradilla">La web recibe unas 690 visitas reales al mes, igual que en septiembre. Lo que ha bajado es la proporción que pulsa WhatsApp: del 12,0 % al 8,4 %. Se comprobó que el botón y la página puente funcionan, así que la caída es real. La causa todavía no está identificada.</p>
+
+  <figure class="grafico">
+    <figcaption>Visitas diarias a la web: personas y robots<span>Visitantes únicos por día · 30 sep – 29 oct 2026</span></figcaption>
+    <div class="grafico-js" id="g-visitas" style="height:58mm"></div>
+  </figure>
+  <p class="fuente">Vercel Web Analytics. Robots: países con una página por visita, ≥ 90 % sin procedencia y fuera de Ecuador (China 324, Singapur 168, Hong Kong 22, India 5). Son el 43 % del panel.</p>
+
+  <div class="dos-columnas">
+    <figure class="grafico">
+      <figcaption>Clics a WhatsApp desde la web<span>30 días que terminan en cada fecha</span></figcaption>
+      <div class="grafico-js" id="g-wa" style="height:54mm"></div>
+    </figure>
+    <figure class="grafico">
+      <figcaption>De dónde llegan las visitas reales<span>Visitantes, últimos 30 días</span></figcaption>
+      <div class="grafico-js" id="g-ref" style="height:54mm"></div>
+    </figure>
+  </div>
+  <p class="fuente">Vercel. Las ventanas anteriores salen de los snapshots de septiembre y octubre (Vercel solo guarda 30 días). «Directo» incluye enlaces abiertos desde WhatsApp o apps, que no informan de su origen.</p>
+
+  <div class="nota">
+    <p class="nota__titulo">Qué sabemos y qué no de la caída</p>
+    <ul>
+      <li>No es el mecanismo: la página puente responde y redirige bien (verificado el 30 oct).</li>
+      <li>No es menos público local: las visitas desde Ecuador suben (369 frente a 334).</li>
+      <li>Sí cambió la mezcla: Bing crece un 50 % (81 visitas) y la página más vista es un artículo de HIFU leído desde México y España, tráfico informativo que rara vez escribe.</li>
+      <li>Con unos 2 clics al día, la serie es ruidosa. Hay que confirmarlo en noviembre antes de tocar la web.</li>
+    </ul>
+  </div>
+</section>
+<script>
+  const sv = D.vercel.serie;
+  const fechaCorta = (d) => +d.slice(8, 10) + " " + MES[d.slice(5, 7)];
+  JVS.barras("#g-visitas", {
+    apilado: true,
+    categorias: sv.map((d) => fechaCorta(d.dia)),
+    series: [
+      { nombre: "Personas", canal: "total", datos: sv.map((d) => d.visitantes - d.bots) },
+      { nombre: "Robots (descontados)", color: "#D9D2C3", datos: sv.map((d) => d.bots) },
+    ],
+  });
+  const hist = D.manual.vercel_historico.serie;
+  JVS.barras("#g-wa", {
+    categorias: ["7 sep", "14 sep", "2 oct", "29 oct"],
+    series: [{ nombre: "Clics", canal: "total", datos: hist.map((h) => h.clics_whatsapp).concat(58) }],
+    colores: [JVS.CANAL.total, JVS.CANAL.total, JVS.CANAL.total, JVS.COLORES.negativo],
+  });
+  const nombresRef = { "google.com": "Google", "": "Directo", "bing.com": "Bing", "duckduckgo.com": "DuckDuckGo",
+                       "es.search.yahoo.com": "Yahoo", "chatgpt.com": "ChatGPT", "m.facebook.com": "Facebook" };
+  const refs = D.vercel.referrers.filter((r) => r.referrerHostname in nombresRef);
+  JVS.barras("#g-ref", {
+    horizontal: true,
+    categorias: refs.map((r) => nombresRef[r.referrerHostname]),
+    series: [{ nombre: "Visitantes", canal: "total", datos: refs.map((r) => r.visitors) }],
+  });
+</script>
+
+<!-- =================================================================== -->
+<!-- 05 · REDES Y FICHA                                                   -->
+<!-- =================================================================== -->
+<section class="seccion">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">05</span>Redes sociales y ficha de Google</p>
+    <h2>5.286 seguidores que no llegan a la web</h2>
+  </div>
+  <p class="entradilla">Ninguna de las tres redes tiene un enlace a la web, así que su tráfico es cero. La ficha de Google es el único activo externo que envía visitas, y suma 7 reseñas nuevas en octubre, pero sigue con la categoría equivocada.</p>
+
+  <table class="datos">
+    <thead><tr><th>Canal</th><th class="num">15 sep</th><th class="num">3 oct</th><th class="num">30 oct</th><th>Enlace a la web</th></tr></thead>
+    <tbody>
+      <tr><td>TikTok @jennyveraspa</td><td class="num">2.610</td><td class="num">2.765</td><td class="num">2.757</td><td><span class="delta delta--baja">No</span></td></tr>
+      <tr><td>Facebook</td><td class="num">1.496</td><td class="num">1.502</td><td class="num">1.503</td><td><span class="delta delta--baja">No</span></td></tr>
+      <tr><td>Instagram @jenny_vera_spa</td><td class="num">1.016</td><td class="num">1.022</td><td class="num">1.026</td><td><span class="delta delta--baja">No</span> · sin vincular a Meta</td></tr>
+      <tr><td>Ficha de Google (reseñas · nota 4,9)</td><td class="num">94</td><td class="num">94</td><td class="num">101</td><td><span class="delta delta--sube">Sí</span> · categoría «Spa de masajes»</td></tr>
+    </tbody>
+  </table>
+  <p class="fuente">Graph API de Facebook; perfiles públicos de Instagram y TikTok y Google Maps consultados con navegador el 30 oct 2026; snapshots del 15 sep y 3 oct.</p>
+
+  <p>TikTok es la red más grande y la única que creció sola en septiembre (+155 seguidores en 18 días), pero en octubre se ha frenado (−8). Sus vídeos recientes rondan las 200 visualizaciones. La categoría de la ficha decide en qué búsquedas aparece el negocio en Google Maps: con «Spa de masajes», el centro no compite en las búsquedas de estética, que son la mayor parte del catálogo.</p>
+</section>
+
+<!-- =================================================================== -->
+<!-- 06 · LO QUE SABEMOS                                                  -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">06</span>Lo que sabemos</p>
+    <h2>Qué se probó, qué funcionó y qué no</h2>
+  </div>
+  <p class="entradilla">Cuatro meses de pruebas medidas. Es el conocimiento que no debe perderse con el cambio de equipo: cada punto tiene detrás una cifra, no una opinión.</p>
+
+  <div class="dos-columnas aprendizajes">
+    <div class="ok">
+      <p class="ok__titulo">Funciona</p>
+      <ul>
+        <li><strong>Renovar las creatividades antes de que se desgasten.</strong> Un anuncio pierde rendimiento hacia la tercera semana. Renovar entre el día 14 y el 18 se validó cuatro veces; en septiembre se hizo pronto y dio el mejor mes ($0,95).</li>
+        <li><strong>Anuncios que nombran un tratamiento concreto</strong> (limpieza facial, láser CO2, facial, linfático): $0,97 por conversación frente a $2,00 de los de cirugía.</li>
+        <li><strong>Una oferta clara.</strong> La promo de HIFU con un 20 % de descuento hizo el mejor CTR de la cuenta (5,05 %) y $0,44 por conversación.</li>
+        <li><strong>Facebook por encima de Instagram:</strong> mueve tres veces más conversaciones, y los Reels de Facebook fueron la posición más barata en tres mediciones.</li>
+        <li><strong>Enlazar desde la propia web hacia páginas que ya tienen búsquedas:</strong> abdominoplastia multiplicó sus clics por 4,5.</li>
+        <li><strong>Poner «en Cuenca, Ecuador» en el título</strong> de cada servicio. Quitarlo costó seis puestos en Google.</li>
+      </ul>
+    </div>
+    <div class="alerta">
+      <p class="alerta__titulo">No funciona</p>
+      <ul>
+        <li><strong>Anuncios de cirugía y postoperatorio:</strong> la mitad de la inversión ($154) para un tercio de las conversaciones. El peor anuncio de la cuenta (fibrosis) costó $3,62 cada una.</li>
+        <li><strong>Apagar la cuenta.</strong> La pausa de cinco días de septiembre costó unas 14 conversaciones; la actual lleva 16 días.</li>
+        <li><strong>Cambiar títulos de páginas que ya funcionan:</strong> se probó dos veces y las dos bajaron (−42 % de clics; del puesto 9 al 16).</li>
+        <li><strong>Escribir más artículos o traducirlos al inglés sin más:</strong> seis traducciones dieron 5 clics en 22 días. Con 94 artículos, el límite no es el volumen.</li>
+        <li><strong>Sacar conclusiones de un mes de datos:</strong> la «ventaja» de los hombres en Meta en agosto resultó ser efecto del anuncio, no del público.</li>
+        <li><strong>Fiarse del panel de Vercel sin limpiar:</strong> el 43 % de las visitas son robots.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="fuente">Snapshots de jul-oct 2026, docs/aprendizajes-seo.md y Meta Ads (rendimiento por anuncio).</p>
+</section>
+
+<!-- =================================================================== -->
+<!-- 07 · LÍNEA BASE                                                      -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">07</span>La línea base</p>
+    <h2>Desde aquí se mide</h2>
+  </div>
+  <p class="entradilla">Las cifras de partida. Para que la comparación valga, cada informe futuro tiene que medir igual: misma fuente, misma ventana y los mismos robots descontados.</p>
+
+  <table class="datos base">
+    <thead><tr><th>Métrica</th><th class="num">Valor</th><th>Fuente · cómo se mide</th></tr></thead>
+    <tbody>
+      <tr class="grupo"><td colspan="3">Google orgánico · 29 sep – 28 oct</td></tr>
+      <tr><td>Clics desde Google<span class="def">Veces que alguien pulsó un resultado nuestro.</span></td><td class="valor-base num">297</td><td>Search Console, 30 días hasta el último consolidado</td></tr>
+      <tr><td>Clics por día (octubre)<span class="def">Para comparar meses incompletos.</span></td><td class="valor-base num">9,96</td><td>Search Console, clics del mes ÷ días con datos</td></tr>
+      <tr><td>Impresiones · CTR<span class="def">Veces que aparecimos en una búsqueda · porcentaje que pulsa.</span></td><td class="valor-base num">19.903 · 1,49 %</td><td>Search Console</td></tr>
+      <tr><td>Impresiones en puestos 1-10 (octubre)<span class="def">Sustituye a la posición media.</span></td><td class="valor-base num">3.857</td><td>Search Console por consulta, tramos 1-3 + 4-10</td></tr>
+
+      <tr class="grupo"><td colspan="3">Web · 30 sep – 29 oct</td></tr>
+      <tr><td>Visitantes reales<span class="def">Sin robots (regla del anexo).</span></td><td class="valor-base num">687</td><td>Vercel, panel menos países robot</td></tr>
+      <tr><td>Clics a WhatsApp<span class="def">Visitas a /es/whatsapp y /en/whatsapp (46 + 12).</span></td><td class="valor-base num">58</td><td>Vercel, páginas vistas de las dos rutas puente</td></tr>
+      <tr><td>Conversión web → WhatsApp<span class="def">Clics a WhatsApp ÷ visitantes reales.</span></td><td class="valor-base num">8,4 %</td><td>Cálculo</td></tr>
+      <tr><td>Desde Ecuador · desde móvil · desde Bing<span class="def">Sobre visitantes reales.</span></td><td class="valor-base num">54 % · 64 % · 81</td><td>Vercel, por país, dispositivo y procedencia</td></tr>
+
+      <tr class="grupo"><td colspan="3">Meta Ads · 30 sep – 29 oct</td></tr>
+      <tr><td>Anuncios activos</td><td class="valor-base num">0</td><td>Meta, estado efectivo de los 22 anuncios</td></tr>
+      <tr><td>Inversión · conversaciones<span class="def">Conversaciones de WhatsApp iniciadas desde un anuncio (7 días).</span></td><td class="valor-base num">$43,94 · 33</td><td>Meta Insights, solo lectura</td></tr>
+      <tr><td>Coste por conversación</td><td class="valor-base num">$1,33</td><td>Inversión ÷ conversaciones</td></tr>
+      <tr><td>Referencia a recuperar: septiembre<span class="def">El mejor mes de la cuenta.</span></td><td class="valor-base num">$0,95</td><td>76 conversaciones con $72,34</td></tr>
+
+      <tr class="grupo"><td colspan="3">Ficha de Google y redes · 30 oct</td></tr>
+      <tr><td>Reseñas en Google · nota</td><td class="valor-base num">101 · 4,9</td><td>Google Maps</td></tr>
+      <tr><td>Categoría principal de la ficha</td><td class="valor-base">Spa de masajes</td><td>Google Maps</td></tr>
+      <tr><td>Seguidores TikTok · Facebook · Instagram</td><td class="valor-base num">2.757 · 1.503 · 1.026</td><td>Perfiles públicos y Graph API</td></tr>
+      <tr><td>Redes con enlace a la web</td><td class="valor-base num">0 de 3</td><td>Revisión de biografías</td></tr>
+    </tbody>
+  </table>
+  <p class="fuente">Datos completos y reproducibles en docs/informes/2026-10-linea-base/datos/ (generados con extraer.py).</p>
+</section>
+
+<!-- =================================================================== -->
+<!-- 08 · PENDIENTES Y RIESGOS                                            -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">08</span>Pendientes y riesgos</p>
+    <h2>Por dónde empezar</h2>
+  </div>
+  <p class="entradilla">Ordenado por impacto. Las cinco primeras no cuestan dinero ni requieren tocar la web.</p>
+  <ul class="acciones">
+    <li><span><strong>Reactivar Meta con creatividades nuevas de tratamiento</strong> (facial, láser, linfático) y una oferta; renovarlas cada dos semanas y media.</span><span class="responsable">Marketing · ya</span></li>
+    <li><span><strong>Cambiar la categoría principal de la ficha de Google</strong> de «Spa de masajes» a una de estética.</span><span class="responsable">Dirección · 5 min</span></li>
+    <li><span><strong>Poner el enlace a la web</strong> en la biografía de Instagram, Facebook y TikTok.</span><span class="responsable">Marketing · 10 min</span></li>
+    <li><span><strong>Vincular Instagram a la página de Facebook y al Business Manager</strong> para poder medirlo.</span><span class="responsable">Dirección · 5 min</span></li>
+    <li><span><strong>Unificar el nombre del negocio:</strong> hoy circulan cinco nombres distintos entre redes y ficha.</span><span class="responsable">Marketing</span></li>
+    <li><span><strong>Revisar el anuncio rechazado de masaje linfático</strong>, que era de los más baratos ($0,67), y volver a enviarlo.</span><span class="responsable">Marketing</span></li>
+    <li><span><strong>Arreglar el pixel de Meta</strong>, que cuenta visitas pero ningún clic a WhatsApp.</span><span class="responsable">Web</span></li>
+    <li><span><strong>Vigilar la conversión a WhatsApp</strong> en noviembre antes de cambiar nada en la web.</span><span class="responsable">Web · 30 nov</span></li>
+  </ul>
+
+  <div class="seccion__cabecera" style="margin-top:8mm">
+    <p class="eyebrow"><span class="seccion__numero">09</span>Lo que falta medir</p>
+    <h2>Medimos contactos, no clientes</h2>
+  </div>
+  <p>Sabemos cuánto cuesta una conversación, pero no cuántas acaban en cita ni cuánto factura cada canal. Con estos datos el informe pasaría de medir marketing a medir negocio. Basta con cifras agregadas, nunca datos de clientas:</p>
+  <table class="datos">
+    <thead><tr><th>Dato</th><th>Lo tiene</th><th>Para qué</th></tr></thead>
+    <tbody>
+      <tr><td><strong>«¿Cómo nos conociste?»</strong> en cada cita</td><td>Recepción</td><td>Coste por clienta real de cada canal</td></tr>
+      <tr><td>Citas por servicio y mes; nuevas frente a recurrentes</td><td>Agenda</td><td>Qué tratamientos traen negocio</td></tr>
+      <tr><td>Estadísticas de la ficha (llamadas, rutas, clics)</td><td>Administrador de la ficha</td><td>Medir Google Maps, hoy a ciegas</td></tr>
+      <tr><td>Estadísticas de TikTok Studio</td><td>Cuenta de TikTok</td><td>Saber qué vídeos funcionan</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================================================================== -->
+<!-- ANEXO · METODOLOGÍA                                                  -->
+<!-- =================================================================== -->
+<section class="seccion salto">
+  <div class="seccion__cabecera">
+    <p class="eyebrow"><span class="seccion__numero">A</span>Anexo</p>
+    <h2>Cómo se midió</h2>
+  </div>
+
+  <h3>Ventanas de cada fuente</h3>
+  <table class="datos">
+    <thead><tr><th>Fuente</th><th>Ventana de la línea base</th><th>Límite</th></tr></thead>
+    <tbody>
+      <tr><td>Search Console</td><td>29 sep – 28 oct 2026</td><td>Va 2-4 días por detrás. Anonimiza ~80 % de las búsquedas: los totales son completos, las listas de consultas no.</td></tr>
+      <tr><td>Vercel Analytics</td><td>30 sep – 29 oct 2026</td><td>Solo guarda 30 días: cada medición hay que guardarla. No permite saber desde qué botón se pulsó WhatsApp.</td></tr>
+      <tr><td>Meta Ads</td><td>30 sep – 29 oct 2026</td><td>Cuenta conversaciones iniciadas, no si acaban en cita.</td></tr>
+      <tr><td>Redes y ficha</td><td>30 oct 2026</td><td>Solo datos públicos; sin estadísticas internas.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cómo se descuentan los robots</h3>
+  <p>Se resta todo país que cumpla a la vez: visitantes y páginas vistas casi iguales (como mucho un 5 % de diferencia: el robot pide una página y se va), al menos 4 visitantes, un 90 % o más sin procedencia, y que no sea Ecuador. Hasta septiembre la regla exigía igualdad exacta, pero China marcó 324 visitantes y 326 páginas en esta ventana. Los robots son el 43 % del panel; sin descontarlos, cualquier cifra de la web está inflada.</p>
+
+  <h3>Glosario</h3>
+  <table class="datos">
+    <tbody>
+      <tr><td><strong>Impresión</strong></td><td>Una vez que la web aparece en los resultados de Google, aunque nadie la pulse.</td></tr>
+      <tr><td><strong>CTR</strong></td><td>Porcentaje de quienes nos ven que pulsan (clics ÷ impresiones).</td></tr>
+      <tr><td><strong>Conversación (Meta)</strong></td><td>Persona que abre un chat de WhatsApp desde un anuncio.</td></tr>
+      <tr><td><strong>Clic a WhatsApp (web)</strong></td><td>Pulsación del botón de WhatsApp en la web. Es intención de contacto: parte no llega a escribir.</td></tr>
+      <tr><td><strong>Creatividad</strong></td><td>La pieza del anuncio: vídeo o imagen con su texto.</td></tr>
+      <tr><td><strong>Ficha de Google</strong></td><td>El perfil del negocio en Google Maps y en el buscador (Google Business Profile).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cierre">
+    <img src="{{SKILL}}/assets/logos/isotipo-dorado.png" alt="">
+    <div>Jenny Vera · Estética Profesional &amp; Spa — Edificio Plaza Médica, Av. Manuel J. Calle y Paucarbamba, Cuenca.<br>Informe interno, solo lectura de datos: no se modificó ninguna cuenta. Donde no hay dato, se dice.</div>
+  </div>
+</section>
+
+</body>
+</html>

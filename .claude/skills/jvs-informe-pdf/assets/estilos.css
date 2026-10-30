@@ -1,0 +1,541 @@
+/* ==========================================================================
+   Jenny Vera Spa — hoja de estilos de informes PDF
+   Se imprime con Chrome headless (scripts/render.sh). A4 vertical.
+   NO editar los tokens por informe: si un informe necesita otro color,
+   es que el informe está mal planteado, no la paleta.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("fonts/PlayfairDisplay.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("fonts/PlayfairDisplay-Italic.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+:root {
+  /* — Marca (extraída del sitio: 149 usos de #D4AF37, 53 de #1B1B1B) — */
+  --oro: #D4AF37;          /* banner, filetes, iconos. NUNCA texto sobre claro (2,1:1) */
+  --oro-texto: #7A6422;    /* texto dorado sobre blanco/crema (5,7:1) */
+  --oro-medio: #9A7A1F;    /* solo texto grande ≥ 14 pt (4,1:1) */
+  --oro-claro: #F3E5AB;    /* texto dorado sobre carbón (13,6:1) */
+  --carbon: #1B1B1B;       /* banner, cabeceras, texto principal */
+  --crema: #FDFBF7;        /* fondo de tarjetas y portada */
+  --arena: #F5F2EB;        /* zebra de tablas, fondos secundarios */
+  --linea: #E6DECD;        /* bordes y separadores */
+
+  /* — Tinta — */
+  --tinta: #1B1B1B;
+  --tinta-2: #4A4A4A;
+  --tinta-3: #6B6B6B;      /* mínimo para texto (5,3:1 sobre blanco) */
+
+  /* — Estado: SIEMPRE con glifo ▲ ▼ ■, nunca solo color — */
+  --positivo: #1B7F4C;
+  --negativo: #B3402E;
+  --neutro: #6B6B6B;
+  --fondo-alerta: #FBF1EE;
+  --fondo-ok: #EEF6F1;
+
+  /* — Series de gráficos (validadas: daltonismo + contraste, orden fijo) — */
+  --serie-1: #A88420;      /* oro       → total / Jenny Vera / serie principal */
+  --serie-2: #2F6AA8;      /* azul      → Meta Ads */
+  --serie-3: #1E8C66;      /* verde     → Google orgánico (GSC) */
+  --serie-4: #C65A2E;      /* terracota → Ficha de Google (GBP) */
+  --serie-5: #8A5AAE;      /* violeta   → TikTok / otros */
+
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- Página ---------- */
+@page {
+  size: A4;
+  margin: 24mm 18mm 20mm 18mm;
+
+  @top-left {
+    content: "Jenny Vera · Estética Profesional & Spa";
+    font-family: "Playfair Display", serif;
+    font-size: 9pt;
+    color: #1B1B1B;
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+    border-bottom: 0.6pt solid #D4AF37;
+  }
+  @top-right {
+    content: "Informe de resultados"; /* la plantilla lo sobrescribe con el periodo */
+    font-family: "Inter", sans-serif;
+    font-size: 7pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7A6422;
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+    border-bottom: 0.6pt solid #D4AF37;
+  }
+  @bottom-left {
+    content: "jennyveraspa.com · Edificio Plaza Médica, Cuenca";
+    font-family: "Inter", sans-serif;
+    font-size: 7pt;
+    color: #6B6B6B;
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Inter", sans-serif;
+    font-size: 7pt;
+    color: #6B6B6B;
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+}
+/* La portada es a sangre: sin márgenes ni cabecera/pie corridos */
+@page :first {
+  margin: 0;
+  @top-left { content: none; border: none; }
+  @top-right { content: none; border: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+* { box-sizing: border-box; }
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  margin: 0;
+  background: #FFFFFF;
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 9.5pt;
+  line-height: 1.55;
+  font-feature-settings: "kern", "liga";
+  hyphens: auto;
+}
+
+/* ==========================================================================
+   PORTADA — banner carbón con logo blanco + resumen ejecutivo
+   ========================================================================== */
+.portada {
+  width: 210mm;
+  height: 297mm;
+  display: flex;
+  flex-direction: column;
+  background: var(--crema);
+  break-after: page;
+  overflow: hidden;
+}
+.banner {
+  position: relative;
+  height: 132mm;
+  padding: 20mm 18mm 0 18mm;
+  background:
+    radial-gradient(ellipse 90mm 70mm at 85% 0%, rgba(212, 175, 55, 0.16), transparent 70%),
+    var(--carbon);
+  color: #FFFFFF;
+  border-bottom: 1.4mm solid var(--oro);
+  overflow: hidden;
+}
+.banner__logo {
+  display: block;
+  height: 34mm;
+  width: auto;
+}
+.banner__isotipo {           /* marca de agua del isotipo, recortada a la derecha */
+  position: absolute;
+  right: -14mm;
+  bottom: -12mm;
+  height: 110mm;
+  opacity: 0.07;
+}
+.banner__filete {
+  width: 22mm;
+  height: 0;
+  border-top: 0.8pt solid var(--oro);
+  margin: 14mm 0 6mm 0;
+}
+.banner__eyebrow {
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oro-claro);
+  margin: 0 0 2.5mm 0;
+}
+.banner__titulo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 36pt;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 140mm;
+  color: #FFFFFF;
+}
+.banner__periodo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13pt;
+  color: var(--oro);
+  margin: 3mm 0 0 0;
+}
+
+.portada__cuerpo {
+  flex: 1;
+  padding: 13mm 18mm 0 18mm;
+}
+.portada__pie {
+  padding: 5mm 18mm 9mm 18mm;
+  border-top: 0.6pt solid var(--linea);
+  margin: 0 18mm;
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8mm;
+  font-size: 7pt;
+  color: var(--tinta-3);
+  line-height: 1.5;
+}
+.portada__pie strong { color: var(--tinta); font-weight: 600; }
+
+/* ==========================================================================
+   TIPOGRAFÍA
+   ========================================================================== */
+.eyebrow {
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+  margin: 0 0 1.5mm 0;
+}
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-variant-numeric: lining-nums;
+  font-weight: 500;
+  color: var(--carbon);
+  break-after: avoid;
+}
+h2 {
+  font-size: 19pt;
+  line-height: 1.15;
+  margin: 0 0 4mm 0;
+}
+h3 {
+  font-size: 12.5pt;
+  line-height: 1.25;
+  margin: 6mm 0 2mm 0;
+}
+p { margin: 0 0 3mm 0; orphans: 3; widows: 3; }
+.entradilla {                 /* primer párrafo de sección: la conclusión */
+  font-size: 11pt;
+  line-height: 1.5;
+  color: var(--tinta);
+}
+strong { font-weight: 600; }
+ul, ol { margin: 0 0 3mm 0; padding-left: 5mm; }
+li { margin-bottom: 1.2mm; }
+li::marker { color: var(--oro-texto); }
+a { color: var(--oro-texto); text-decoration: underline; text-decoration-color: rgba(212,175,55,.6); }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.muted { color: var(--tinta-3); }
+
+/* ==========================================================================
+   SECCIONES
+   ========================================================================== */
+.seccion { margin-bottom: 9mm; }
+.seccion + .seccion { padding-top: 2mm; }
+.seccion__cabecera {
+  margin-bottom: 4mm;
+  break-inside: avoid;
+}
+/* Reserva 45 mm tras la cabecera: Chrome ignora break-after:avoid y la dejaría
+   huérfana al pie de página. Con esto salta a la página siguiente si no cabe. */
+.seccion__cabecera::after {
+  content: "";
+  display: block;
+  height: 45mm;
+  margin-bottom: -45mm;
+}
+.seccion__cabecera .eyebrow { margin-bottom: 1mm; }
+.seccion__numero {
+  font-family: var(--serif);
+  font-variant-numeric: lining-nums;
+  font-size: 12pt;
+  letter-spacing: 0;
+  color: var(--oro-texto);
+  margin-right: 2.5mm;
+  vertical-align: -0.5pt;
+}
+.seccion__cabecera h2 { margin: 0; }
+.salto { break-before: page; }
+.no-cortar { break-inside: avoid; }
+
+/* ==========================================================================
+   KPI — tarjetas de cifra
+   ========================================================================== */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3mm;
+  margin: 0 0 6mm 0;
+  break-inside: avoid;
+}
+.kpis--3 { grid-template-columns: repeat(3, 1fr); }
+.kpis--2 { grid-template-columns: repeat(2, 1fr); }
+.kpi {
+  background: #FFFFFF;
+  border: 0.6pt solid var(--linea);
+  border-top: 0.6mm solid var(--oro);
+  border-radius: 1.5mm;
+  padding: 3.5mm 4mm 3.5mm 4mm;
+}
+.portada .kpi { background: #FFFFFF; }
+.kpi__etiqueta {
+  font-size: 6.5pt;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+  margin: 0 0 1.5mm 0;
+}
+.kpi__valor {
+  font-family: var(--serif);
+  font-size: 22pt;
+  line-height: 1.05;
+  font-weight: 500;
+  color: var(--carbon);
+  font-variant-numeric: lining-nums tabular-nums;
+  margin: 0;
+}
+.kpi__valor small { font-size: 11pt; color: var(--tinta-2); }
+.kpi__nota {
+  font-size: 7pt;
+  color: var(--tinta-3);
+  margin: 1.5mm 0 0 0;
+  line-height: 1.4;
+}
+
+/* Deltas: el glifo es obligatorio (lectura sin color / impresión en B/N) */
+.delta { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.delta--sube { color: var(--positivo); }
+.delta--sube::before { content: "▲ "; font-size: 0.8em; }
+.delta--baja { color: var(--negativo); }
+.delta--baja::before { content: "▼ "; font-size: 0.8em; }
+.delta--igual { color: var(--neutro); }
+.delta--igual::before { content: "■ "; font-size: 0.7em; }
+
+/* ==========================================================================
+   TABLAS
+   ========================================================================== */
+table.datos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+  margin: 0 0 2mm 0;
+  break-inside: auto;
+}
+table.datos thead { display: table-header-group; } /* se repite al cortar página */
+table.datos th {
+  text-align: left;
+  font-size: 6.5pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tinta-2);
+  padding: 2mm 2.5mm;
+  border-bottom: 0.8pt solid var(--carbon);
+}
+table.datos td {
+  padding: 1.8mm 2.5mm;
+  border-bottom: 0.4pt solid var(--linea);
+  vertical-align: top;
+}
+table.datos tbody tr:nth-child(even) td { background: var(--arena); }
+table.datos tr { break-inside: avoid; }
+table.datos .derecha, table.datos td.num, table.datos th.num { text-align: right; }
+table.datos tfoot td {
+  font-weight: 600;
+  border-top: 0.8pt solid var(--carbon);
+  border-bottom: none;
+  background: transparent;
+}
+.fuente {
+  font-size: 6.8pt;
+  color: var(--tinta-3);
+  margin: 1mm 0 5mm 0;
+}
+.fuente::before { content: "Fuente: "; font-weight: 600; }
+
+/* ==========================================================================
+   GRÁFICOS — ECharts en SVG (assets/graficos.js). La altura se fija en el div.
+   ========================================================================== */
+.grafico-js { width: 100%; height: 60mm; }
+.kpi__mini { height: 9mm; margin: 2mm -1mm -1mm -1mm; }
+figure.grafico {
+  margin: 2mm 0 5mm 0;
+  break-inside: avoid;
+}
+figure.grafico img { display: block; width: 100%; height: auto; }
+figure.grafico .grafico-js { margin-top: 1mm; }
+figure.grafico figcaption {
+  font-family: var(--serif);
+  font-size: 11pt;
+  color: var(--carbon);
+  margin: 0 0 2mm 0;
+}
+figure.grafico figcaption span {     /* subtítulo: unidad y periodo */
+  display: block;
+  font-family: var(--sans);
+  font-size: 7.5pt;
+  color: var(--tinta-3);
+  margin-top: 0.5mm;
+}
+
+/* ==========================================================================
+   CAJAS DE TEXTO
+   ========================================================================== */
+.nota, .alerta, .ok {
+  border-left: 0.9mm solid var(--oro);
+  background: var(--crema);
+  padding: 3.5mm 4.5mm;
+  margin: 0 0 5mm 0;
+  border-radius: 0 1.5mm 1.5mm 0;
+  break-inside: avoid;
+}
+.alerta { border-left-color: var(--negativo); background: var(--fondo-alerta); }
+.ok     { border-left-color: var(--positivo); background: var(--fondo-ok); }
+.nota__titulo, .alerta__titulo, .ok__titulo {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 1.5mm 0;
+  color: var(--oro-texto);
+}
+.alerta__titulo { color: var(--negativo); }
+.ok__titulo { color: var(--positivo); }
+.nota p:last-child, .alerta p:last-child, .ok p:last-child,
+.nota ul:last-child, .alerta ul:last-child, .ok ul:last-child { margin-bottom: 0; }
+
+/* Lo esencial — en portada: 3 conclusiones numeradas */
+.esencial { list-style: none; padding: 0; margin: 0; counter-reset: esencial; }
+.esencial li {
+  counter-increment: esencial;
+  position: relative;
+  padding: 0 0 0 10mm;
+  margin: 0 0 4.5mm 0;
+  font-size: 10.5pt;
+  line-height: 1.45;
+}
+.esencial li::before {
+  content: counter(esencial, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: -0.6mm;
+  font-family: var(--serif);
+  font-size: 13pt;
+  color: var(--oro-texto);
+}
+
+/* Próximos pasos — acción + responsable + fecha */
+.acciones { list-style: none; padding: 0; margin: 0 0 5mm 0; }
+.acciones li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4mm;
+  align-items: baseline;
+  padding: 2.5mm 0;
+  border-bottom: 0.4pt solid var(--linea);
+  margin: 0;
+  break-inside: avoid;
+}
+.responsable {
+  font-size: 6.5pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+  background: var(--crema);
+  border: 0.5pt solid var(--linea);
+  border-radius: 10mm;
+  padding: 0.6mm 2.5mm;
+  white-space: nowrap;
+}
+
+/* Rejilla de dos columnas (texto + gráfico, dos tablas…) */
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7mm;
+  break-inside: avoid;
+}
+
+/* Bloque final de contacto */
+.cierre {
+  margin-top: 10mm;
+  padding-top: 5mm;
+  border-top: 0.6pt solid var(--oro);
+  display: flex;
+  align-items: center;
+  gap: 5mm;
+  font-size: 7.5pt;
+  color: var(--tinta-3);
+  break-inside: avoid;
+}
+.cierre img { height: 12mm; }
+
+/* ==========================================================================
+   CRONOLOGÍA — hitos del negocio en vertical (fecha · hecho · efecto medido)
+   ========================================================================== */
+.cronologia { list-style: none; margin: 0 0 5mm 0; padding: 0; position: relative; }
+.cronologia::before {
+  content: ""; position: absolute; left: 22mm; top: 1.5mm; bottom: 1.5mm;
+  border-left: 0.8pt solid var(--linea);
+}
+.cronologia li {
+  display: grid; grid-template-columns: 22mm 1fr; gap: 0 6mm;
+  margin: 0 0 3.2mm 0; position: relative; break-inside: avoid;
+}
+.cronologia li::before {               /* punto sobre la línea */
+  content: ""; position: absolute; left: calc(22mm - 1.4mm); top: 1.3mm;
+  width: 2.8mm; height: 2.8mm; border-radius: 50%;
+  background: #fff; border: 0.9pt solid var(--oro);
+}
+.cronologia li.clave::before { background: var(--oro); }
+.cronologia li.malo::before { border-color: var(--negativo); background: var(--negativo); }
+.cronologia__fecha {
+  font-size: 7pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--oro-texto); padding-top: 0.6mm; padding-right: 3mm; text-align: right;
+}
+.cronologia__hecho { padding-left: 1mm; }
+.cronologia__hecho strong { display: block; font-weight: 600; font-size: 9.5pt; }
+.cronologia__hecho span { font-size: 8.5pt; color: var(--tinta-2); }
+
+/* Tabla de línea base: la columna de definición va en pequeño */
+table.datos td .def { display: block; font-size: 7pt; color: var(--tinta-3); line-height: 1.35; margin-top: 0.6mm; }
+table.datos td.valor-base { font-family: var(--serif); font-size: 10.5pt; white-space: nowrap; text-align: right;
+  font-variant-numeric: lining-nums tabular-nums; }
+table.datos tr.grupo td {
+  background: transparent !important; padding-top: 4mm; border-bottom: 0.6pt solid var(--oro);
+  font-size: 6.8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oro-texto);
+}
+
+/* ECharts fija el ancho del SVG al dibujar, que ocurre con el diseño de PANTALLA.
+   Si la pantalla es más ancha que el área útil A4 (174 mm), el SVG desborda al
+   imprimir y Chrome encoge TODO el documento. Igualar ambos anchos lo evita. */
+@media screen {
+  body { width: 174mm; }
+}
