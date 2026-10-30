@@ -3,20 +3,78 @@
   "redes": {
     "metodo": "Facebook: Graph API (followers_count). Instagram: meta description del perfil público. TikTok: perfil público con Playwright. Nunca WebFetch (alucina en fichas de redes).",
     "serie": [
-      {"fecha": "2026-09-15", "facebook": 1496, "instagram": 1016, "tiktok": 2610, "fuente": "snapshot-2026-09-15.md"},
-      {"fecha": "2026-10-03", "facebook": 1502, "instagram": 1022, "tiktok": 2765, "fuente": "snapshot-2026-10-03.md"},
-      {"fecha": "2026-10-30", "facebook": 1503, "instagram": 1026, "tiktok": 2757, "fuente": "Graph API + Playwright, 30 oct 2026"}
+      {
+        "fecha": "2026-09-15",
+        "facebook": 1496,
+        "instagram": 1016,
+        "tiktok": 2610,
+        "fuente": "snapshot-2026-09-15.md"
+      },
+      {
+        "fecha": "2026-10-03",
+        "facebook": 1502,
+        "instagram": 1022,
+        "tiktok": 2765,
+        "fuente": "snapshot-2026-10-03.md"
+      },
+      {
+        "fecha": "2026-10-30",
+        "facebook": 1503,
+        "instagram": 1026,
+        "tiktok": 2757,
+        "fuente": "Graph API + Playwright, 30 oct 2026"
+      }
     ],
-    "enlace_al_sitio": {"facebook": false, "instagram": false, "tiktok": false, "verificado": "2026-10-03"},
+    "enlace_al_sitio": {
+      "facebook": false,
+      "instagram": false,
+      "tiktok": false,
+      "verificado": "2026-10-03"
+    },
     "instagram_vinculado_a_meta": false,
-    "tiktok_vistas_ultimos_videos": [359, 6126, 132, 3, 170, 215, 228, 200, 198, 220, 213, 200, 274, 25, 14, 251]
+    "tiktok_vistas_ultimos_videos": [
+      359,
+      6126,
+      132,
+      3,
+      170,
+      215,
+      228,
+      200,
+      198,
+      220,
+      213,
+      200,
+      274,
+      25,
+      14,
+      251
+    ]
   },
   "ficha_google": {
     "metodo": "Google Maps con Playwright (place id 0x91cd3d557cd80507:0x98335d51bae228bb)",
     "serie": [
-      {"fecha": "2026-09-15", "nota": 4.9, "resenas": 94, "categoria": "Spa de masajes", "fuente": "snapshot-2026-09-15.md"},
-      {"fecha": "2026-10-03", "nota": 4.9, "resenas": 94, "categoria": "Spa de masajes", "fuente": "snapshot-2026-10-03.md"},
-      {"fecha": "2026-10-30", "nota": 4.9, "resenas": 101, "categoria": "Spa de masajes", "fuente": "Playwright, 30 oct 2026"}
+      {
+        "fecha": "2026-09-15",
+        "nota": 4.9,
+        "resenas": 94,
+        "categoria": "Spa de masajes",
+        "fuente": "snapshot-2026-09-15.md"
+      },
+      {
+        "fecha": "2026-10-03",
+        "nota": 4.9,
+        "resenas": 94,
+        "categoria": "Spa de masajes",
+        "fuente": "snapshot-2026-10-03.md"
+      },
+      {
+        "fecha": "2026-10-30",
+        "nota": 4.9,
+        "resenas": 101,
+        "categoria": "Spa de masajes",
+        "fuente": "Playwright, 30 oct 2026"
+      }
     ],
     "enlaza_al_sitio": true,
     "fotos": 81
@@ -24,9 +82,202 @@
   "vercel_historico": {
     "_nota": "Vercel solo guarda 30 días: estas ventanas ya no se pueden consultar. Visitantes limpios = sin bots. Clics WA = páginas vistas de /es|/en/whatsapp (la puente existe desde el 25 jul).",
     "serie": [
-      {"ventana": "8 ago – 7 sep", "corte": "2026-09-07", "visitantes_limpios": 650, "clics_whatsapp": 66, "fuente": "snapshot-2026-09-07.md"},
-      {"ventana": "16 ago – 14 sep", "corte": "2026-09-15", "visitantes_limpios": 664, "clics_whatsapp": 84, "fuente": "snapshot-2026-09-15.md"},
-      {"ventana": "3 sep – 2 oct", "corte": "2026-10-03", "visitantes_limpios": 691, "clics_whatsapp": 83, "fuente": "snapshot-2026-10-03.md"}
+      {
+        "ventana": "8 ago – 7 sep",
+        "corte": "2026-09-07",
+        "visitantes_limpios": 650,
+        "clics_whatsapp": 66,
+        "fuente": "snapshot-2026-09-07.md"
+      },
+      {
+        "ventana": "16 ago – 14 sep",
+        "corte": "2026-09-15",
+        "visitantes_limpios": 664,
+        "clics_whatsapp": 84,
+        "fuente": "snapshot-2026-09-15.md"
+      },
+      {
+        "ventana": "3 sep – 2 oct",
+        "corte": "2026-10-03",
+        "visitantes_limpios": 691,
+        "clics_whatsapp": 83,
+        "fuente": "snapshot-2026-10-03.md"
+      }
     ]
+  },
+  "ficha_google_rendimiento": {
+    "metodo": "Panel «Performance» de Google Business Profile, leído con Claude in Chrome en la sesión del administrador (solo lectura), 30 oct 2026. Valores mensuales leídos del tooltip de cada punto; las rutas se obtienen como interacciones − llamadas − clics (cuadra con el total de 333).",
+    "perfil": "Jenny Vera Estética Profesional & Spa (verificado, id 1152324174377984496)",
+    "duplicado": "Existe una segunda ficha «Jenny Vera Spa Plaza Médica» (id 15516854373622971626) marcada como «Duplicate» en el gestor.",
+    "octubre_parcial_hasta": "2026-10-27",
+    "mensual": [
+      {
+        "mes": "2026-05",
+        "interacciones": 94,
+        "llamadas": 9,
+        "rutas": 51,
+        "clics_web": 34
+      },
+      {
+        "mes": "2026-06",
+        "interacciones": 97,
+        "llamadas": 12,
+        "rutas": 56,
+        "clics_web": 29
+      },
+      {
+        "mes": "2026-07",
+        "interacciones": 106,
+        "llamadas": 12,
+        "rutas": 44,
+        "clics_web": 50
+      },
+      {
+        "mes": "2026-08",
+        "interacciones": 138,
+        "llamadas": 9,
+        "rutas": 81,
+        "clics_web": 48
+      },
+      {
+        "mes": "2026-09",
+        "interacciones": 82,
+        "llamadas": 10,
+        "rutas": 47,
+        "clics_web": 25
+      },
+      {
+        "mes": "2026-10",
+        "interacciones": 86,
+        "llamadas": 7,
+        "rutas": 54,
+        "clics_web": 25,
+        "parcial": true
+      }
+    ],
+    "reservas": 0,
+    "seis_meses": {
+      "periodo": "may – oct 2026",
+      "interacciones": 603,
+      "llamadas": 59,
+      "rutas": 333,
+      "clics_web": 211,
+      "vistas": 10321,
+      "vistas_por_origen": {
+        "busqueda_movil": 6739,
+        "maps_movil": 2014,
+        "busqueda_escritorio": 1336,
+        "maps_escritorio": 232
+      },
+      "busquedas": 811,
+      "busquedas_top": [
+        [
+          "drenaje linfatico",
+          142
+        ],
+        [
+          "limpieza facial cuenca",
+          112
+        ],
+        [
+          "spa",
+          112
+        ],
+        [
+          "limpieza facial",
+          102
+        ],
+        [
+          "masajes cuenca",
+          93
+        ],
+        [
+          "jenny",
+          91
+        ],
+        [
+          "vera",
+          40
+        ],
+        [
+          "depilacion laser cuenca",
+          38
+        ],
+        [
+          "masajes relajantes cuenca",
+          17
+        ],
+        [
+          "depilacion laser",
+          16
+        ],
+        [
+          "dermapen",
+          16
+        ],
+        [
+          "facial",
+          16
+        ],
+        [
+          "spa cuenca",
+          16
+        ]
+      ],
+      "busquedas_nota": "El resto aparece como «< 15»; entre ellas «armonización facial cuenca», «botox cuenca», «aparato radiofrecuencia corporal cuenca»."
+    },
+    "septiembre": {
+      "interacciones": 82,
+      "interacciones_vs_2025": -42.7,
+      "vistas": 2081,
+      "vistas_vs_2025": -31.5,
+      "vistas_por_origen": {
+        "busqueda_movil": 1566,
+        "maps_movil": 264,
+        "busqueda_escritorio": 213,
+        "maps_escritorio": 38
+      },
+      "busquedas": 242,
+      "busquedas_vs_2025": -63.5,
+      "busquedas_top": [
+        [
+          "drenaje linfatico",
+          67
+        ],
+        [
+          "limpieza facial cuenca",
+          38
+        ],
+        [
+          "jenny",
+          33
+        ],
+        [
+          "vera",
+          24
+        ],
+        [
+          "masajes cuenca",
+          23
+        ]
+      ]
+    },
+    "octubre": {
+      "hasta": "2026-10-27",
+      "interacciones": 86,
+      "llamadas": 7,
+      "rutas": 54,
+      "clics_web": 25,
+      "vistas": 2078,
+      "vistas_por_origen": {
+        "busqueda_movil": 1487,
+        "maps_movil": 313,
+        "busqueda_escritorio": 245,
+        "maps_escritorio": 33
+      },
+      "busquedas": null,
+      "busquedas_nota": "Google las publica a principios del mes siguiente."
+    },
+    "aviso_panel": "El panel muestra «5 new customer reviews» para leer y responder."
   }
 }

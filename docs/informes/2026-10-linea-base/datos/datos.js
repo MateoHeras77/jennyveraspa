@@ -1,6 +1,6 @@
 window.DATOS = {
  "corte": "2026-10-30",
- "generado": "2026-10-30T10:30",
+ "generado": "2026-10-30T11:51",
  "gsc": {
   "ultimo_dia": "2026-10-28",
   "ventana": {
@@ -3133,14 +3133,14 @@ window.DATOS = {
     "pageviews": 33
    },
    {
+    "requestPath": "Others",
+    "visitors": 25,
+    "pageviews": 33
+   },
+   {
     "requestPath": "/es/servicios/limpieza-facial",
     "visitors": 24,
     "pageviews": 28
-   },
-   {
-    "requestPath": "Others",
-    "visitors": 23,
-    "pageviews": 33
    },
    {
     "requestPath": "/es/blog/cuanto-cuesta-abdominoplastia-ecuador",
@@ -3558,7 +3558,7 @@ window.DATOS = {
     "pageviews": 2
    },
    {
-    "requestPath": "/en/servicios/plasma-rico-plaquetas",
+    "requestPath": "/en/blog/pdrn-salmon-rejuvenecimiento-celular",
     "visitors": 1,
     "pageviews": 2
    },
@@ -3573,7 +3573,7 @@ window.DATOS = {
     "pageviews": 1
    },
    {
-    "requestPath": "/es/blog/tratamientos-de-acne",
+    "requestPath": "/es/blog/pagina/4",
     "visitors": 1,
     "pageviews": 1
    }
@@ -3582,7 +3582,7 @@ window.DATOS = {
    {
     "requestPath": "Others",
     "visitors": 475,
-    "pageviews": 577
+    "pageviews": 576
    },
    {
     "requestPath": "/es",
@@ -3775,14 +3775,14 @@ window.DATOS = {
     "pageviews": 11
    },
    {
-    "requestPath": "/es/blog/drenaje-linfatico-facial",
+    "requestPath": "/en/blog/depilacion-laser-cuenca-precios",
     "visitors": 10,
     "pageviews": 10
    },
    {
-    "requestPath": "/es/blog/lifting-facial-procedimientos-quirurgicos-opciones-no-invasivas",
+    "requestPath": "/es/blog/laser-co2-antes-y-despues",
     "visitors": 10,
-    "pageviews": 11
+    "pageviews": 12
    }
   ]
  },
@@ -3899,6 +3899,181 @@ window.DATOS = {
      "fuente": "snapshot-2026-10-03.md"
     }
    ]
+  },
+  "ficha_google_rendimiento": {
+   "metodo": "Panel «Performance» de Google Business Profile, leído con Claude in Chrome en la sesión del administrador (solo lectura), 30 oct 2026. Valores mensuales leídos del tooltip de cada punto; las rutas se obtienen como interacciones − llamadas − clics (cuadra con el total de 333).",
+   "perfil": "Jenny Vera Estética Profesional & Spa (verificado, id 1152324174377984496)",
+   "duplicado": "Existe una segunda ficha «Jenny Vera Spa Plaza Médica» (id 15516854373622971626) marcada como «Duplicate» en el gestor.",
+   "octubre_parcial_hasta": "2026-10-27",
+   "mensual": [
+    {
+     "mes": "2026-05",
+     "interacciones": 94,
+     "llamadas": 9,
+     "rutas": 51,
+     "clics_web": 34
+    },
+    {
+     "mes": "2026-06",
+     "interacciones": 97,
+     "llamadas": 12,
+     "rutas": 56,
+     "clics_web": 29
+    },
+    {
+     "mes": "2026-07",
+     "interacciones": 106,
+     "llamadas": 12,
+     "rutas": 44,
+     "clics_web": 50
+    },
+    {
+     "mes": "2026-08",
+     "interacciones": 138,
+     "llamadas": 9,
+     "rutas": 81,
+     "clics_web": 48
+    },
+    {
+     "mes": "2026-09",
+     "interacciones": 82,
+     "llamadas": 10,
+     "rutas": 47,
+     "clics_web": 25
+    },
+    {
+     "mes": "2026-10",
+     "interacciones": 86,
+     "llamadas": 7,
+     "rutas": 54,
+     "clics_web": 25,
+     "parcial": true
+    }
+   ],
+   "reservas": 0,
+   "seis_meses": {
+    "periodo": "may – oct 2026",
+    "interacciones": 603,
+    "llamadas": 59,
+    "rutas": 333,
+    "clics_web": 211,
+    "vistas": 10321,
+    "vistas_por_origen": {
+     "busqueda_movil": 6739,
+     "maps_movil": 2014,
+     "busqueda_escritorio": 1336,
+     "maps_escritorio": 232
+    },
+    "busquedas": 811,
+    "busquedas_top": [
+     [
+      "drenaje linfatico",
+      142
+     ],
+     [
+      "limpieza facial cuenca",
+      112
+     ],
+     [
+      "spa",
+      112
+     ],
+     [
+      "limpieza facial",
+      102
+     ],
+     [
+      "masajes cuenca",
+      93
+     ],
+     [
+      "jenny",
+      91
+     ],
+     [
+      "vera",
+      40
+     ],
+     [
+      "depilacion laser cuenca",
+      38
+     ],
+     [
+      "masajes relajantes cuenca",
+      17
+     ],
+     [
+      "depilacion laser",
+      16
+     ],
+     [
+      "dermapen",
+      16
+     ],
+     [
+      "facial",
+      16
+     ],
+     [
+      "spa cuenca",
+      16
+     ]
+    ],
+    "busquedas_nota": "El resto aparece como «< 15»; entre ellas «armonización facial cuenca», «botox cuenca», «aparato radiofrecuencia corporal cuenca»."
+   },
+   "septiembre": {
+    "interacciones": 82,
+    "interacciones_vs_2025": -42.7,
+    "vistas": 2081,
+    "vistas_vs_2025": -31.5,
+    "vistas_por_origen": {
+     "busqueda_movil": 1566,
+     "maps_movil": 264,
+     "busqueda_escritorio": 213,
+     "maps_escritorio": 38
+    },
+    "busquedas": 242,
+    "busquedas_vs_2025": -63.5,
+    "busquedas_top": [
+     [
+      "drenaje linfatico",
+      67
+     ],
+     [
+      "limpieza facial cuenca",
+      38
+     ],
+     [
+      "jenny",
+      33
+     ],
+     [
+      "vera",
+      24
+     ],
+     [
+      "masajes cuenca",
+      23
+     ]
+    ]
+   },
+   "octubre": {
+    "hasta": "2026-10-27",
+    "interacciones": 86,
+    "llamadas": 7,
+    "rutas": 54,
+    "clics_web": 25,
+    "vistas": 2078,
+    "vistas_por_origen": {
+     "busqueda_movil": 1487,
+     "maps_movil": 313,
+     "busqueda_escritorio": 245,
+     "maps_escritorio": 33
+    },
+    "busquedas": null,
+    "busquedas_nota": "Google las publica a principios del mes siguiente."
+   },
+   "aviso_panel": "El panel muestra «5 new customer reviews» para leer y responder."
   }
  }
 };
