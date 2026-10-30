@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
             // Pixel queda instalado pero mudo (no se registra ni un PageView).
             // Vercel Analytics no la necesita porque se sirve desde el propio
             // dominio (/_vercel/insights/script.js) y ya entra por 'self'.
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'self';",
           },
           {
             key: 'X-Content-Type-Options',

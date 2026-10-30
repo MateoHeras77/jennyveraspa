@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
@@ -105,6 +105,10 @@ export function ContactForm() {
     });
 
     const [phone, setPhone] = useState("");
+    // Antispam: marca de tiempo puesta en el navegador al montar (no en el render del
+    // servidor, que en una página estática sería la hora del build). Ver actions/contact.ts.
+    const [montado, setMontado] = useState("");
+    useEffect(() => setMontado(String(Date.now())), []);
     const phoneValue = phone || state.inputs?.phone || "";
     // Handle phone updates from server state if needed, though typically phone input manages its own state well.
     // If state.inputs.phone changes (e.g. after error), update local state.
@@ -122,7 +126,13 @@ export function ContactForm() {
 
     return (
         <form action={formAction} className="space-y-6">
-            
+            {/* Antispam: campo trampa (invisible para personas) y marca de tiempo */}
+            <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                <label htmlFor="empresa_web">No rellenar</label>
+                <input type="text" id="empresa_web" name="empresa_web" tabIndex={-1} autoComplete="off" defaultValue="" />
+            </div>
+            <input type="hidden" name="_t" value={montado} />
+
             {/* Success Message */}
             {state.success && (
                 <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative flex items-center gap-2" role="alert">
